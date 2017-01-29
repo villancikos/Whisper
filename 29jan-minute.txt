@@ -1,0 +1,4 @@
+Minute from Jan 29.
+1. Database Structurre
+2. GitHub push from local repo to remote repo
+3. Merge requests accepted by teammate
