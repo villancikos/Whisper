@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOS/SignUpViewController.swift"
+            timestampString = "507509424.098027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "SignUpViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOS.SignUpViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; iOS.SignUpViewController"
+                  moduleName = "iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
+                  timestampString = "507512102.04539"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "70">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOS.SignUpViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; iOS.SignUpViewController"
+                  moduleName = "iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
+                  timestampString = "507512102.049406"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOS.SignUpViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;iOS.SignUpViewController&gt;"
+                  moduleName = "iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
+                  timestampString = "507512102.053219"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "iOS.SignUpViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;iOS.SignUpViewController&gt;"
+                  moduleName = "iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
+                  timestampString = "507512102.056193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
