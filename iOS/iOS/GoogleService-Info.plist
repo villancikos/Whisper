@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>241417745514-m804nri70qoj3feqa00709gtcmb70kvg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.241417745514-m804nri70qoj3feqa00709gtcmb70kvg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC1zeVvBLFilEKYuvrEUhT2OEujTuXnUyg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>241417745514</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.TripleATeam.Whisper</string>
+	<key>PROJECT_ID</key>
+	<string>whisper-f225b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>whisper-f225b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:241417745514:ios:019e8cf98a1c69b0</string>
+	<key>DATABASE_URL</key>
+	<string>https://whisper-f225b.firebaseio.com</string>
+</dict>
+</plist>
