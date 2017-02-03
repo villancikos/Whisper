@@ -11,7 +11,9 @@ import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var contactTabelView: UITableView!
+
+
+    @IBOutlet weak var contactTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +35,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = contactTabelView.dequeueReusableCell(withIdentifier: "contactCell") as! ContactTableViewCell
+        let cell = contactTableView.dequeueReusableCell(withIdentifier: "contactCell") as! ContactTableViewCell
         
-        cell.contackName.text = "Khalid Alobaid"
+        cell.contactName.text = "Khalid Alobaid"
         
         return cell
     }

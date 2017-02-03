@@ -26,7 +26,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507512102.04539"
+                  timestampString = "507814280.924034"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -41,7 +41,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507512102.049406"
+                  timestampString = "507814280.92825"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -56,7 +56,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507512102.053219"
+                  timestampString = "507814280.931849"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -71,7 +71,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507512102.056193"
+                  timestampString = "507814280.935409"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -79,6 +79,36 @@
                   offsetFromSymbolStart = "31">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOS/HomeViewController.swift"
+            timestampString = "507813923.821928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "didReceiveMemoryWarning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iOS/HomeViewController.swift"
+            timestampString = "507813923.821928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
