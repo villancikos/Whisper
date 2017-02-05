@@ -22,11 +22,11 @@
   firebase.initializeApp(config);
 </script>
 <script>
-  var provider = new firebase.auth.GoogleAuthProvider();
+  var GoogleProvider = new firebase.auth.GoogleAuthProvider();
   function googleSignin() {
     console.log("Click");
-    console.log(provider);
-  firebase.auth().signInWithPopup(provider).then(function(result) {
+    console.log(GoogleProvider);
+  firebase.auth().signInWithPopup(GoogleProvider).then(function(result) {
     // This gives you a Google Access Token. You can use it to access the Google API.
     var token = result.credential.accessToken;
     // The signed-in user info.
@@ -63,8 +63,25 @@
 }
 
 </script>
-</head>
+<script>
+   window.fbAsyncInit = function() {
+      FB.init({
+         appId      : '1860552097561990',
+         xfbml      : true,
+         version    : 'v2.6'
+      });
+   };
 
+   (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+	
+</script>
+</head>
 <body>
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
@@ -79,14 +96,20 @@
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
+    <h3>Google Login</h3>
 <button onclick = "googleSignin()">Google Signin</button>
 <button onclick = "googleSignout()">Google Signout</button>
+  </div>
+
+<div class="section no-pad-bot" id="index-banner">
+    <h3>Facebook Login</h3>
+<button onclick = "facebookSignin()">Facebook Signin</button>
+<button onclick = "facebookSignout()">Facebook Signout</button>
   </div>
 
 
   <div class="container">
     <div class="section">
-
 
 
     </div>
@@ -138,7 +161,34 @@
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
+<script>
+var FacebookProvider = new firebase.auth.FacebookAuthProvider();
 
+function facebookSignin() {
+   firebase.auth().signInWithPopup(FacebookProvider)
+   
+   .then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+		
+      console.log(token)
+      console.log(user)
+   }).catch(function(error) {
+      console.log(error.code);
+      console.log(error.message);
+   });
+}
+
+function facebookSignout() {
+   firebase.auth().signOut()
+   
+   .then(function() {
+      console.log('Signout successful!')
+   }, function(error) {
+      console.log('Signout failed')
+   });
+}
+</script>
 </body>
 </body>
 
