@@ -1,0 +1,33 @@
+
+
+notes:
+
+first instal via npm the firebase 
+ npm install firebase --save
+
+then because we need to serve via server and no local filesystem we use 
+$ npm install -g firebase-tools
+and then 
+$ firebase serve
+
+
+
+var playersRef = firebase.database().ref("players/");
+playersRef.set({John:{number:1,age:30},Amanda:{number:2,age:20}});
+
+
+var johnRef = firebase.database().ref("players/John");
+johnRef.update({
+   "number": 10
+});
+
+#####TO use an id say PUSH instead of update or set #######
+First initialize the firebase 
+    var playersRef=firebase.database().ref("players/");
+then push
+    playersRef.push({
+    name: "Pedrou",
+    number: 1,
+    age: 30
+    });
+
