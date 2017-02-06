@@ -12,56 +12,7 @@
 <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
 <script>
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
-    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
-    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
-    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
-    messagingSenderId: "740790435984"
-  };
-  firebase.initializeApp(config);
-</script>
-<script>
-  var GoogleProvider = new firebase.auth.GoogleAuthProvider();
-  function googleSignin() {
-    console.log("Click");
-    console.log(GoogleProvider);
-  firebase.auth().signInWithPopup(GoogleProvider).then(function(result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    console.log("Token");
-    console.log(token);
-    console.log("User");
-    console.log(user);
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log("ErrorCode");
-    console.log(error.code);
-    console.log("ErrorMessage");
-    console.log(error.message);
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-
-  }
-
-  function googleSignout() {
-   firebase.auth().signOut()
-	
-   .then(function() {
-      console.log('Signout Succesfull')
-   }, function(error) {
-      console.log('Signout Failed')  
-   });
-}
-
+ 
 </script>
 <script>
    window.fbAsyncInit = function() {
@@ -110,7 +61,9 @@
 
   <div class="container">
     <div class="section">
-
+      <div id="players">
+        <p>Fetching data ... </p>
+        </div>
 
     </div>
     <br><br>
@@ -162,7 +115,33 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
 <script>
-var FacebookProvider = new firebase.auth.FacebookAuthProvider();
+  $( document ).ready(function() {
+     var config = {
+    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
+    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
+    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
+    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
+    messagingSenderId: "740790435984"
+  };
+  firebase.initializeApp(config);
+  var populateIn = $('div#players');
+  var ref = firebase.database().ref("players");
+
+  ref.on("value", function(snapshot) {
+    snapshot.forEach(function (data){
+      populateIn.append("<p>");
+      populateIn.append("id: <strong>"+data.key+"</strong><br>");
+      populateIn.append(" age: "+data.val().age+"<br>");
+      populateIn.append(" name: "+data.val().name+"<br>");
+      populateIn.append(" number: "+data.val().number+"<br>");
+      populateIn.append("</p>");
+    })
+    }, function (error) {
+      console.log("Error: " + error.code);
+    });
+  });//end of ready function//
+
+  var FacebookProvider = new firebase.auth.FacebookAuthProvider();
 
 function facebookSignin() {
    firebase.auth().signInWithPopup(FacebookProvider)
@@ -189,15 +168,50 @@ function facebookSignout() {
    });
 }
 
-var connectedRef = firebase.database().ref(".info/connected");
+ 
+  var GoogleProvider = new firebase.auth.GoogleAuthProvider();
+  function googleSignin() {
+    console.log("Click");
+    console.log(GoogleProvider);
+  firebase.auth().signInWithPopup(GoogleProvider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("Token");
+    console.log(token);
+    console.log("User");
+    console.log(user);
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log("ErrorCode");
+    console.log(error.code);
+    console.log("ErrorMessage");
+    console.log(error.message);
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+    });
+  }
+  function googleSignout() {
+   firebase.auth().signOut()
+	
+   .then(function() {
+      console.log('Signout Succesfull')
+   }, function(error) {
+      console.log('Signout Failed')  
+   });
+}
 
-connectedRef.on("value", function(snap) {
-   if (snap.val() === true) {
-      alert("connected");
-   } else {
-      alert("not connected");
-   }
-});
+    function populateTable(){
+    var $playersRef = firebase.database().ref("players/");
+    var populateIn = $('div#players');
+    console.log(populateIn);
+  }
 
 </script>
 </body>

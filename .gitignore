@@ -87,3 +87,14 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Android Git Ignore
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild

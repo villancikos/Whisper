@@ -26,9 +26,9 @@ First initialize the firebase
     var playersRef=firebase.database().ref("players/");
 then push
     playersRef.push({
-    name: "Pedrou",
-    number: 1,
-    age: 30
+    name: "Shelma",
+    number: 10,
+    age: 27
     });
 
 
@@ -130,3 +130,21 @@ ratingRef.orderByValue().on("value", function(data) {
       console.log("The " + data.key + " rating is " + data.val());
    });
 });
+
+
+Read and Write
+Next code snippet defined inside Firebase security rules will allow 
+writing access to /users/'$uid'/ for authenticated user with the same uid, but everyone could read it.
+
+Example
+{
+   "rules": {
+      "users": {
+         "$uid": {
+            ".write": "$uid === auth.uid",
+            ".read": true
+         }
+      }
+   }
+}
+
