@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=Whispper v1.tex
 
 [Frame0_View0,0]
-TopLine=75
-Cursor=1967
+TopLine=105
+Cursor=3033
 
 [Frame1]
 Flags=0
@@ -35,8 +35,8 @@ Class=LaTeXView
 Document=part1.tex
 
 [Frame1_View0,0]
-TopLine=65
-Cursor=3772
+TopLine=46
+Cursor=3523
 
 [Frame2]
 Flags=0
@@ -53,8 +53,8 @@ Class=LaTeXView
 Document=part2.tex
 
 [Frame2_View0,0]
-TopLine=36
-Cursor=1606
+TopLine=78
+Cursor=5139
 
 [Frame3]
 Flags=0
@@ -94,5 +94,5 @@ Cursor=45
 
 [SessionInfo]
 FrameCount=5
-ActiveFrame=0
+ActiveFrame=2
 
