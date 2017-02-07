@@ -56,6 +56,8 @@ class SignUpViewController: UIViewController {
         
     }
     
+    
+    
     func singIn(user : FIRUser){
     
     }

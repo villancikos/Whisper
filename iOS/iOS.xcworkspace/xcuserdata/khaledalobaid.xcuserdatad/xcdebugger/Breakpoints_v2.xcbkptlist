@@ -26,7 +26,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507814280.924034"
+                  timestampString = "508202568.93961"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -41,7 +41,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507814280.92825"
+                  timestampString = "508202568.944086"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -56,7 +56,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507814280.931849"
+                  timestampString = "508202568.947853"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -71,7 +71,7 @@
                   moduleName = "iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/khaledalobaid/Whisper/iOS/iOS/SignUpViewController.swift"
-                  timestampString = "507814280.935409"
+                  timestampString = "508202568.951003"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -88,12 +88,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOS/HomeViewController.swift"
-            timestampString = "507813923.821928"
+            timestampString = "508005339.752584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "didReceiveMemoryWarning()"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iOS/HomeViewController.swift"
-            timestampString = "507813923.821928"
+            timestampString = "508005339.752584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47">
+            startingLineNumber = "62"
+            endingLineNumber = "62">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
