@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Whisper</string>
     <string name="action_settings">Settings</string>
+
+    // For Facebook Log in
+    <string name="facebook_app_id">1226702380778233</string>
+    <string name="fb_login_protocol_scheme">fb1226702380778233</string>
+
 </resources>

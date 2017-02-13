@@ -19,6 +19,11 @@ android {
     }
 }
 
+// For Facebook Log in
+repositories {
+    mavenCentral()
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -35,6 +40,9 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.6.1'
     compile 'com.firebaseui:firebase-ui-auth:0.6.0'
     compile 'com.google.firebase:firebase-database:9.6.0'
+
+    // For Facebook Log in
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
 }
 

@@ -21,6 +21,11 @@ import static android.R.attr.id;
 import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 import static com.whisper.triplea.whisperandroid.R.id.fab;
 
+// For Facebook Log in
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
@@ -68,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                                     .setIsSmartLockEnabled(false)
                                     .setProviders(
                                             AuthUI.EMAIL_PROVIDER,
-                                            AuthUI.GOOGLE_PROVIDER)
+                                            AuthUI.GOOGLE_PROVIDER,
+                                            AuthUI.FACEBOOK_PROVIDER)
                                     .build(),
                             RC_SIGN_IN);
                 }
