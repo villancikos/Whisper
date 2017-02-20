@@ -113,20 +113,20 @@
     
     var signLink = $('#sign-button');
     var config = {
-      apiKey: "AIzaSyAFKtYVz2RxyeZsPKSfF1uA1DVBYt-aG5U",
-      authDomain: "whisper-f225b.firebaseapp.com",
-      databaseURL: "https://whisper-f225b.firebaseio.com",
-      storageBucket: "whisper-f225b.appspot.com",
-      messagingSenderId: "241417745514"
-  };
-  firebase.initializeApp(config);
-  var userWelcome = $('.welcome-line');
-  var fetcher = $('.fetcher');
-  var FacebookProvider = new firebase.auth.FacebookAuthProvider();    
-  initApp = function() {
+    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
+    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
+    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
+    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
+    messagingSenderId: "740790435984"
+    };
+    firebase.initializeApp(config);
+    var userWelcome = $('.welcome-line');
+    var fetcher = $('.fetcher');
+    var FacebookProvider = new firebase.auth.FacebookAuthProvider();    
+    initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
-            console.log(user);
+            //console.log(user);
             // User is signed in.
             var displayName = user.displayName;
             var email = user.email;
@@ -134,6 +134,21 @@
             var photoURL = user.photoURL;
             var uid = user.uid;
             var providerData = user.providerData;
+            var mydb = firebase.database();
+            var randomRef = mydb.ref(uid);
+            randomRef.set({
+              username: email,
+              email: email,
+              profile_picture_url : photoURL
+            });
+           
+            var playersRef = mydb.ref('players/'); 
+            playersRef.on("value", function (snapshot) {
+                console.log(snapshot.val());
+            }); 
+            var playersRef = mydb.ref('players/'+uid)
+            playersRef.set({ password: 'hidden', another: 'propery'});
+
             fetcher.text("User Information: ");
             $('.profile-img').attr('src', providerData[0].photoURL);
             // $('.profile-img').attr('src', photoURL);
@@ -198,10 +213,17 @@
     
     var signLink = $('#sign-button');
     var accDetails = $('#account-details');
+    
+
+
+
+    
     }); 
     // end of jquery on load
     window.addEventListener('load', function() {
-    initApp()});
+      initApp();
+     
+    });
 </script>
 </body>
 </body>
