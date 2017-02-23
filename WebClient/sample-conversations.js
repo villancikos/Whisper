@@ -1,76 +1,62 @@
 // Initial Conversaton Data to Test Whisper Database Structure
 module.exports = {
     // Conversations. Still not sure if we need to add something else.
-    conversations: {
-        conversation0001: {
-            'test':'test working'
-        },
-        conversation0002: {
-            'test':'test working'
-        },
-        conversation0003: {
-            'test':'test working'
-        },
-    },
-    // Participants, to keep a record of the participants of each chat.
-    participants: {
-        conversation0001: {
-            ramiri01: true,
-            jurdin01: true
-        },
-        conversation0002: {
-            lucas02: true,
-            jurdini01: true
-        },
-    },
-    // messages shared inside each conversation
-    messages: {
-        conversation0001: {
-            message000001: {
-                sender: 'ramiri01',
-                content: "Hey pal, hope you are doing great!",
-                typeOfContent: "text",
-                timestamp: 1487855066
-            },
-            message000002: {
-                sender: 'jurdini01',
-                content: "Hey Ramiri, long time no see. I'm great!",
-                typeOfContent: "text",
-                timestamp: 1487855080
-            },
-        },
-        conversation0002: {
-            message000001: {
-                sender: 'lucas02',
-                content: "Hey Jurdini. I'm Lucas, do you remember me?",
-                typeOfContent: "text",
-                timestamp: 1487855001
-            },
-            message000002: {
-                sender: 'jurdini01',
-                content: "Lucas! Of course, how you've been mate?",
-                typeOfContent: "text",
-                timestamp: 1487855120
-            },
-        }
-    },
 
-    // Users available on our system.
-    users: {
-        ramiri01: {
-            name: "Ramiri Wohasah",
-            email: "ramiri@gmail.com",
-            profile_pic: "ramiri_img.jpg"
-        },
-        jurdini01: {
-            name: "Jurdi Nisa",
-            email: "jurdini@gmail.com",
-            profile_pic: "jurdini_pics.jpg"
-        },
-        lucas02: {
-            name: "Lucas Goodwill",
-            email: "lucasg@gmail.com",
-            profile_pic: "lucas-mugshot.jpg"
-        }
-    }
-};
+    conversation0001: {
+        last_message: "I was thinking of you!",
+        timestamp: 1487889541297
+    },
+    conversation0002: {
+        last_message: "It's amazing what you can do with just a few lines of code.",
+        timestamp: 1487889541297
+    },
+    conversation0003: {
+        last_message: "Pretty sure the weather is getting better now.",
+        timestamp: 1487889541297
+    },
+    conversation0004: {
+        last_message: "Do you even lift bro?",
+        timestamp: 1487889541297
+    },
+    conversation0005: {
+        last_message: "Razor may conquer the hardware games.",
+        timestamp: 1487889541297
+    },
+    conversation0006: {
+        last_message: "Do you need something from the store?.",
+        timestamp: 1487802962000
+                    
+    },
+    conversation0007: {
+        last_message: "I so wanna have some tacos!!!",
+        timestamp: 1487889541297
+    },
+    conversation0008: {
+        last_message: "I wonder if emoji works... 🙏🏻 <- lets try",
+        timestamp: 1487889541297
+    },
+    conversation0010: {
+        last_message: "My cable is electrical",
+        timestamp: 1487889541297
+    },
+    conversation0011: {
+        last_message: "Pony Tail guy was funny",
+        timestamp: 1487889541297
+    },
+    conversation0012: {
+        last_message: "do you still need some books?",
+        timestamp: 1487889541297
+    },
+    conversation0013: {
+        last_message: "Are you coming tomorrow?",
+        timestamp: 1487889541297
+    },
+    conversation0014: {
+        last_message: "I'm waiting just outside man!",
+        timestamp: 1487889541297
+    },
+    conversation0015: {
+        last_message: "Ok dude.",
+        timestamp: 1487889541297
+    },
+}

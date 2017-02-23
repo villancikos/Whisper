@@ -19,26 +19,32 @@ var firebaseConfig = require('../firebaseconfig')
 var AppWrapper = React.createClass({
     getInitialState: function () {
         return {
-            conversationPool: {}
+            conversations: {}
+        }
+    },
+    componentDidMount: function(){
+         this.setState({
+            conversations: require('../sample-conversations')
+        });
+    },
+    getDefaultProps: function(){
+        var thisconvo = this.loadSampleConversations
+        return {
+            // this.setState({conversations: thisconvo})
         }
     },
 
-    loadSampleConversationPool: function () {
+    loadSampleConversations: function () {
         this.setState({
-            conversationPool: require('../sample-conversations')
+            conversations: require('../sample-conversations')
         });
     },
-    renderConversation: function (key) {
-        return <Conversation key={key} index={key} details={this.state.conversationPool.conversations[key]} />
-    },
     render: function () {
+        // console.log(this.state.conversations);
         return (
-            <div className="d-flex">
-                <ConversationsSideBar loadSampleConversationPool={this.loadSampleConversationPool} />
-                <ul>
-                    {Object.keys(this.state.conversationPool).map(this.renderConversation)}
-                </ul>
-                <ConversationPanel />
+            <div className="row">
+                <ConversationsSideBar conversations={this.state.conversations} />
+                <ConversationPanel loadSampleConversations={this.loadSampleConversations} />
             </div>
 
         )
@@ -51,10 +57,15 @@ var AppWrapper = React.createClass({
 */
 
 var ConversationsSideBar = React.createClass({
+    renderConversation: function (key) {
+        return <Conversation key={key} index={key} details={this.props.conversations[key]} />
+    },
     render: function () {
         return (
-            <div>
-                <button onClick={this.props.loadSampleConversationPool}>Load Test Convos</button>
+            <div className="col-md-4">
+                <ul>
+                    {Object.keys(this.props.conversations).map(this.renderConversation)}
+                </ul>
             </div>
         )
     }
@@ -65,11 +76,28 @@ var ConversationsSideBar = React.createClass({
     In charge of rendering each conversation available on the sidebar
  */
 var Conversation = React.createClass({
+    formatTime: function(time){
+        var dateObj = new Date(time);
+        var now = Date.now();
+        var elapsed = now - time;
+        var filter = 60*60*24*1000; // one day
+            console.log(now);
+            console.log(elapsed);
+            console.log(filter);
+        if (elapsed >= filter){
+            return dateObj.getDate()+"/"+dateObj.getMonth()+"/"+dateObj.getFullYear();
+        }
+        return dateObj.getHours()+":"+dateObj.getMinutes();
+
+    },
     render: function () {
-        var details = this.props.details;
+        var last_message = this.props.details.last_message;
+        var time = this.formatTime(this.props.details.timestamp);
+        // console.log(details);
         return (
             <li>
-                {details}
+                <p>{last_message}</p>
+                <pre>{time}</pre>
             </li>
         )
     }
@@ -85,8 +113,9 @@ var Conversation = React.createClass({
 var ConversationPanel = React.createClass({
     render: function () {
         return (
-            <div className="col-md-9">
+            <div className="col-md-8">
                 <h1> Conversation Panel</h1>
+                
             </div>
 
         )
