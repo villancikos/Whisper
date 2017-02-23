@@ -50,6 +50,7 @@
   <div class="container">
     <div class="row">
       <div class="col s12">
+        <div id="results"> </div>
        <h1 class="welcome-line">Welcome</h1>
         <p>Status: <span id="sign-in-status"></span></p>
         <p><a id="signInButton" href="#" style="display:none">Sign In</a><a id="signOutButton" href="#" style="display:none">Sign Out</a></p>
@@ -126,6 +127,7 @@
     initApp = function() {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
+            writeGarbageToDiv(user.uid, "message"+user.uid , user.email, "mom");
             //console.log(user);
             // User is signed in.
             var displayName = user.displayName;
@@ -145,10 +147,11 @@
             var playersRef = mydb.ref('players/'); 
             playersRef.on("value", function (snapshot) {
                 console.log(snapshot.val());
-            }); 
+                $('.fetcher').text(JSON.stringify(snapshot.val()));
+            });
             var playersRef = mydb.ref('players/'+uid)
             playersRef.set({ password: 'hidden', another: 'propery'});
-
+            
             fetcher.text("User Information: ");
             $('.profile-img').attr('src', providerData[0].photoURL);
             // $('.profile-img').attr('src', photoURL);
@@ -217,7 +220,23 @@
 
 
 
-    
+    function writeGarbageToDiv(uid, messageid, sender, receiver){
+      fbdb = firebase.database().ref('/messages/sender/'+uid);
+      fbdb.set({
+        uid: uid,
+        messageid: messageid,
+        sender: sender,
+        receiver: receiver
+      });
+    };
+
+  
+    fbdb = firebase.database().ref('/messages/sender/');
+      fbdb.on("value", function(snapshot){
+        $('#results').append(fbdb);
+        alert("entro");
+      });
+
     }); 
     // end of jquery on load
     window.addEventListener('load', function() {
