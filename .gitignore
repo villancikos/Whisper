@@ -159,3 +159,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Firebase Config info SENSIBLE
+firebaseconfig.js
