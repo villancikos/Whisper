@@ -42,6 +42,9 @@ var AppWrapper = React.createClass({
             }
         });
     },
+    addConversation: function(conversation){
+        this.setState(conversation);
+    },
     getDefaultProps: function () {
         var thisconvo = this.loadSampleConversations
         return {
@@ -53,7 +56,7 @@ var AppWrapper = React.createClass({
         // <ConversationPanel messages={this.state.messages} />
         return (
             <div className="row">
-                <ConversationsSideBar conversations={this.state.conversations} />
+                <ConversationsSideBar conversations={this.state.conversations} addConversation={this.addConversation}/>
 
             </div>
 
@@ -68,7 +71,7 @@ var AppWrapper = React.createClass({
 
 var ConversationsSideBar = React.createClass({
     renderConversation: function (key) {
-        return <Conversation key={key} index={key} details={this.props.conversations[key]} />
+        return <Conversation key={key} index={key} details={this.props.conversations[key]} addConversation={this.props.addConversation}/>
     },
     render: function () {
         return (
@@ -94,7 +97,9 @@ var Conversation = React.createClass({
         console.log("Emulating that on click, that conversation will render on right side");
         // In this section we add the state to the message.
         // So this is the best place to call the conversation from firebase.
-        this.setState(require('../samples/sample-conversation0001'))
+        this.props.addConversation(require('../samples/sample-conversation0001'))
+        // this.setState(require('../samples/sample-conversation0001'));
+        // return <ConversationPanel messages={this.state.messages} />
     },
     render: function () {
         var last_message = this.props.details.last_message;
