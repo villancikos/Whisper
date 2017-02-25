@@ -22,11 +22,11 @@ var AppWrapper = React.createClass({
     getInitialState: function () {
         return {
             conversations: {},
-            messages: {}
+            messages: {},
+            availableConversations: {}
         }
     },
     componentDidMount: function () {
-        var messages = require('../sample-messages')
         this.setState({
             conversations: require('../samples/sample-conversations'),
             // messages: require('../sample-messages')
@@ -39,25 +39,42 @@ var AppWrapper = React.createClass({
                     lucas02: true,
                     jurdini01: true
                 },
+            },
+            availableConversations: {
+
             }
         });
     },
-    addConversation: function(conversation){
-        this.setState(conversation);
+    refreshConversationPanel: function (new_conversation) {
+        delete this.state.availableConversations;
+        if (new_conversation === 'conversation0001') {
+            this.setState({ availableConversations: require('../samples/conversation0001') });
+        }
+        else if (new_conversation === 'conversation0002') {
+            this.setState({ availableConversations: require('../samples/conversation0002') });
+        }
+        else if (new_conversation === 'conversation0003') {
+            this.setState({ availableConversations: require('../samples/conversation0003') });
+        }
+        else if (new_conversation === 'conversation0004') {
+            this.setState({ availableConversations: require('../samples/conversation0004') });
+        }
+        else {
+            this.setState({ availableConversations: {} });
+        }
+
+
     },
     getDefaultProps: function () {
         var thisconvo = this.loadSampleConversations
         return {
-            // this.setState({conversations: thisconvo})
         }
     },
     render: function () {
-        // console.log(this.state.conversations);
-        // <ConversationPanel messages={this.state.messages} />
         return (
             <div className="row">
-                <ConversationsSideBar conversations={this.state.conversations} addConversation={this.addConversation}/>
-
+                <ConversationsSideBar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
+                <ConversationPanel availableConversations={this.state.availableConversations} />
             </div>
 
         )
@@ -71,7 +88,7 @@ var AppWrapper = React.createClass({
 
 var ConversationsSideBar = React.createClass({
     renderConversation: function (key) {
-        return <Conversation key={key} index={key} details={this.props.conversations[key]} addConversation={this.props.addConversation}/>
+        return <Conversation key={key} index={key} details={this.props.conversations[key]} refreshConversationPanel={this.props.refreshConversationPanel} />
     },
     render: function () {
         return (
@@ -90,22 +107,16 @@ var ConversationsSideBar = React.createClass({
     In charge of rendering each conversation available on the sidebar
  */
 var Conversation = React.createClass({
-    rendersomething: function (index) {
-        console.log("Index " + index + " was clicked.");
-    },
     retrieveConversation: function (index) {
         console.log("Emulating that on click, that conversation will render on right side");
         // In this section we add the state to the message.
         // So this is the best place to call the conversation from firebase.
-        this.props.addConversation(require('../samples/sample-conversation0001'))
-        // this.setState(require('../samples/sample-conversation0001'));
-        // return <ConversationPanel messages={this.state.messages} />
+        this.props.refreshConversationPanel(index);
     },
     render: function () {
         var last_message = this.props.details.last_message;
         var time = h.formatTime(this.props.details.timestamp);
         var index = this.props.index;
-        // console.log(details);;
         return (
             <li>
                 <button href={this.props.index} onClick={this.retrieveConversation.bind(this, index)}>{this.props.index}</button>
@@ -120,43 +131,71 @@ var Conversation = React.createClass({
 
 /* 
     Conversation Panel
-    Used to render the conversation history with a contact.
+    Used to render the conversation that the user clicked and is 
+    currently interacting on.
 */
 
 var ConversationPanel = React.createClass({
-    renderMessages: function (key) {
-        return <Message key={key} index={key} messageDetails={this.props.messages[key]} />
+    getMessageList: function (conversationId) {
+        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} />
     },
     render: function () {
         return (
-            <div className="">
-                {Object.keys(this.props.messages).map(this.renderMessages)}
+            <div className="conversation-panel">
+                <div className="">
+                    {Object.keys(this.props.availableConversations).map(this.getMessageList)}
+                </div>
+                <AddMessage />
             </div>
-
         )
+    }
+});
 
+var AddMessage = React.createClass({
+    render: function(){
+        return (
+            <form>
+            <input type="text"/>
+            <button type="">Send Message</button>
+            </form>
+        )
+    }
+
+});
+
+/*
+    MessageList
+    Will add to state all the messages inside a conversation.
+*/
+var MessageList = React.createClass({
+    renderMessage: function (message_id) {
+        return <Message index={message_id} key={message_id} message_data={this.props.messages[message_id]} />
+    },
+    render: function () {
+        return (
+            <div><ul>
+                {Object.keys(this.props.messages).map(this.renderMessage)}</ul>
+            </div>
+        )
     }
 });
 
 
 /*
-    Messages
-    Will render each message in the conversation panel
-
-    <MessageDetail key={key} index={key} detaildetails={this.props.messageDetails[key]}/>
-    {Object.keys(this.props.messageDetails).map(this.displayContents)}
-
+    Message Component
+    Renders all the messages from a conversation into the DOM
 */
 var Message = React.createClass({
     render: function () {
-        var messageDetails = this.props.messageDetails;
+        var message_data = this.props.message_data;
         return (
-            <ul>
-                <li>Sender: {messageDetails.sender}</li>
-                <li>{messageDetails.content}</li>
-                <li>{messageDetails.typeOfContent}</li>
-                <li>On: {h.formatTime(messageDetails.timestamp)}</li>
-            </ul>
+            <li>
+                <h4>{message_data.sender}</h4>
+                <p>{message_data.content}</p>
+                <p>{message_data.typeOfContent}</p>
+                <p>{h.formatTime(message_data.timestamp)}</p>
+
+            </li>
         )
     }
 });
