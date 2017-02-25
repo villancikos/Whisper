@@ -1,7 +1,6 @@
 // Initial Conversaton Data to Test Whisper Database Structure
 module.exports = {
     // messages shared inside each conversation
-    messages: {
         conversation0001: {
             message000001: {
                 sender: 'ramiri01',
@@ -28,7 +27,6 @@ module.exports = {
                 content: "Lucas! Of course, how you've been mate?",
                 typeOfContent: "text",
                 timestamp: 1487855120
-            },
-        }
+            }
     }
 }
