@@ -9,7 +9,9 @@ let helpers = {
         }
         return dateObj.getHours() + ":" + dateObj.getMinutes();
     },
-
+    generateMessageId: function () {
+        return "message" + Date.now();
+    }
 }
 
 export default helpers;

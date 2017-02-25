@@ -70,11 +70,18 @@ var AppWrapper = React.createClass({
         return {
         }
     },
+    addNewMessage: function (conversation_id, new_message) {
+        console.log("Yep. New message added.")
+        // update the state object
+        this.state.availableConversations[conversation_id][h.generateMessageId()] = new_message
+        // now set the state.
+        this.setState({ availableConversations: this.state.availableConversations });
+    },
     render: function () {
         return (
             <div className="row">
                 <ConversationsSideBar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
-                <ConversationPanel availableConversations={this.state.availableConversations} />
+                <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} />
             </div>
 
         )
@@ -137,7 +144,7 @@ var Conversation = React.createClass({
 
 var ConversationPanel = React.createClass({
     getMessageList: function (conversationId) {
-        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} />
+        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} addNewMessage={this.props.addNewMessage} />
     },
     render: function () {
         return (
@@ -145,18 +152,42 @@ var ConversationPanel = React.createClass({
                 <div className="">
                     {Object.keys(this.props.availableConversations).map(this.getMessageList)}
                 </div>
-                <AddMessage />
+
             </div>
         )
     }
 });
 
+/*
+    Add Message Component
+    Will take care of adding new messages to a conversation.
+ */
 var AddMessage = React.createClass({
-    render: function(){
+    addNewMessage: function (event) {
+        // Must add logic for firebase
+        // 1. Stop form submitting defauly behavior.
+        event.preventDefault();
+        // 2. Take data from the form and create a new message
+        var new_message = {
+            sender: this.refs.user.value,
+            content: this.refs.content.value,
+            typeOfContent: "text",
+            timestamp: Date.now()
+        }
+        var conversation_id = this.refs.conversation_id.value;
+        console.log("Preparing to add new message: ");
+        // 3. Add Message to state and clean form.
+        this.props.addNewMessage(conversation_id, new_message);
+        this.refs.messageForm.reset();
+    },
+    render: function () {
+        var uid = 'pancrasio';
         return (
-            <form>
-            <input type="text"/>
-            <button type="">Send Message</button>
+            <form ref="messageForm" onSubmit={this.addNewMessage} >
+                <input type="text" ref="content" />
+                <input type="hidden" ref="user" value={uid} />
+                <input type="hidden" ref="conversation_id" value={this.props.conversation_id} />
+                <button type="submit">Send Message</button>
             </form>
         )
     }
@@ -175,6 +206,7 @@ var MessageList = React.createClass({
         return (
             <div><ul>
                 {Object.keys(this.props.messages).map(this.renderMessage)}</ul>
+                <AddMessage addNewMessage={this.props.addNewMessage} conversation_id={this.props.index} />
             </div>
         )
     }
