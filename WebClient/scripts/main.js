@@ -28,21 +28,17 @@ var AppWrapper = React.createClass({
     componentDidMount: function () {
         var messages = require('../sample-messages')
         this.setState({
-            conversations: require('../sample-conversations'),
+            conversations: require('../samples/sample-conversations'),
             // messages: require('../sample-messages')
-            messages: {
-                message000001: {
-                    sender: 'ramiri01',
-                    content: "Hey pal, hope you are doing great!",
-                    typeOfContent: "text",
-                    timestamp: 1487855066
+            participants: {
+                conversation0001: {
+                    ramiri01: true,
+                    jurdin01: true
                 },
-                message000002: {
-                    sender: 'jurdini01',
-                    content: "Hey Ramiri, long time no see. I'm great!",
-                    typeOfContent: "text",
-                    timestamp: 1487855080
-                }
+                conversation0002: {
+                    lucas02: true,
+                    jurdini01: true
+                },
             }
         });
     },
@@ -54,10 +50,11 @@ var AppWrapper = React.createClass({
     },
     render: function () {
         // console.log(this.state.conversations);
+        // <ConversationPanel messages={this.state.messages} />
         return (
             <div className="row">
                 <ConversationsSideBar conversations={this.state.conversations} />
-                <ConversationPanel messages={this.state.messages} />
+
             </div>
 
         )
@@ -93,9 +90,11 @@ var Conversation = React.createClass({
     rendersomething: function (index) {
         console.log("Index " + index + " was clicked.");
     },
-    handleClick: function (index) {
-
-        console.log(index);
+    retrieveConversation: function (index) {
+        console.log("Emulating that on click, that conversation will render on right side");
+        // In this section we add the state to the message.
+        // So this is the best place to call the conversation from firebase.
+        this.setState(require('../samples/sample-conversation0001'))
     },
     render: function () {
         var last_message = this.props.details.last_message;
@@ -104,7 +103,7 @@ var Conversation = React.createClass({
         // console.log(details);;
         return (
             <li>
-                <button href={this.props.index} onClick={this.handleClick.bind(this, index)}>{this.props.index}</button>
+                <button href={this.props.index} onClick={this.retrieveConversation.bind(this, index)}>{this.props.index}</button>
                 <p>{last_message}</p>
                 <pre>{time}</pre>
             </li>
@@ -126,7 +125,7 @@ var ConversationPanel = React.createClass({
     render: function () {
         return (
             <div className="">
-                    {Object.keys(this.props.messages).map(this.renderMessages)}
+                {Object.keys(this.props.messages).map(this.renderMessages)}
             </div>
 
         )
@@ -148,10 +147,10 @@ var Message = React.createClass({
         var messageDetails = this.props.messageDetails;
         return (
             <ul>
-               <li>Sender: {messageDetails.sender}</li>
-               <li>{messageDetails.content}</li>
-               <li>{messageDetails.typeOfContent}</li>
-               <li>On: {h.formatTime(messageDetails.timestamp)}</li>
+                <li>Sender: {messageDetails.sender}</li>
+                <li>{messageDetails.content}</li>
+                <li>{messageDetails.typeOfContent}</li>
+                <li>On: {h.formatTime(messageDetails.timestamp)}</li>
             </ul>
         )
     }
