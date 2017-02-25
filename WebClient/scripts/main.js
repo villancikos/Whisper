@@ -42,7 +42,8 @@ var AppWrapper = React.createClass({
             },
             availableConversations: {
 
-            }
+            },
+            userid : "pancrasio"
         });
     },
     refreshConversationPanel: function (new_conversation) {

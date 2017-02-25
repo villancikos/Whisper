@@ -3,13 +3,13 @@ module.exports = {
     // Conversations. Still not sure if we need to add something else.
     conversations: {
         conversation0001: {
-            'test':'test working'
+            'test': 'test working'
         },
         conversation0002: {
-            'test':'test working'
+            'test': 'test working'
         },
         conversation0003: {
-            'test':'test working'
+            'test': 'test working'
         },
     },
     // Participants, to keep a record of the participants of each chat.
@@ -52,7 +52,31 @@ module.exports = {
                 typeOfContent: "text",
                 timestamp: 1487855120
             },
+        },
+        conversation0003: {
+            message000001: {
+                sender: 'emptyness',
+                content: "I'm so alone!",
+                typeOfContent: "text",
+                timestamp: 1487855066
+            }
+        },
+        conversation0004: {
+            message000001: {
+                sender: 'emptyness',
+                content: "I'm so alone!",
+                typeOfContent: "text",
+                timestamp: 1487855066
+            },
+            message000002: {
+                sender: 'fullness',
+                content: "Not in this universe!",
+                typeOfContent: "text",
+                timestamp: 1487855999
+            },
+
         }
+
     },
 
     // Users available on our system.
