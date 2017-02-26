@@ -22,7 +22,29 @@ var app = firebase.initializeApp({
 const database = firebase.database();
 const convosRef = database.ref("conversations");
 const messageRef = database.ref("messages");
+// const participantsRef = database.ref("participants");
+// const participantsRef = require('../samples/sample-participants');
+const user_id = 'jurdini01';
+const usersRef = database.ref("users/"+ user_id);
+// console.log(usersRef.users.ramiri01.conversations);
+// Get all the conversations to which user has access
+Object.keys(usersRef).map(function(key){
+    // console.log(usersRef[key]);
+    // console.log(usersRef[key]);
+});
 
+var conversationList = [];
+usersRef.on('value', snapshot => {
+    // Obtain the conversations of this user
+    var conversations = snapshot.child("/conversations/").val();
+    // iterate through them and push them to the list.
+    Object.keys(conversations).map(function(key){
+        conversationList.push(key);
+        // console.log(key);
+    })
+debugger;
+});
+console.log(conversationList);
 /*
     Main Wrapper for our Whisper Web App
 */
@@ -39,9 +61,6 @@ var AppWrapper = React.createClass({
             this.setState({ conversations: snapshot.val() });
         });
         this.setState({
-            // conversations: convos,
-            // conversations: require('../samples/sample-conversations'),
-            // messages: require('../sample-messages')
             participants: {
                 conversation0001: {
                     ramiri01: true,
@@ -90,7 +109,7 @@ var AppWrapper = React.createClass({
         }
         var updates = {};
         updates['/messages/' + conversation_id + "/" + message_id] = message_data;
-        updates['/conversations/' + conversation_id ] = update_conversation;
+        updates['/conversations/' + conversation_id] = update_conversation;
         database.ref().update(updates);
 
     },

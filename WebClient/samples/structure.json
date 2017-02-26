@@ -23,38 +23,6 @@
         "conversation0006": {
             "last_message": "Do you need something from the store?.",
             "timestamp": 1487802962000
-        },
-        "conversation0007": {
-            "last_message": "I so wanna have some tacos!!!",
-            "timestamp": 1487889541297
-        },
-        "conversation0008": {
-            "last_message": "I wonder if emoji works... 🙏🏻 <- lets try",
-            "timestamp": 1487889541297
-        },
-        "conversation0010": {
-            "last_message": "My cable is electrical",
-            "timestamp": 1487889541297
-        },
-        "conversation0011": {
-            "last_message": "Pony Tail guy was funny",
-            "timestamp": 1487889541297
-        },
-        "conversation0012": {
-            "last_message": "do you still need some books?",
-            "timestamp": 1487889541297
-        },
-        "conversation0013": {
-            "last_message": "Are you coming tomorrow?",
-            "timestamp": 1487889541297
-        },
-        "conversation0014": {
-            "last_message": "I'm waiting just outside man!",
-            "timestamp": 1487889541297
-        },
-        "conversation0015": {
-            "last_message": "Ok dude.",
-            "timestamp": 1487889541297
         }
     },
     "participants": {
@@ -123,12 +91,19 @@
         "ramiri01": {
             "name": "Ramiri Wohasah",
             "email": "ramiri@gmail.com",
-            "profile_pic": "ramiri_img.jpg"
+            "profile_pic": "ramiri_img.jpg",
+            "conversations": {
+                "conversation0001": true
+            }
         },
         "jurdini01": {
             "name": "Jurdi Nisa",
             "email": "jurdini@gmail.com",
-            "profile_pic": "jurdini_pics.jpg"
+            "profile_pic": "jurdini_pics.jpg",
+            "conversations": {
+                "conversation0001": true,
+                "conversation0002": true
+            }
         },
         "lucas02": {
             "name": "Lucas Goodwill",
