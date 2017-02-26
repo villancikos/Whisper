@@ -38,9 +38,6 @@ var AppWrapper = React.createClass({
         convosRef.on('value', snapshot => {
             this.setState({ conversations: snapshot.val() });
         });
-        // messageRef.on('value',snapshot => {
-        //     this.setState({messages: snapshot.val()});
-        // });
         this.setState({
             // conversations: convos,
             // conversations: require('../samples/sample-conversations'),
@@ -86,25 +83,16 @@ var AppWrapper = React.createClass({
         // Update Conversation on Firebase.
         // Write the new post's data simultaneously in the posts list and the user's post list.
         // debugger;
-        // var update_conversation = {};
         var update_conversation = {
             last_message: message_data.content,
             timestamp: message_data.timestamp,
             sender: message_data.sender
         }
-        // console.log(update_conversation)
         var updates = {};
         updates['/messages/' + conversation_id + "/" + message_id] = message_data;
         updates['/conversations/' + conversation_id ] = update_conversation;
-        // updates['/conversations/' + conversation_id] = {}
-            console.log(updates);
-        // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
         database.ref().update(updates);
-        // database.ref('messages/'+conversation_id).set(
-        //     h.generateMessageId() = {
-        //         new_message
-        //     }
-        // );
+
     },
     render: function () {
         return (
@@ -144,7 +132,6 @@ var ConversationsSideBar = React.createClass({
  */
 var Conversation = React.createClass({
     retrieveConversation: function (index) {
-        console.log("Emulating that on click, that conversation will render on right side");
         // In this section we add the state to the message.
         // So this is the best place to call the conversation from firebase.
         this.props.refreshConversationPanel(index);
