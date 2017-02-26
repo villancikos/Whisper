@@ -25,26 +25,91 @@ const messageRef = database.ref("messages");
 // const participantsRef = database.ref("participants");
 // const participantsRef = require('../samples/sample-participants');
 const user_id = 'jurdini01';
-const usersRef = database.ref("users/"+ user_id);
+const usersRef = database.ref("users/" + user_id);
+const participantsRef = database.ref("participants/");
 // console.log(usersRef.users.ramiri01.conversations);
 // Get all the conversations to which user has access
-Object.keys(usersRef).map(function(key){
+Object.keys(usersRef).map(function (key) {
     // console.log(usersRef[key]);
     // console.log(usersRef[key]);
 });
 
-var conversationList = [];
-usersRef.on('value', snapshot => {
+var conversationList = {};
+usersRef.once('value', snapshot => {
     // Obtain the conversations of this user
     var conversations = snapshot.child("/conversations/").val();
     // iterate through them and push them to the list.
-    Object.keys(conversations).map(function(key){
-        conversationList.push(key);
-        // console.log(key);
-    })
-debugger;
+    Object.keys(conversations).map(function (key) {
+        conversationList[key] = conversations[key];
+    });
+    console.log(Object.keys(snapshot.child("/conversations/").val()));
 });
 console.log(conversationList);
+
+usersRef.once('value' , snapshot =>{
+    var data = snapshot.val()
+    var keys = Object.keys(data)
+    console.log(keys);
+});
+
+// Now we have the conversations which this user should access.
+// Let's fetch them!
+// convosRef.once('value', function(snapshot){
+    
+// });
+
+
+// console.log(database.ref('/participants/').equalTo('jurdini01').val());
+// database.ref('/participants/').orderByChild('jurdini01').startAt(!null).once('value').then(function (snapshot) {
+//     console.log(snapshot.val());
+// });
+
+
+participantsRef.once('value' , snapshot =>{
+    var data = snapshot.val()
+    var keys = Object.keys(data)
+    // console.log(data);
+});
+
+// database.ref('/conversations/').once('value')
+//     .then(function (snapshot) {
+//         snapshot.forEach(function (childSnapshot) {
+//             console.log(childSnapshot.val());
+//         })
+//     })
+
+// var test = function () {
+    // Object.keys(conversationList).map(function (key) {
+        // debugger;
+        // console.log(conversationList[key]);
+        // convosRef.on('value', snapshot =>{
+        //     if (snapshot.val() !== key){
+        //         console.log(snapshot.val());
+        //     }
+        // });
+    // })
+// };
+
+
+
+// const conversationsReference = database.ref("users/"+ user_id+"/conversations/");
+// conversationsReference.once("value")
+//   .then(function(snapshot) {
+//     snapshot.forEach(function(childSnapshot) {
+//       // key will be "ada" the first time and "alan" the second time
+//       database.ref("/conversations/"+childSnapshot.key).on("value")
+//       .then(function(othersnapshot){
+//         console.log(othersnapshot.val());
+//       })
+//     //   var key = childSnapshot.key;
+//     //   console.log(key);
+//       // childData will be the actual contents of the child
+//     //   var childData = childSnapshot.val();
+//     //   console.log(childData);
+//   });
+// });
+
+
 /*
     Main Wrapper for our Whisper Web App
 */
