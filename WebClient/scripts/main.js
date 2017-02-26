@@ -63,21 +63,6 @@ var AppWrapper = React.createClass({
     },
     refreshConversationPanel: function (new_conversation) {
         delete this.state.availableConversations;
-        // if (new_conversation === 'conversation0001') {
-        //     this.setState({ availableConversations: require('../samples/conversation0001') });
-        // }
-        // else if (new_conversation === 'conversation0002') {
-        //     this.setState({ availableConversations: require('../samples/conversation0002') });
-        // }
-        // else if (new_conversation === 'conversation0003') {
-        //     this.setState({ availableConversations: require('../samples/conversation0003') });
-        // }
-        // else if (new_conversation === 'conversation0004') {
-        //     this.setState({ availableConversations: require('../samples/conversation0004') });
-        // }
-        // else {
-        //     this.setState({ availableConversations: {} });
-        // }
 
         database.ref("messages/" + new_conversation).on("value", snapshot => {
             var obj = {}
@@ -100,9 +85,19 @@ var AppWrapper = React.createClass({
 
         // Update Conversation on Firebase.
         // Write the new post's data simultaneously in the posts list and the user's post list.
+        // debugger;
+        // var update_conversation = {};
+        var update_conversation = {
+            last_message: message_data.content,
+            timestamp: message_data.timestamp,
+            sender: message_data.sender
+        }
+        // console.log(update_conversation)
         var updates = {};
-        updates['/messages/' + conversation_id + "/"+ message_id] = message_data
-        console.log(updates);
+        updates['/messages/' + conversation_id + "/" + message_id] = message_data;
+        updates['/conversations/' + conversation_id ] = update_conversation;
+        // updates['/conversations/' + conversation_id] = {}
+            console.log(updates);
         // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
         database.ref().update(updates);
         // database.ref('messages/'+conversation_id).set(
