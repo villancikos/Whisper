@@ -92,17 +92,24 @@ var AppWrapper = React.createClass({
         return {
         }
     },
-    addNewMessage: function (conversation_id, new_message) {
-        console.log("Incoming message: ");
-        console.log(new_message);
-        console.log("ConversationId: ");
-        console.log(conversation_id);
-
+    addNewMessage: function (conversation_id, message_id, message_data) {
         // update the state object
-        // this.state.availableConversations.rendered_conversation[message_id] = new_message;
+        this.state.availableConversations[conversation_id][message_id] = message_data;
         // now set the state.
-        // this.setState({ availableConversations: this.state.availableConversations });
+        this.setState({ availableConversations: this.state.availableConversations });
 
+        // Update Conversation on Firebase.
+        // Write the new post's data simultaneously in the posts list and the user's post list.
+        var updates = {};
+        updates['/messages/' + conversation_id + "/"+ message_id] = message_data
+        console.log(updates);
+        // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+        database.ref().update(updates);
+        // database.ref('messages/'+conversation_id).set(
+        //     h.generateMessageId() = {
+        //         new_message
+        //     }
+        // );
     },
     render: function () {
         return (
@@ -194,33 +201,21 @@ var AddMessage = React.createClass({
         // Must add logic for firebase
         // 1. Stop form submitting defauly behavior.
         event.preventDefault();
-
-
         // 2. Take data from the form and create a new message
-        var new_message = {};
+        // create custom message_id and form message_data
+        var conversation_id = this.refs.conversation_id.value;
         var message_id = h.generateMessageId();
-        var data = {
+        var message_data = {
             sender: this.refs.user.value,
             content: this.refs.content.value,
             typeOfContent: "text",
             timestamp: Date.now()
         }
-        var conversation_id = this.refs.conversation_id.value;
-        console.log(conversation_id);
-        new_message[message_id] = data;
-        console.log("Preparing to add the following message: ");
-        console.log(new_message);
-        // 3. Add Message to state and clean form.
-        this.props.addNewMessage(conversation_id, new_message);
-
-        // 4. upload it to firebase too.
-        // database.ref('messages/'+conversation_id).set(
-        //     h.generateMessageId() = {
-        //         new_message
-        //     }
-        // );
-
+        // 3. Pass message data to parent and clean form
+        this.props.addNewMessage(conversation_id, message_id, message_data);
         this.refs.messageForm.reset();
+
+
     },
     render: function () {
         var uid = 'pancrasio';
@@ -245,6 +240,7 @@ var MessageList = React.createClass({
         return <Message index={message_id} key={message_id} message_data={this.props.messages[message_id]} />
     },
     render: function () {
+        //  TODO: Add try catch if conversation is empty.
         return (
             <div><ul>
                 {Object.keys(this.props.messages).map(this.renderMessage)}</ul>
