@@ -1,13 +1,12 @@
 {
-  "name": "catch-of-the-day",
+  "name": "Whisper App",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "msin.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Triple A Team",
+  "license": "",
   "devDependencies": {
     "autobind-decorator": "1.3.4",
     "babel": "6.23.0",
@@ -35,5 +34,8 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.9.0"
+  },
+  "dependencies": {
+    "firebase": "^3.6.10"
   }
 }

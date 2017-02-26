@@ -9,11 +9,19 @@ var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 // Our helpers function to reduce code in main app
 var h = require('./helpers');
+import * as firebase from 'firebase';
+var app = firebase.initializeApp({
 
-/* Firebase */
-var firebase = require('firebase');
-var firebaseConfig = require('../firebaseconfig')
-// var firebaseApp = firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
+    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
+    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
+    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
+    messagingSenderId: "740790435984"
+
+});
+const database = firebase.database();
+const convosRef = database.ref("conversations");
+const messageRef = database.ref("messages");
 
 /*
     Main Wrapper for our Whisper Web App
@@ -27,8 +35,15 @@ var AppWrapper = React.createClass({
         }
     },
     componentDidMount: function () {
+        convosRef.on('value', snapshot => {
+            this.setState({ conversations: snapshot.val() });
+        });
+        // messageRef.on('value',snapshot => {
+        //     this.setState({messages: snapshot.val()});
+        // });
         this.setState({
-            conversations: require('../samples/sample-conversations'),
+            // conversations: convos,
+            // conversations: require('../samples/sample-conversations'),
             // messages: require('../sample-messages')
             participants: {
                 conversation0001: {
@@ -43,26 +58,32 @@ var AppWrapper = React.createClass({
             availableConversations: {
 
             },
-            userid : "pancrasio"
+            userid: "pancrasio"
         });
     },
     refreshConversationPanel: function (new_conversation) {
         delete this.state.availableConversations;
-        if (new_conversation === 'conversation0001') {
-            this.setState({ availableConversations: require('../samples/conversation0001') });
-        }
-        else if (new_conversation === 'conversation0002') {
-            this.setState({ availableConversations: require('../samples/conversation0002') });
-        }
-        else if (new_conversation === 'conversation0003') {
-            this.setState({ availableConversations: require('../samples/conversation0003') });
-        }
-        else if (new_conversation === 'conversation0004') {
-            this.setState({ availableConversations: require('../samples/conversation0004') });
-        }
-        else {
-            this.setState({ availableConversations: {} });
-        }
+        // if (new_conversation === 'conversation0001') {
+        //     this.setState({ availableConversations: require('../samples/conversation0001') });
+        // }
+        // else if (new_conversation === 'conversation0002') {
+        //     this.setState({ availableConversations: require('../samples/conversation0002') });
+        // }
+        // else if (new_conversation === 'conversation0003') {
+        //     this.setState({ availableConversations: require('../samples/conversation0003') });
+        // }
+        // else if (new_conversation === 'conversation0004') {
+        //     this.setState({ availableConversations: require('../samples/conversation0004') });
+        // }
+        // else {
+        //     this.setState({ availableConversations: {} });
+        // }
+
+        database.ref("messages/" + new_conversation).on("value", snapshot => {
+            var obj = {}
+            obj[new_conversation] = snapshot.val()
+            this.setState({ availableConversations: obj })
+        });
 
 
     },
@@ -72,11 +93,16 @@ var AppWrapper = React.createClass({
         }
     },
     addNewMessage: function (conversation_id, new_message) {
-        console.log("Yep. New message added.")
+        console.log("Incoming message: ");
+        console.log(new_message);
+        console.log("ConversationId: ");
+        console.log(conversation_id);
+
         // update the state object
-        this.state.availableConversations[conversation_id][h.generateMessageId()] = new_message
+        // this.state.availableConversations.rendered_conversation[message_id] = new_message;
         // now set the state.
-        this.setState({ availableConversations: this.state.availableConversations });
+        // this.setState({ availableConversations: this.state.availableConversations });
+
     },
     render: function () {
         return (
@@ -168,17 +194,32 @@ var AddMessage = React.createClass({
         // Must add logic for firebase
         // 1. Stop form submitting defauly behavior.
         event.preventDefault();
+
+
         // 2. Take data from the form and create a new message
-        var new_message = {
+        var new_message = {};
+        var message_id = h.generateMessageId();
+        var data = {
             sender: this.refs.user.value,
             content: this.refs.content.value,
             typeOfContent: "text",
             timestamp: Date.now()
         }
         var conversation_id = this.refs.conversation_id.value;
-        console.log("Preparing to add new message: ");
+        console.log(conversation_id);
+        new_message[message_id] = data;
+        console.log("Preparing to add the following message: ");
+        console.log(new_message);
         // 3. Add Message to state and clean form.
         this.props.addNewMessage(conversation_id, new_message);
+
+        // 4. upload it to firebase too.
+        // database.ref('messages/'+conversation_id).set(
+        //     h.generateMessageId() = {
+        //         new_message
+        //     }
+        // );
+
         this.refs.messageForm.reset();
     },
     render: function () {
