@@ -237,10 +237,13 @@ var AppWrapper = React.createClass({
         database.ref().update(updates);
 
     },
+    actAsUser: function(){
+
+    },
     render: function () {
         return (
             <div className="row">
-            <form onSubmit={this.AddMessage}>
+            <form onSubmit={this.actAsUser}>
             <input type="text" ref="useridref"/>
             </form>
                 <ConversationsSideBar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
