@@ -27,6 +27,11 @@ const messageRef = database.ref("messages");
 const user_id = 'jurdini01';
 const usersRef = database.ref("users/" + user_id);
 const participantsRef = database.ref("participants/");
+
+
+
+
+
 // console.log(usersRef.users.ramiri01.conversations);
 // Get all the conversations to which user has access
 Object.keys(usersRef).map(function (key) {
@@ -34,28 +39,29 @@ Object.keys(usersRef).map(function (key) {
     // console.log(usersRef[key]);
 });
 
-var conversationList = {};
 usersRef.once('value', snapshot => {
     // Obtain the conversations of this user
-    var conversations = snapshot.child("/conversations/").val();
-    // iterate through them and push them to the list.
-    Object.keys(conversations).map(function (key) {
-        conversationList[key] = conversations[key];
-    });
-    console.log(Object.keys(snapshot.child("/conversations/").val()));
-});
-console.log(conversationList);
+    var conversations = Object.keys(snapshot.child("/conversations/").val());
+    for (var i = 0; i < conversations.length; i++) {
+        database.ref('/conversations/' + conversations[i]).once('value', childSnapshot => {
+            // console.log(childSnapshot.val());
 
-usersRef.once('value' , snapshot =>{
+        });
+    }
+});
+
+// console.log(conversationList);
+
+usersRef.once('value', snapshot => {
     var data = snapshot.val()
     var keys = Object.keys(data)
-    console.log(keys);
+    // console.log(keys);
 });
 
 // Now we have the conversations which this user should access.
 // Let's fetch them!
 // convosRef.once('value', function(snapshot){
-    
+
 // });
 
 
@@ -65,7 +71,7 @@ usersRef.once('value' , snapshot =>{
 // });
 
 
-participantsRef.once('value' , snapshot =>{
+participantsRef.once('value', snapshot => {
     var data = snapshot.val()
     var keys = Object.keys(data)
     // console.log(data);
@@ -79,15 +85,15 @@ participantsRef.once('value' , snapshot =>{
 //     })
 
 // var test = function () {
-    // Object.keys(conversationList).map(function (key) {
-        // debugger;
-        // console.log(conversationList[key]);
-        // convosRef.on('value', snapshot =>{
-        //     if (snapshot.val() !== key){
-        //         console.log(snapshot.val());
-        //     }
-        // });
-    // })
+// Object.keys(conversationList).map(function (key) {
+// debugger;
+// console.log(conversationList[key]);
+// convosRef.on('value', snapshot =>{
+//     if (snapshot.val() !== key){
+//         console.log(snapshot.val());
+//     }
+// });
+// })
 // };
 
 
@@ -122,9 +128,62 @@ var AppWrapper = React.createClass({
         }
     },
     componentDidMount: function () {
-        convosRef.on('value', snapshot => {
-            this.setState({ conversations: snapshot.val() });
-        });
+        // usersRef.once('value', snapshot => {
+        //     // Obtain the conversations of this user
+        //     var conversations = Object.keys(snapshot.child("/conversations/").val());
+        //     var test = {};
+        //     console.log(conversations);
+        //     console.log(snapshot.val());
+        //     for (var conv_key in conversations) {
+        //         console.log(conversations[conv_key]);
+
+        //         database.ref('/conversations/'+conversations[conv_key]).once('value')
+        //         .then(function(childSnapshot){
+        //             console.log(childSnapshot.val());
+        //             // var data = childSnapshot.val();
+
+        //             // var key = Object.keys(data);
+        //             // this.setState({conversations: childSnapshot.val()});
+        //             // this.state.conversations[key]=data;
+        //         });
+        //     }
+        //     // this.setState({ conversations: this.state.conversations});
+        // });
+        // usersRef.on('value', snap => snap.forEach((subSnap) => console.log(subSnap.val())));
+
+        var myObject = {};
+        usersRef.on('value', function (userSnapshot) {
+
+            // First we get the qty of conversations.
+            var conversationCount = userSnapshot.child('conversations').numChildren();
+            // we initialize an empty counter
+            var conversationLoadedCount = 0;
+            // we traverse now the conversations ref with the past conversations.
+            userSnapshot.child('conversations').forEach(function (conversationKey) {
+                var conversationRef = database.ref('conversations').child(conversationKey.key);
+                conversationRef.on('value', function (conversationsSnapshot) {
+                    var conversation = conversationsSnapshot.val();
+
+                    conversationLoadedCount = conversationLoadedCount + 1;
+                    myObject[conversationKey.key] = conversation;
+                    // console.log(conversationKey.key);
+                    this.state.conversations[conversationKey.key] = conversation;
+                    this.setState({ conversations: this.state.conversations });
+                    if (conversationLoadedCount === conversationCount) {
+                        console.log("We've loaded all conversations");
+                    }
+                }.bind(this));
+            }.bind(this));
+        }.bind(this));
+        // this.setState({ conversations: this.state.conversations });
+        // this.setState({ conversations: this.state.conversations })
+        // this.setState({conversations: this.state.conversations});
+        // Load all Sample Conversations
+        // convosRef.on('value', snapshot => {
+        //     this.setState({ conversations: snapshot.val() });
+        // });
+        // debugger;
+        // this.setState({conversations: myObject});
         this.setState({
             participants: {
                 conversation0001: {
@@ -181,6 +240,9 @@ var AppWrapper = React.createClass({
     render: function () {
         return (
             <div className="row">
+            <form onSubmit={this.AddMessage}>
+            <input type="text" ref="useridref"/>
+            </form>
                 <ConversationsSideBar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
                 <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} />
             </div>
