@@ -98,7 +98,7 @@
         <!--Reset Password View Controller-->
         <scene sceneID="qZF-xT-a2Y">
             <objects>
-                <viewController id="Y7L-hI-OJH" customClass="resetPasswordViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y7L-hI-OJH" customClass="ResetPasswordViewController" customModule="iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4r6-y6-IwT"/>
                         <viewControllerLayoutGuide type="bottom" id="1MB-js-VTW"/>
