@@ -10,14 +10,12 @@
 		139762284D63CFF1EDC4FD96 /* Pods_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E87A8E63F88D53C8363065 /* Pods_iOS.framework */; };
 		6B32541E1E3FD5DC006E0E38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B32541D1E3FD5DC006E0E38 /* GoogleService-Info.plist */; };
 		6B3254201E3FEF34006E0E38 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B32541F1E3FEF34006E0E38 /* SignInViewController.swift */; };
-		6B3254221E3FEF6F006E0E38 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3254211E3FEF6F006E0E38 /* SignUpViewController.swift */; };
-		6B3254241E3FFC38006E0E38 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3254231E3FFC38006E0E38 /* HomeViewController.swift */; };
-		6B3254261E3FFEE2006E0E38 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3254251E3FFEE2006E0E38 /* ContactTableViewCell.swift */; };
 		6BBC76DE1E3F7FC1007FE8CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC76DD1E3F7FC1007FE8CA /* AppDelegate.swift */; };
-		6BBC76E01E3F7FC1007FE8CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBC76DF1E3F7FC1007FE8CA /* ViewController.swift */; };
 		6BBC76E31E3F7FC1007FE8CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC76E11E3F7FC1007FE8CA /* Main.storyboard */; };
 		6BBC76E51E3F7FC1007FE8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC76E41E3F7FC1007FE8CA /* Assets.xcassets */; };
 		6BBC76E81E3F7FC1007FE8CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBC76E61E3F7FC1007FE8CA /* LaunchScreen.storyboard */; };
+		A86FA7701E6732CF00F666A8 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */; };
+		A86FA7721E67386300F666A8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86FA7711E67386300F666A8 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,17 +23,15 @@
 		442F19B4CB0E90308537965F /* Pods-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS/Pods-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6B32541D1E3FD5DC006E0E38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6B32541F1E3FEF34006E0E38 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		6B3254211E3FEF6F006E0E38 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		6B3254231E3FFC38006E0E38 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		6B3254251E3FFEE2006E0E38 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		6BBC76DA1E3F7FC1007FE8CA /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BBC76DD1E3F7FC1007FE8CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6BBC76DF1E3F7FC1007FE8CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6BBC76E21E3F7FC1007FE8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6BBC76E41E3F7FC1007FE8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BBC76E71E3F7FC1007FE8CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BBC76E91E3F7FC1007FE8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84E87A8E63F88D53C8363065 /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		A86FA7711E67386300F666A8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +75,8 @@
 		6BBC76DC1E3F7FC1007FE8CA /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A86FA7731E673FBB00F666A8 /* Controllers */,
 				6BBC76DD1E3F7FC1007FE8CA /* AppDelegate.swift */,
-				6BBC76DF1E3F7FC1007FE8CA /* ViewController.swift */,
-				6B32541F1E3FEF34006E0E38 /* SignInViewController.swift */,
-				6B3254211E3FEF6F006E0E38 /* SignUpViewController.swift */,
-				6B3254231E3FFC38006E0E38 /* HomeViewController.swift */,
-				6B3254251E3FFEE2006E0E38 /* ContactTableViewCell.swift */,
 				6BBC76E11E3F7FC1007FE8CA /* Main.storyboard */,
 				6BBC76E41E3F7FC1007FE8CA /* Assets.xcassets */,
 				6BBC76E61E3F7FC1007FE8CA /* LaunchScreen.storyboard */,
@@ -92,6 +84,16 @@
 				6B32541D1E3FD5DC006E0E38 /* GoogleService-Info.plist */,
 			);
 			path = iOS;
+			sourceTree = "<group>";
+		};
+		A86FA7731E673FBB00F666A8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6B32541F1E3FEF34006E0E38 /* SignInViewController.swift */,
+				A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */,
+				A86FA7711E67386300F666A8 /* SignUpViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		EB2070B3B7218A45F1C3D233 /* Pods */ = {
@@ -227,11 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B3254261E3FFEE2006E0E38 /* ContactTableViewCell.swift in Sources */,
-				6B3254241E3FFC38006E0E38 /* HomeViewController.swift in Sources */,
-				6BBC76E01E3F7FC1007FE8CA /* ViewController.swift in Sources */,
+				A86FA7721E67386300F666A8 /* SignUpViewController.swift in Sources */,
 				6BBC76DE1E3F7FC1007FE8CA /* AppDelegate.swift in Sources */,
-				6B3254221E3FEF6F006E0E38 /* SignUpViewController.swift in Sources */,
+				A86FA7701E6732CF00F666A8 /* ResetPasswordViewController.swift in Sources */,
 				6B3254201E3FEF34006E0E38 /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

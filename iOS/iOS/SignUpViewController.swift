@@ -1,30 +1,47 @@
 //
-//  SignUpViewController.swift
+//  signUpViewController.swift
 //  iOS
 //
-//  Created by Khaled AlObaid on 1/30/17.
+//  Created by Obolo Oluremi on 01/03/2017.
 //  Copyright © 2017 TripleAteam. All rights reserved.
 //
 
 import UIKit
 import Firebase
-import FirebaseAuth
 
 class SignUpViewController: UIViewController {
-    
-    var ref : FIRDatabaseReference!
-    
-    
-
-
-    @IBOutlet weak var nickNameText: UITextField!
-    @IBOutlet weak var passswordTextField: UITextField!
+    @IBAction func didClickCancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     @IBOutlet weak var emailTextField: UITextField!
+
+    @IBAction func didClickSignUp(_ sender: Any) {
+        handleSignUp()
+        
+    }
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    
+    func handleSignUp(){
+        //this func handles sign up to Whisper
+
+    let email = emailTextField.text
+    let password = passwordTextField.text
+    
+        FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { (user, error) in
+            if error != nil {
+            print("something wrong")
+            }else{
+            print("new user created")
+            }
+        }
+        
+    
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference()
 
         // Do any additional setup after loading the view.
     }
@@ -34,39 +51,6 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didClickSignUp(_ sender: Any) {
-        let nickName = self.nickNameText.text
-        let email = self.emailTextField.text
-        let password = self.passswordTextField.text
-        
-        FIRAuth.auth()?.createUser(withEmail: email!, password: password!, completion: { (user, error) in
-            if let error = error {
-                // handul error
-            }else {
-                // sign in
-                self.singIn(user: user!)
-                
-                    
-                    
-                    
-                
-                }
-            
-        })
-        
-    }
-    
-    
-    
-    func singIn(user : FIRUser){
-    
-    }
-    
-    
-    
-    
-    
-    
-    
-    
+
+   
 }
