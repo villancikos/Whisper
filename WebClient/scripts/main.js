@@ -1,14 +1,21 @@
+// import React from 'react';
+// import { render } from 'react-dom';
+import { browserHistory, Router, Route, Match, Miss } from 'react-router';
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
+// var ReactRouter = require('react-router');
+// var Router = ReactRouter.Router;
+// var Route = ReactRouter.Route;
 
-var createBrowserHistory = require('history/lib/createBrowserHistory');
+// var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 // Our helpers function to reduce code in main app
-var h = require('./helpers');
+// var h = require('./helpers');
+import h from './helpers/helpers';
+
+
 import * as firebase from 'firebase';
 var app = firebase.initializeApp({
 
@@ -271,12 +278,48 @@ var Message = React.createClass({
 });
 
 /*
+    App Login
+*/
+var AppLogin = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <h2>Please login</h2>
+            </div>
+        );
+    }
+});
+
+/*
     Routes
 */
-var routes = (
-    <Router history={createBrowserHistory()}>
-        <Route path="/" component={AppWrapper} />
-    </Router>
-)
+// var routes = (
+//     <Router history={createBrowserHistory()}>
+//         <Route path="/" component={AppLogin} />
+//         <Route path="/app" component={AppWrapper} />
+//     </Router>
+// )
 
-ReactDOM.render(routes, document.querySelector('#main'));
+// const Root = () => {
+//   return (
+//     <BrowserRouter>
+//       <div>
+//         <Match exactly pattern="/" component={AppLogin} />
+//         <Match pattern="/app" component={AppWrapper} />
+//       </div>
+//     </BrowserRouter>
+//   )
+// }
+
+// ReactDOM.render(<Root/>, document.querySelector('#main'));
+
+// Declarative route configuration (could also load this config lazily
+// instead, all you really need is a single root route, you don't need to
+// colocate the entire config).
+// Add <Route path="*" component={NoMatch}/> for 404s
+ReactDOM.render((
+    <Router history={browserHistory}>
+        <Route path="/" component={AppLogin} />
+        <Route path="/app/" component={AppWrapper} />
+    </Router>
+), document.getElementById('main'))

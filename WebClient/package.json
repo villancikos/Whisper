@@ -1,15 +1,16 @@
 {
-  "name": "Whisper App",
+  "name": "whisperapp",
   "version": "1.0.0",
   "description": "",
   "main": "msin.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Triple A Team",
   "license": "",
   "devDependencies": {
     "autobind-decorator": "1.3.4",
     "babel": "6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "babelify": "7.3.0",
     "browser-sync": "2.18.8",
     "browserify": "14.1.0",
