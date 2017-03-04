@@ -37,6 +37,7 @@
     "watchify": "3.9.0"
   },
   "dependencies": {
-    "firebase": "^3.6.10"
+    "firebase": "^3.6.10",
+    "firebaseui": "^1.0.0"
   }
 }

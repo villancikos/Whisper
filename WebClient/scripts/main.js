@@ -1,63 +1,58 @@
-// import React from 'react';
-// import { render } from 'react-dom';
 import { browserHistory, Router, Route, Match, Miss } from 'react-router';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-// var ReactRouter = require('react-router');
-// var Router = ReactRouter.Router;
-// var Route = ReactRouter.Route;
-
-// var createBrowserHistory = require('history/lib/createBrowserHistory');
-
 // Our helpers function to reduce code in main app
-// var h = require('./helpers');
 import h from './helpers/helpers';
 
-
-import * as firebase from 'firebase';
-var app = firebase.initializeApp({
-
-    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
-    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
-    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
-    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
-    messagingSenderId: "740790435984"
-
-});
-const database = firebase.database();
-const convosRef = database.ref("conversations");
-const messageRef = database.ref("messages");
-// const participantsRef = database.ref("participants");
-// const participantsRef = require('../samples/sample-participants');
+import Login from './components/login';
+import { ref, firebaseAuth } from './config/firebaseapp'
+const convosRef = ref.child("conversations");
+const messageRef = ref.child("messages");
 const user_id = 'jurdini01';
-const usersRef = database.ref("users/" + user_id);
-const participantsRef = database.ref("participants/");
+const usersRef = ref.child("users/" + user_id);
+const participantsRef = ref.child("participants/");
 
 /*
     Main Wrapper for our Whisper Web App
 */
 var AppWrapper = React.createClass({
     getInitialState: function () {
+        console.log("AppWrapper Initial State.");
         return {
             conversations: {},
             messages: {},
-            availableConversations: {}
+            availableConversations: {},
+            loggedUser: '',
         }
     },
+    componentWillMount: function () {
+        console.log("AppWrapper component will mount.");
+    },
     componentDidMount: function () {
-        usersRef.on('value', userSnapshot => {
-            userSnapshot.child('conversations').forEach(conversationKey => {
-                var conversationRef = database.ref('conversations').child(conversationKey.key);
-                conversationRef.on('value', conversationsSnapshot => {
-                    var conversation = conversationsSnapshot.val();
-                    this.state.conversations[conversationKey.key] = conversation;
-                    this.setState({ conversations: this.state.conversations });
+        console.log("AppWrapper component is now mounted.");
+        firebaseAuth.onAuthStateChanged(user => {
+            var loggedUser = null;
+            if (user) {
+                loggedUser = user.uid;
+            }
+            this.state.loggedUser = loggedUser||null;
+            this.setState({
+                loggedUser: this.state.loggedUser
+            }); 
+            var userConversations = ref.child("users/" + this.state.loggedUser);
+            userConversations.on('value', userSnapshot => {
+                userSnapshot.child('conversations').forEach(conversationKey => {
+                    var conversationRef = convosRef.child(conversationKey.key);
+                    conversationRef.on('value', conversationsSnapshot => {
+                        var conversation = conversationsSnapshot.val();
+                        this.state.conversations[conversationKey.key] = conversation;
+                        this.setState({ conversations: this.state.conversations });
+                    });
                 });
             });
         });
-
         this.setState({
             participants: {
                 conversation0001: {
@@ -72,13 +67,13 @@ var AppWrapper = React.createClass({
             availableConversations: {
 
             },
-            userid: "pancrasio"
         });
+
     },
     refreshConversationPanel: function (new_conversation) {
         delete this.state.availableConversations;
 
-        database.ref("messages/" + new_conversation).on("value", snapshot => {
+        ref.child("messages/" + new_conversation).on("value", snapshot => {
             var obj = {}
             obj[new_conversation] = snapshot.val()
             this.setState({ availableConversations: obj })
@@ -108,7 +103,7 @@ var AppWrapper = React.createClass({
         var updates = {};
         updates['/messages/' + conversation_id + "/" + message_id] = message_data;
         updates['/conversations/' + conversation_id] = update_conversation;
-        database.ref().update(updates);
+        ref.update(updates);
 
     },
     actAsUser: function (event) {
@@ -293,33 +288,13 @@ var AppLogin = React.createClass({
 /*
     Routes
 */
-// var routes = (
-//     <Router history={createBrowserHistory()}>
-//         <Route path="/" component={AppLogin} />
-//         <Route path="/app" component={AppWrapper} />
-//     </Router>
-// )
-
-// const Root = () => {
-//   return (
-//     <BrowserRouter>
-//       <div>
-//         <Match exactly pattern="/" component={AppLogin} />
-//         <Match pattern="/app" component={AppWrapper} />
-//       </div>
-//     </BrowserRouter>
-//   )
-// }
-
-// ReactDOM.render(<Root/>, document.querySelector('#main'));
-
 // Declarative route configuration (could also load this config lazily
 // instead, all you really need is a single root route, you don't need to
 // colocate the entire config).
 // Add <Route path="*" component={NoMatch}/> for 404s
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={AppLogin} />
-        <Route path="/app/" component={AppWrapper} />
+        <Route path="/" component={Login} />
+        <Route path="/app" component={AppWrapper} />
     </Router>
 ), document.getElementById('main'))

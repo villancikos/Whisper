@@ -1,5 +1,9 @@
 {
     "conversations": {
+        "conversation0012012012012":{
+            "last_message": "Totally mate! Where to?",
+            "timestamp": 1488648607
+        },
         "conversation0001": {
             "last_message": "I was thinking of you!",
             "timestamp": 1487889541297
@@ -36,6 +40,20 @@
         }
     },
     "messages": {
+        "conversation0012012012012":{
+            "message1212012012":{
+                "sender": "ramiri01",
+                "content": "Hey amigo. Want to study?",
+                "typeOfContent": "text",
+                "timestamp": 1488648607
+            },
+            "message3123121212":{
+                "sender": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
+                "content": "Totally mate! Where to?",
+                "typeOfContent": "text",
+                "timestamp": 1488648510
+            }
+        },
         "conversation0001": {
             "message000001": {
                 "sender": "ramiri01",
@@ -88,6 +106,15 @@
         }
     },
     "users": {
+        "aZs5rISKcqWbed5rEyagbsIx5Ij2":{
+            "name": "Fernando Villa",
+            "email": "villancikos@gmail.com",
+            "profile_pic": "https://lh3.googleusercontent.com/-5c7FDMIZKao/AAAAAAAAAAI/AAAAAAABkLg/dCXG3_ATNNk/photo.jpg",
+            "conversations":{
+                "conversation0012012012012": true
+            }
+
+        },
         "ramiri01": {
             "name": "Ramiri Wohasah",
             "email": "ramiri@gmail.com",
