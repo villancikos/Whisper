@@ -106,19 +106,11 @@ var AppWrapper = React.createClass({
         ref.update(updates);
 
     },
-    actAsUser: function (event) {
-        event.preventDefault();
-        this.refs.user.value
-        this.setState({ user: user })
-    },
     render: function () {
         return (
             <div className="row">
-                <form onSubmit={this.actAsUser}>
-                    <input type="text" ref="useridref" />
-                </form>
                 <ConversationsSideBar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
-                <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} />
+                <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} loggedUser={this.state.loggedUser}/>
             </div>
 
         )
@@ -180,7 +172,7 @@ var Conversation = React.createClass({
 
 var ConversationPanel = React.createClass({
     getMessageList: function (conversationId) {
-        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} addNewMessage={this.props.addNewMessage} />
+        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} addNewMessage={this.props.addNewMessage} loggedUser={this.props.loggedUser}/>
     },
     render: function () {
         return (
@@ -224,7 +216,7 @@ var AddMessage = React.createClass({
         return (
             <form ref="messageForm" onSubmit={this.addNewMessage} >
                 <input type="text" ref="content" />
-                <input type="hidden" ref="user" value={uid} />
+                <input type="hidden" ref="user" value={this.props.loggedUser} />
                 <input type="hidden" ref="conversation_id" value={this.props.conversation_id} />
                 <button type="submit">Send Message</button>
             </form>
@@ -246,7 +238,7 @@ var MessageList = React.createClass({
         return (
             <div><ul>
                 {Object.keys(this.props.messages).map(this.renderMessage)}</ul>
-                <AddMessage addNewMessage={this.props.addNewMessage} conversation_id={this.props.index} />
+                <AddMessage addNewMessage={this.props.addNewMessage} conversation_id={this.props.index} loggedUser={this.props.loggedUser} />
             </div>
         )
     }
