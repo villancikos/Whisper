@@ -71,7 +71,8 @@ function buildScript(file, watch) {
     debug : true,
     cache: {},
     packageCache: {},
-    transform:  [babelify.configure({presets : ['es2015', 'react'] })]
+    // transform:  [babelify.configure({presets : ['es2015', 'react']})],
+    transform:  [babelify.configure({presets : ['es2015', 'react'] , plugins: ['transform-decorators-legacy']})],
   };
 
   // watchify() if watch requested, otherwise run browserify() once 
