@@ -15,7 +15,7 @@ export default class ConversationPanel extends React.Component {
 
     render() {
         return (
-            <div className="conversation-panel">
+            <div className="col-md-8 conversation-panel">
                 <div className="">
                     {Object.keys(this.props.availableConversations).map(this.getMessageList)}
                 </div>

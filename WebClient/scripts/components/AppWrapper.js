@@ -101,10 +101,13 @@ export default class AppWrapper extends React.Component {
         ref.update(updates);
 
     }
+    startNewConversation(){
+        alert("Do you really want?");
+    }
     render() {
         return (
-            <div className="row">
-                <ConversationsSidebar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} />
+            <div className="row app-wrapper">
+                <ConversationsSidebar  conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel}/>
                 <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} loggedUser={this.state.loggedUser} />
             </div>
 
