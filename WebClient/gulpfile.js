@@ -22,7 +22,7 @@ var historyApiFallback = require('connect-history-api-fallback')
   Styles Task
 */
 
-gulp.task('styles',function() {
+gulp.task('styles', function () {
   // move over fonts
 
   gulp.src('css/fonts/**.*')
@@ -33,13 +33,13 @@ gulp.task('styles',function() {
     .pipe(stylus())
     .pipe(autoprefixer())
     .pipe(gulp.dest('./build/css/'))
-    .pipe(reload({stream:true}))
+    .pipe(reload({ stream: true }))
 });
 
 /*
   Images
 */
-gulp.task('images',function(){
+gulp.task('images', function () {
   gulp.src('css/images/**')
     .pipe(gulp.dest('./build/css/images'))
 });
@@ -47,13 +47,13 @@ gulp.task('images',function(){
 /*
   Browser Sync
 */
-gulp.task('browser-sync', function() {
-    browserSync({
-        // we need to disable clicks and forms for when we test multiple rooms
-        server : {},
-        middleware : [ historyApiFallback() ],
-        ghostMode: false
-    });
+gulp.task('browser-sync', function () {
+  browserSync({
+    // we need to disable clicks and forms for when we test multiple rooms
+    server: {},
+    middleware: [historyApiFallback()],
+    ghostMode: false
+  });
 });
 
 function handleErrors() {
@@ -68,11 +68,12 @@ function handleErrors() {
 function buildScript(file, watch) {
   var props = {
     entries: ['./scripts/' + file],
-    debug : true,
+    debug: true,
     cache: {},
     packageCache: {},
-    transform:  [babelify.configure({presets : ['es2015', 'react'] })]
-  };
+    transform: [babelify.configure({ presets: ['es2015', 'react'], plugins: ['transform-decorators-legacy'] })],
+    // transform:  [babelify.configure({presets : ['es2015', 'react']})],
+  }
 
   // watchify() if watch requested, otherwise run browserify() once 
   var bundler = watch ? watchify(browserify(props)) : browserify(props);
@@ -88,11 +89,11 @@ function buildScript(file, watch) {
       // .pipe(uglify())
       // .pipe(rename('app.min.js'))
       // .pipe(gulp.dest('./build'))
-      .pipe(reload({stream:true}))
+      .pipe(reload({ stream: true }))
   }
 
   // listen for an update and run rebundle
-  bundler.on('update', function() {
+  bundler.on('update', function () {
     rebundle();
     gutil.log('Rebundle...');
   });
@@ -101,12 +102,12 @@ function buildScript(file, watch) {
   return rebundle();
 }
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
   return buildScript('main.js', false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
-gulp.task('default', ['images','styles','scripts','browser-sync'], function() {
+gulp.task('default', ['images', 'styles', 'scripts', 'browser-sync'], function () {
   gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
   return buildScript('main.js', true); // browserify watch for JS changes
 });
