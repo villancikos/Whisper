@@ -10,18 +10,16 @@ import MessageList from './MessageList';
 @autobind
 export default class ConversationPanel extends React.Component {
     getMessageList(conversationId) {
-        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} addNewMessage={this.props.addNewMessage} loggedUser={this.props.loggedUser} />
+        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} />
     }
 
     render() {
         return (
-            <div className="col-md-8 conversation-panel">
-                <div className="">
+            <div className="conversation-panel">
+                <div>
                     {Object.keys(this.props.availableConversations).map(this.getMessageList)}
                 </div>
-
             </div>
         )
     }
-
 }

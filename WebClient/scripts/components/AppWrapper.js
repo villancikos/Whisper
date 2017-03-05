@@ -4,6 +4,9 @@ import autobind from 'autobind-decorator';
 import { ref, firebaseAuth } from '../config/firebaseapp';
 import ConversationsSidebar from './ConversationsSidebar';
 import ConversationPanel from './ConversationPanel';
+import ActionsBar from './ActionsBar';
+import UserDrawer from './UserDrawer';
+import AddMessage from './AddMessage';
 
 // Constants Used across the entire app.
 const convosRef = ref.child("conversations");
@@ -24,13 +27,13 @@ export default class AppWrapper extends React.Component {
             messages: {},
             availableConversations: {},
             loggedUser: '',
+            userDrawer: false,
+            activeConversation: false,
         }
     }
     componentWillMount() {
-        console.log("AppWrapper component will mount.");
     }
     componentDidMount() {
-        console.log("AppWrapper component is now mounted.");
         firebaseAuth.onAuthStateChanged(user => {
             var loggedUser = null;
             if (user) {
@@ -40,17 +43,19 @@ export default class AppWrapper extends React.Component {
             this.setState({
                 loggedUser: this.state.loggedUser
             });
-            var userConversations = ref.child("users/" + this.state.loggedUser);
-            userConversations.on('value', userSnapshot => {
-                userSnapshot.child('conversations').forEach(conversationKey => {
-                    var conversationRef = convosRef.child(conversationKey.key);
-                    conversationRef.on('value', conversationsSnapshot => {
-                        var conversation = conversationsSnapshot.val();
-                        this.state.conversations[conversationKey.key] = conversation;
-                        this.setState({ conversations: this.state.conversations });
+            if (this.state.loggedUser !== null) {
+                var userConversations = ref.child("users/" + this.state.loggedUser);
+                userConversations.on('value', userSnapshot => {
+                    userSnapshot.child('conversations').forEach(conversationKey => {
+                        var conversationRef = convosRef.child(conversationKey.key);
+                        conversationRef.on('value', conversationsSnapshot => {
+                            var conversation = conversationsSnapshot.val();
+                            this.state.conversations[conversationKey.key] = conversation;
+                            this.setState({ conversations: this.state.conversations });
+                        });
                     });
                 });
-            });
+            }
         });
         this.setState({
             participants: {
@@ -72,7 +77,6 @@ export default class AppWrapper extends React.Component {
 
     refreshConversationPanel(new_conversation) {
         delete this.state.availableConversations;
-
         ref.child("messages/" + new_conversation).on("value", snapshot => {
             var obj = {}
             obj[new_conversation] = snapshot.val()
@@ -80,6 +84,13 @@ export default class AppWrapper extends React.Component {
         });
 
 
+    }
+    promptConversationStarter(conversationKey, userKey) {
+        delete this.state.availableConversations;
+        this.setState({
+            availableConversations: {}
+        });
+        this.toggleActiveConversation(conversationKey);
     }
     addNewMessage(conversation_id, message_id, message_data) {
         // update the state object
@@ -101,16 +112,39 @@ export default class AppWrapper extends React.Component {
         ref.update(updates);
 
     }
-    startNewConversation(){
-        alert("Do you really want?");
+    toggleUserDrawer() {
+        this.setState({ userDrawer: !this.state.userDrawer });
+    }
+    toggleActiveConversation(index) {
+        this.setState({ currentConversation: index });
+        this.setState({ activeConversation: !this.state.activeConversation });
     }
     render() {
         return (
             <div className="row app-wrapper">
-                <ConversationsSidebar  conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel}/>
-                <ConversationPanel availableConversations={this.state.availableConversations} addNewMessage={this.addNewMessage} loggedUser={this.state.loggedUser} />
-            </div>
+                <div className="col-md-5 left-side">
+                    <div className="">
+                        <ActionsBar toggleUserDrawer={this.toggleUserDrawer} loggedUser={this.state.loggedUser} />
+                    </div>
+                    <div className="col-md-5">
+                        {this.state.userDrawer ?
+                            <UserDrawer loggedUser={this.props.loggedUser} toggleUserDrawer={this.toggleUserDrawer}
+                                promptConversationStarter={this.promptConversationStarter} />
+                            :
+                            <ConversationsSidebar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} loggedUser={this.state.loggedUser} toggleActiveConversation={this.toggleActiveConversation} />
+                        }
+                    </div>
 
+                </div>
+
+                <div className="col-md-7 right-side">
+                    <ConversationPanel availableConversations={this.state.availableConversations} />
+                    {this.state.activeConversation ?
+                        <AddMessage addNewMessage={this.addNewMessage} conversation_id={this.state.currentConversation} loggedUser={this.state.loggedUser} />
+                        : null}
+                </div>
+
+            </div>
         )
     }
 }

@@ -29,12 +29,14 @@ export default class AddMessage extends React.Component {
 
     render() {
         return (
-            <form ref="messageForm" onSubmit={this.addNewMessage} >
-                <input type="text" ref="content" />
-                <input type="hidden" ref="user" value={this.props.loggedUser} />
-                <input type="hidden" ref="conversation_id" value={this.props.conversation_id} />
-                <button type="submit">Send Message</button>
-            </form>
+            <div className="message-form col-md-12">
+                <form ref="messageForm" onSubmit={this.addNewMessage} >
+                    <input type="text" ref="content" />
+                    <input type="hidden" ref="user" value={this.props.loggedUser} />
+                    <input type="hidden" ref="conversation_id" value={this.props.conversation_id} />
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
         )
     }
 

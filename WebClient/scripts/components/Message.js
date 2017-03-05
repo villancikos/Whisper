@@ -15,7 +15,6 @@ export default class Message extends React.Component {
                 <p>{message_data.content}</p>
                 <p>{message_data.typeOfContent}</p>
                 <p>{h.formatTime(message_data.timestamp)}</p>
-
             </li>
         )
     }
