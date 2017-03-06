@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "167687328797",
+    "firebase_url": "https://whispermariya-48e27.firebaseio.com",
+    "project_id": "whispermariya-48e27",
+    "storage_bucket": "whispermariya-48e27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167687328797:android:886695860b4c2e3b",
+        "android_client_info": {
+          "package_name": "com.example.marik.whispermariya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167687328797-snidh56jojpctnj630701el71meq67e0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marik.whispermariya",
+            "certificate_hash": "9b2789956e8a5d12689ccc4411f965c4aea590c6"
+          }
+        },
+        {
+          "client_id": "167687328797-252jov9hid343eqei1ii6vmnleafo3t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwg93NLlRuIv0fhZROprEdnZ73UhJiLEM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167687328797-252jov9hid343eqei1ii6vmnleafo3t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
