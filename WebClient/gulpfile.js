@@ -75,6 +75,7 @@ function buildScript(file, watch) {
     // transform:  [babelify.configure({presets : ['es2015', 'react']})],
   }
 
+
   // watchify() if watch requested, otherwise run browserify() once 
   var bundler = watch ? watchify(browserify(props)) : browserify(props);
 

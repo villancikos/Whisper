@@ -7,6 +7,9 @@ import h from '../helpers/helpers';
  */
 
 export default class Conversation extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     retrieveConversation(index) {
         // In this section we add the state to the message.
         // So this is the best place to call the conversation from firebase.
