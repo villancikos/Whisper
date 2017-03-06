@@ -9,17 +9,24 @@ const users = ref.child('users');
 */
 @autobind
 export default class ActionsBar extends React.Component {
-    toggleUserDrawer() { 
-        console.log("Click ActionBar Button");
-        this.props.toggleUserDrawer();
+    showUserDrawer() {
+        this.props.showUserDrawer();
+    }
+    hideUserDrawer() {
+        this.props.hideUserDrawer();
     }
     render() {
+        if (this.props.userDrawer) {
+            return (
+                <div className="action-bar">
+                    <button onClick={this.hideUserDrawer} className="btn btn-warning float-right">Go Back</button>
+                </div>
+            )
+        }
         return (
             <div className="action-bar">
-                <button onClick={this.toggleUserDrawer} className="btn btn-warning float-right">
-                    New Conversation
-                </button>
-            </div >
+                <button onClick={this.showUserDrawer} className="btn btn-warning float-right">Start Conversation</button>
+            </div>
         )
     }
 }

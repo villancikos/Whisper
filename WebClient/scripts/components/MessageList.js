@@ -19,6 +19,9 @@ export default class MessageList extends React.Component {
                 <ul>
                     {Object.keys(this.props.messages).map(this.renderMessage)}
                 </ul>
+            <div><ul>
+                {Object.keys(this.props.messages).map(this.renderMessage)}</ul>
+                <AddMessage addNewMessage={this.props.addNewMessage} conversation_id={this.props.index} loggedUser={this.props.loggedUser} />
             </div>
         )
     }

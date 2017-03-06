@@ -28,14 +28,16 @@ export default class UserDrawer extends React.Component {
         evt.preventDefault();
         console.log("Dando click a un usuario");
         // Hide the user panel
-        this.props.toggleUserDrawer();
+        this.props.hideUserDrawer();
+        // Render the AddMessageForm
+        this.props.showActiveConversation();
         var loggedUser = this.props.loggedUser;
         // push a new key to this user conversations.
         var userPath = ref.child("/users/" + loggedUser + "/conversations/");
         var conversationPath = userPath.push();
         var conversationKey = conversationPath.key;
         // Show on the conversation Panel new conversation
-        this.props.promptConversationStarter(conversationKey,userKey);
+        // this.props.promptConversationStarter(conversationKey, userKey);
         // var updates = {};
         // updates[conversationKey] = true;
         // userPath.update(updates);
@@ -59,13 +61,16 @@ export default class UserDrawer extends React.Component {
         // message to the conversation 
     }
     renderUsers(userKey) {
-        return <li key={userKey}><a onClick={(evt) => this.startConversation(userKey, evt)} href="">{this.state.users[userKey]}</a></li>
+        return <li key={userKey}><a onClick={(evt) => this.startConversation(userKey, evt)} href="#">{this.state.users[userKey]}</a></li>
     }
     render() {
         return (
-            <ul>
-                {Object.keys(this.state.users).map(this.renderUsers)}
-            </ul>
+            <div>
+                <h3>Select From The List</h3>
+                <ul>
+                    {Object.keys(this.state.users).map(this.renderUsers)}
+                </ul>
+            </div>
         )
     }
 }

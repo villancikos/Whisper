@@ -25,7 +25,7 @@ export default class AppWrapper extends React.Component {
         this.state = {
             conversations: {},
             messages: {},
-            availableConversations: {},
+            currentActiveConversation: {},
             loggedUser: '',
             userDrawer: false,
             activeConversation: false,
@@ -68,7 +68,7 @@ export default class AppWrapper extends React.Component {
                     jurdini01: true
                 },
             },
-            availableConversations: {
+            currentActiveConversation: {
 
             },
         });
@@ -76,27 +76,27 @@ export default class AppWrapper extends React.Component {
     }
 
     refreshConversationPanel(new_conversation) {
-        delete this.state.availableConversations;
+        delete this.state.currentActiveConversation;
         ref.child("messages/" + new_conversation).on("value", snapshot => {
             var obj = {}
             obj[new_conversation] = snapshot.val()
-            this.setState({ availableConversations: obj })
+            this.setState({ currentActiveConversation: obj })
         });
 
 
     }
     promptConversationStarter(conversationKey, userKey) {
-        delete this.state.availableConversations;
+        delete this.state.currentActiveConversation;
         this.setState({
-            availableConversations: {}
+            currentActiveConversation: {}
         });
         this.toggleActiveConversation(conversationKey);
     }
     addNewMessage(conversation_id, message_id, message_data) {
         // update the state object
-        this.state.availableConversations[conversation_id][message_id] = message_data;
+        this.state.currentActiveConversation[conversation_id][message_id] = message_data;
         // now set the state.
-        this.setState({ availableConversations: this.state.availableConversations });
+        this.setState({ currentActiveConversation: this.state.currentActiveConversation });
 
         // Update Conversation on Firebase.
         // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -116,31 +116,45 @@ export default class AppWrapper extends React.Component {
         this.setState({ userDrawer: !this.state.userDrawer });
     }
     toggleActiveConversation(index) {
-        this.setState({ currentConversation: index });
+        this.setState({ currentConversationId: index });
         this.setState({ activeConversation: !this.state.activeConversation });
+    }
+    showActiveConversation() {
+        this.setState({ activeConversation: true });
+    }
+    hideActiveConversation() {
+        this.setState({ activeConversation: false });
+    }
+    showUserDrawer() {
+        this.setState({ userDrawer: true })
+    }
+    hideUserDrawer() {
+        this.setState({ userDrawer: false })
     }
     render() {
         return (
             <div className="row app-wrapper">
                 <div className="col-md-5 left-side">
-                    <div className="">
-                        <ActionsBar toggleUserDrawer={this.toggleUserDrawer} loggedUser={this.state.loggedUser} />
+                    <div>
+                        <ActionsBar showUserDrawer={this.showUserDrawer} hideUserDrawer={this.hideUserDrawer} loggedUser={this.state.loggedUser} userDrawer={this.state.userDrawer}/>
                     </div>
-                    <div className="col-md-5">
+                    <div>
                         {this.state.userDrawer ?
-                            <UserDrawer loggedUser={this.props.loggedUser} toggleUserDrawer={this.toggleUserDrawer}
+                            <UserDrawer loggedUser={this.props.loggedUser}
+                            hideUserDrawer={this.hideUserDrawer}
+                            showActiveConversation={this.showActiveConversation}
                                 promptConversationStarter={this.promptConversationStarter} />
                             :
-                            <ConversationsSidebar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} loggedUser={this.state.loggedUser} toggleActiveConversation={this.toggleActiveConversation} />
+                        <ConversationsSidebar conversations={this.state.conversations} refreshConversationPanel={this.refreshConversationPanel} loggedUser={this.state.loggedUser} showActiveConversation={this.showActiveConversation}  />
                         }
                     </div>
 
                 </div>
 
                 <div className="col-md-7 right-side">
-                    <ConversationPanel availableConversations={this.state.availableConversations} />
+                    <ConversationPanel currentActiveConversation={this.state.currentActiveConversation} />
                     {this.state.activeConversation ?
-                        <AddMessage addNewMessage={this.addNewMessage} conversation_id={this.state.currentConversation} loggedUser={this.state.loggedUser} />
+                        <AddMessage addNewMessage={this.addNewMessage} conversation_id={this.state.currentConversationId} loggedUser={this.state.loggedUser} />
                         : null}
                 </div>
 

@@ -10,14 +10,24 @@ import MessageList from './MessageList';
 @autobind
 export default class ConversationPanel extends React.Component {
     getMessageList(conversationId) {
-        return <MessageList key={conversationId} index={conversationId} messages={this.props.availableConversations[conversationId]} />
+        return <MessageList key={conversationId} index={conversationId} messages={this.props.currentActiveConversation[conversationId]} />
     }
 
     render() {
+        var currentActiveConversation = this.props.currentActiveConversation || {}
+        if (currentActiveConversation !== {}) {
+            return (
+                <div className="conversation-panel">
+                    <div>
+                        {Object.keys(this.props.currentActiveConversation).map(this.getMessageList)}
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className="conversation-panel">
                 <div>
-                    {Object.keys(this.props.availableConversations).map(this.getMessageList)}
+                    <p>Start a new conversation or click on the conversation sidebar to see the messages.</p>
                 </div>
             </div>
         )

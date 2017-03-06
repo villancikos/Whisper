@@ -1,11 +1,16 @@
 // Importing Third Party Libraries
+import { browserHistory, Router, Route, Match, Miss } from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory, Router, Route, Match, Miss } from 'react-router';
+import { ref, firebaseAuth } from './config/firebaseapp';
 
-// Import Our Main Components
+// Our helpers function to reduce code in main app
+import h from './helpers/helpers';
+
+// Import Our Components
 import Login from './components/login';
 import AppWrapper from './components/AppWrapper';
+
 
 /*
     App Login

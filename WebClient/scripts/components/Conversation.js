@@ -11,7 +11,7 @@ export default class Conversation extends React.Component {
         // In this section we add the state to the message.
         // So this is the best place to call the conversation from firebase.
         this.props.refreshConversationPanel(index);
-        this.props.toggleActiveConversation(index);
+        this.props.showActiveConversation();
     }
 
     render() {
