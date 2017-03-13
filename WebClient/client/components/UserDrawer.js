@@ -12,7 +12,7 @@ export default class UserDrawer extends React.Component {
                 {Object.keys(this.props.users).map((userId) =>
                     <div className="list-group-item" key={userId}
                     // onClick={this.props.startNewConversation.bind(null,userId,h.createRandomId())}
-                    onClick={this.props.startNewConversation.bind(null,userId,'last message blaa', '1212121212121')}
+                    onClick={this.props.startNewConversation.bind(null,userId)}
                     // startNewConversation(sender,conversationId,lastMessage,timestamp)
                     >
                         <img style={{height: "45px"}} src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-128.png" alt={`${this.props.users[userId].name} profile pic`} className="rounded-circle mr-2" />

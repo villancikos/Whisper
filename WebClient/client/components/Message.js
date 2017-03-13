@@ -10,24 +10,24 @@ export default class Message extends React.Component {
     }
     render() {
         var message_data = this.props.message_data || {};
-        if (message_data !== {}){
-        return (
-            <div className="p-0" style={{ border: 'solid 0.1px gray' }}>
-                <small>{message_data.sender}</small>
-                <p>{message_data.content}</p>
-                <small>
-                    <i className="fa fa-clock-o mr-1"></i>
-                    {message_data.timestamp}
-                </small>
-            </div>
-        )
+        if (message_data !== {}) {
+            return (
+                <div className="p-0" style={{ border: 'solid 0.1px gray' }}>
+                    <small>{message_data.sender}</small>
+                    <p>{message_data.content}</p>
+                    <small>
+                        {message_data.timestamp !== '' ? <i className="fa fa-clock-o mr-1"></i> : ''}
+                        {message_data.timestamp}
+                    </small>
+                </div>
+            )
 
-    }
-    return(
-        <div className="p-0">
-        Empty Message Data
+        }
+        return (
+            <div className="p-0">
+                Empty Message Data
         </div>
-    )
+        )
 
     }
 
