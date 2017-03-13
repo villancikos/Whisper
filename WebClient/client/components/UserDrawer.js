@@ -5,10 +5,21 @@ import h from './helpers/h';
   This renders the sidebar with all the users available in Whisper
 */
 export default class UserDrawer extends React.Component {
+    filterUsers(term){
+        console.log(term);
+        filteredUsers = {};
+        Object.assign(filteredUsers,this.props.users);
+
+    }
     render() {
         return (
             <div>
-                <h3 className="pl-3">Select From The List</h3>
+                <h4 className="pl-3">Select User From The List</h4>
+                <input placeholder="Or search ..." className="search-bar" type="text" onChange={(event) => this.filterUsers(event.target.value)}/>
+                // {Object.keys(this.props.users).map((userId) =>
+                //     {if userId.indexOf()}    
+                // )}
+
                 {Object.keys(this.props.users).map((userId) =>
                     <div className="list-group-item" key={userId}
                     // onClick={this.props.startNewConversation.bind(null,userId,h.createRandomId())}
