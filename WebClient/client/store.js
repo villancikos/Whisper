@@ -6,16 +6,17 @@ import { browserHistory } from 'react-router';
 import users from './sample-data/sample-users';
 import conversations from './sample-data/sample-conversations';
 import messages from './sample-data/sample-messages';
-let defaultDrawerState = {visible: false};
+let defaultDrawerState = { leftDrawer: false };
 // import the root reducer
 import rootReducer from './reducers/index';
 
 const defaultState = {
-    users: users,
-    conversations: conversations,
-    messages: messages,
+    users,
+    conversations,
+    messages,
     currentConversation: '',
     leftDrawer: defaultDrawerState,
+    loggedUser:'',
 }
 
 
