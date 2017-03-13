@@ -46,3 +46,15 @@ export function showContactsSidebar() {
     type: 'SHOW_CONTACTS_SIDEBAR',
   }
 }
+
+
+export function startNewConversation(sender,conversationId,lastMessage,timestamp,typeOfContent) {
+  return {
+    type: 'START_NEW_CONVERSATION',
+    sender,
+    conversationId,
+    lastMessage,
+    timestamp,
+    typeOfContent:'text',
+  }
+}

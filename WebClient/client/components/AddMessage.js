@@ -16,8 +16,8 @@ export default class AddMessage extends React.Component {
         Provisional Code for creating Id of Messages. Later we Will
         replace this with a Firebase push for a random id! 
         */
-        var messageId = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var messageId = '';
+        var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (var i = 0; i < 22; i++)
             messageId += possible.charAt(Math.floor(Math.random() * possible.length));
         /* 

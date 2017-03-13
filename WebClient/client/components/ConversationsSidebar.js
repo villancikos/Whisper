@@ -1,5 +1,6 @@
 import React from 'react';
 import Conversation from './Conversation';
+import UserDrawer from './UserDrawer';
 /* 
   ConversationsSidebar
 */
@@ -11,12 +12,12 @@ export default class ConversationsSidebar extends React.Component {
                 <div className="nav justify-content-end">
                     <div className="nav-item">
                         <button onClick={this.props.showContactsSidebar} className="btn btn-primary">
-                            {this.props.leftDrawer.visible ? "Back to Conversations" : "Search Contacts"}
+                            {this.props.leftDrawer.leftDrawer ? "Back to Conversations" : "Search Contacts"}
                         </button>
                     </div>
                 </div>
-                {this.props.leftDrawer.visible ?
-                    "Contacts here"
+                {this.props.leftDrawer.leftDrawer ?
+                    <UserDrawer {...this.props}/>
                     :
                     Object.keys(this.props.conversations).map((i) => <Conversation {...this.props} key={i} i={i} />)
                 }

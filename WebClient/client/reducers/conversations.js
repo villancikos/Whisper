@@ -1,4 +1,4 @@
-function conversations(state = [], action) {
+function conversations(state = {}, action) {
     switch (action.type) {
         case 'UPDATE_CONVERSATION_HEADER':
             return {
@@ -6,6 +6,15 @@ function conversations(state = [], action) {
                 [action.conversationId]: {
                     last_message: action.lastMessage,
                     timestamp: action.timestamp
+                }
+            }
+        case 'START_NEW_CONVERSATION':
+            console.log('STARTING A NEW CONVERSATION ON Conversations REDUCER');
+            return {
+                ...state,
+                [action.conversationId]:{
+                    last_message: action.lastMessage,
+                    timestamp: action.timestamp,
                 }
             }
         default:
