@@ -1,3 +1,5 @@
+import h from '../components/helpers/h';
+
 function currentConversation(state = {}, action) {
     switch (action.type) {
         case 'TOGGLE_CONVERSATION':

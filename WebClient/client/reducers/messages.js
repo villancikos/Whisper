@@ -1,11 +1,5 @@
-function randomIdGenerator() {
-    var messageId = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 22; i++){
-        messageId += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return messageId;
-}
+import h from '../components/helpers/h';
+
 function messages(state = {}, action) {
     switch (action.type) {
         case 'ADD_MESSAGE':
@@ -32,7 +26,7 @@ function addMessage(state = {}, action) {
             // return the new state with the new comment
             return {
                 ...state,
-                [action.messageId || randomIdGenerator()]: {
+                [action.messageId]: {
                     sender: action.sender,
                     content: action.content || action.lastMessage,
                     typeOfContent: action.typeOfContent,

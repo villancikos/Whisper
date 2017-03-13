@@ -6,12 +6,19 @@ import React from 'react';
 
 export default class Conversation extends React.Component {
     render() {
-        const { conversations, i } = this.props;
+        const { conversations, i } = this.props  || {};
+        if (conversations !== {} && i!=={}) {
+            return (
+                <div className="list-group-item" onClick={() => { this.props.toggleConversation(i) }}>
+                    <div>{conversations[i].last_message}</div>
+                    <small>
+                        <i className="fa fa-clock-o mr-1"></i>{conversations[i].timestamp}
+                    </small>
+                </div>
+            )
+        }
         return (
-            <div className="list-group-item" onClick={() => {this.props.toggleConversation(i)}}>
-                <div>{conversations[i].last_message}</div>
-                <small><i className="fa fa-clock-o mr-1"></i>{conversations[i].timestamp}</small>
-            </div>
+            <div>It looks like you don't have convos yet :D</div>
         )
     }
 }

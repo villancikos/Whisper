@@ -1,3 +1,4 @@
+import h from '../components/helpers/h';
 // Runs whenever a new conversation is created in the 
 // user database
 export function addConversation(index) {
@@ -11,7 +12,7 @@ export function addConversation(index) {
 export function toggleConversation(index) {
   return {
     type: 'TOGGLE_CONVERSATION',
-    index: index
+    index
   }
 }
 
@@ -48,13 +49,15 @@ export function showContactsSidebar() {
 }
 
 
-export function startNewConversation(sender,conversationId,lastMessage,timestamp,typeOfContent) {
+export function startNewConversation(receiver,lastMessage='',timestamp='',typeOfContent='text') {
   return {
     type: 'START_NEW_CONVERSATION',
-    sender,
-    conversationId,
+    sender:'yoloswagger',
+    receiver,
+    conversationId: h.createRandomId(),
+    messageId: h.createRandomId(),
     lastMessage,
     timestamp,
-    typeOfContent:'text',
+    typeOfContent,
   }
 }

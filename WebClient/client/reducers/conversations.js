@@ -1,3 +1,5 @@
+import h from '../components/helpers/h';
+
 function conversations(state = {}, action) {
     switch (action.type) {
         case 'UPDATE_CONVERSATION_HEADER':
