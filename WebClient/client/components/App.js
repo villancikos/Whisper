@@ -10,6 +10,7 @@ function mapStateToProps(state) {
         messages: state.messages,
         currentConversation: state.currentConversation,
         leftDrawer: state.leftDrawer,
+        loggedUser: '',
     }
 }
 
