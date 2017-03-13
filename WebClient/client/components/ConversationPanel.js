@@ -12,10 +12,11 @@ export default class ConversationPanel extends React.Component {
         if (currentConversation !== '') {
             return (
                 <div id="conversationPanel" className="d-flex flex-column col-md-7 p-0">
-                    <div>
-                        {Object.keys(currentConversation).map((i) =>
-                            <MessageList {...this.props} key={i} i={i} />)}
-                    </div>
+                <div>
+                    
+                </div>
+                    {Object.keys(currentConversation).map((i) =>
+                        <MessageList {...this.props} key={i} i={i} />)}
                 </div>
             )
         }

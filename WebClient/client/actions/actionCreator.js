@@ -17,11 +17,11 @@ export function toggleConversation(index) {
 }
 
 // runs whenever user sends message inside chat
-export function addMessage(conversationId, messageId, sender, content, typeOfContent, timestamp) {
+export function addMessage(conversationId, sender, content, typeOfContent, timestamp) {
   return {
     type: 'ADD_MESSAGE',
     conversationId,
-    messageId,
+    messageId: h.createRandomId(),
     sender,
     content,
     typeOfContent,
@@ -48,11 +48,13 @@ export function showContactsSidebar() {
   }
 }
 
-
+// because we are starting a new conversation first we need TODO: evaluate if there 
+// is no current conversation between sender (loggedUser) and receiver. If not...
+// then we can start a new one. Else, we need to fetch the conversation id.
 export function startNewConversation(receiver,lastMessage='',timestamp='',typeOfContent='text') {
   return {
     type: 'START_NEW_CONVERSATION',
-    sender:'yoloswagger',
+    sender:'currentLoggedUser',
     receiver,
     conversationId: h.createRandomId(),
     messageId: h.createRandomId(),

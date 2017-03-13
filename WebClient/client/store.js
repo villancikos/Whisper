@@ -17,6 +17,7 @@ const defaultState = {
     currentConversation: '',
     leftDrawer: defaultDrawerState,
     loggedUser:'',
+    
 }
 
 

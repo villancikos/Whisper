@@ -13,7 +13,7 @@ export default class AddMessage extends React.Component {
         const content = this.refs.content.value;
         const typeOfContent = 'text';
         const timestamp = Date.now();
-        this.props.addMessage(conversationId, h.createRandomId(), sender, content, typeOfContent, timestamp);
+        this.props.addMessage(conversationId, sender, content, typeOfContent, timestamp);
         this.props.updateConversationHeader(conversationId, content, timestamp)
         this.refs.messageForm.reset();
     }
