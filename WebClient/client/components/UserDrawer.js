@@ -16,13 +16,8 @@ export default class UserDrawer extends React.Component {
             <div>
                 <h4 className="pl-3">Select User From The List</h4>
                 <input placeholder="Or search ..." className="search-bar" type="text" onChange={(event) => this.filterUsers(event.target.value)}/>
-                // {Object.keys(this.props.users).map((userId) =>
-                //     {if userId.indexOf()}    
-                // )}
-
                 {Object.keys(this.props.users).map((userId) =>
                     <div className="list-group-item" key={userId}
-                    // onClick={this.props.startNewConversation.bind(null,userId,h.createRandomId())}
                     onClick={this.props.startNewConversation.bind(null,userId)}
                     // startNewConversation(sender,conversationId,lastMessage,timestamp)
                     >

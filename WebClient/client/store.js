@@ -15,8 +15,13 @@ const defaultState = {
     conversations,
     messages,
     currentConversation: '',
-    leftDrawer: defaultDrawerState,
-    loggedUser:'',
+    ui: {
+        leftDrawer: false,
+    },
+    auth: {
+        currently: null,
+        uid: null,
+    },
     
 }
 
