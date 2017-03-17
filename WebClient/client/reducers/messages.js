@@ -1,13 +1,14 @@
 import h from '../components/helpers/h';
+import C from '../actions/actionConstants';
 
 function messages(state = {}, action) {
     switch (action.type) {
-        case 'ADD_MESSAGE':
+        case C.ADD_MESSAGE:
             // return the new state with the new comment
             return Object.assign({}, state, {
                 [action.conversationId]: addMessage(state[action.conversationId], action)
             })
-        case 'START_NEW_CONVERSATION':
+        case C.START_NEW_CONVERSATION:
             console.log('STARTING A NEW CONVERSATION ON MESSAGES REDUCER');
             return Object.assign({}, state, {
                 [action.conversationId]: addMessage(state[action.conversationId], action)
@@ -21,8 +22,8 @@ function messages(state = {}, action) {
 
 function addMessage(state = {}, action) {
     switch (action.type) {
-        case 'ADD_MESSAGE':
-        case 'START_NEW_CONVERSATION':
+        case C.ADD_MESSAGE:
+        case C.START_NEW_CONVERSATION:
             // return the new state with the new comment
             return {
                 ...state,

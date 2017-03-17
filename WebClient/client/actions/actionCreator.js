@@ -1,9 +1,10 @@
 import h from '../components/helpers/h';
+import C from './actionConstants';
 // Runs whenever a new conversation is created in the 
 // user database
 export function addConversation(index) {
   return {
-    type: 'ADD_CONVERSATION',
+    type: C.ADD_CONVERSATION,
     index
   }
 }
@@ -11,7 +12,7 @@ export function addConversation(index) {
 // on the righ drawer.
 export function toggleConversation(index) {
   return {
-    type: 'TOGGLE_CONVERSATION',
+    type: C.TOGGLE_CONVERSATION,
     index
   }
 }
@@ -19,7 +20,7 @@ export function toggleConversation(index) {
 // runs whenever user sends message inside chat
 export function addMessage(conversationId, sender, content, typeOfContent) {
   return {
-    type: 'ADD_MESSAGE',
+    type: C.ADD_MESSAGE,
     conversationId,
     messageId: h.createRandomId(),
     sender,
@@ -33,7 +34,7 @@ export function addMessage(conversationId, sender, content, typeOfContent) {
 // Updates the conversation header of the sidebar.
 export function updateConversationHeader(conversationId, lastMessage, timestamp) {
   return {
-    type: 'UPDATE_CONVERSATION_HEADER',
+    type: C.UPDATE_CONVERSATION_HEADER,
     conversationId,
     lastMessage,
     timestamp
@@ -43,7 +44,7 @@ export function updateConversationHeader(conversationId, lastMessage, timestamp)
 
 export function showContactsSidebar() {
   return {
-    type: 'SHOW_CONTACTS_SIDEBAR',
+    type: C.SHOW_CONTACTS_SIDEBAR,
   }
 }
 
@@ -52,7 +53,7 @@ export function showContactsSidebar() {
 // then we can start a new one. Else, we need to fetch the conversation id.
 export function startNewConversation(receiver) {
   return {
-    type: 'START_NEW_CONVERSATION',
+    type: C.START_NEW_CONVERSATION,
     sender:'currentLoggedUser',
     receiver,
     conversationId: h.createRandomId(),
