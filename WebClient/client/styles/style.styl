@@ -4,19 +4,16 @@
 @import '_typography.styl'
 @import '_animations.styl'
 
-
 #conversationPanel
     background-color: black
     width: 100%
     height: 100vh
     overflow: scroll
 
-.add-message
-
 .add-message-form input[type=text]
     width: 100%
     display: block
-    background-color: white
+    background-color: red
     height: 3em 
     font-size: 1em
 
@@ -26,18 +23,68 @@
     overflow: scroll
 
 
-body
-    color #5bc0de
 
-.list-group-item
-    background-color: black
-
-
-small
-    color #f0ad4e
-
-.message-timestamp
-    color #5cb85c
-
-.message-sender
-    color blue
+.speech-whispper{
+  padding: 30px 40px;
+  .bubble-sender{
+    width: 240px;
+    height: auto;
+    display: block;
+    background: #f5f5f5;
+    border-radius: 4px;
+    box-shadow: 2px 8px 5px #000;
+    position: relative;
+    margin: 0 0 25px;
+    &.alt{
+      margin: 0 0 0 60px;
+    }
+    .bubble-sender-txt{
+      padding: 8px 55px 8px 14px;
+      .bubble-sender-name{
+        font-weight: 600;
+        font-size: 12px;
+        margin: 0 0 4px;
+        color: #3498db;
+        span{
+          font-weight: normal;
+          color: #b3b3b3;
+        }
+        &.alt{
+          color: #2ecc71;
+        }
+      }
+      .bubble-sender-message{
+        font-size: 12px;
+        margin: 0;
+        color: #2b2b2b;
+      }
+      .bubble-sender-timestamp{
+        font-size: 11px;
+        position: absolute;
+        bottom: 8px;
+        right: 10px;
+        text-transform: uppercase; color: #999
+      }
+    }
+    .bubble-sender-arrow {
+      position: absolute;
+      width: 0;
+      bottom:42px;
+      left: -16px;
+      height: 0;
+    }
+    .bubble-arrow:after {
+      content: "";
+      position: absolute;
+      border: 0 solid transparent;
+      border-top: 9px solid #f5f5f5;
+      border-radius: 0 20px 0;
+      width: 15px;
+      height: 30px;
+      transform: rotate(145deg);
+    }
+    .bubble-arrow.alt:after {
+      transform: rotate(45deg) scaleY(-1);
+    }
+  }
+}
