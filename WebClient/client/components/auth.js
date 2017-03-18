@@ -1,8 +1,8 @@
 import React from 'react'
 import firebase from 'firebase'
 import firebaseui from 'firebaseui'
-import { ref, firebaseAuth } from '../config/firebaseapp'
-const firebaseUI = new firebaseui.auth.AuthUI(firebaseAuth);
+import { ref, fAuth } from './helpers/firebase'
+const firebaseUI = new firebaseui.auth.AuthUI(fAuth);
 
 export default class FirebaseUi extends React.Component {
     constructor(props) {

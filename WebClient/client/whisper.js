@@ -10,6 +10,7 @@ import css from './styles/style.styl';
 import Main from './components/Main';
 import App from './components/App';
 import About from './components/About';
+import Login from './components/Login';
 
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';

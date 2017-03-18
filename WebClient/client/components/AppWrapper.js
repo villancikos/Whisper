@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const AppWrapper = React.createClass({
+export default class AppWrapper extends React.Component {
   render() {
     return (
       <div className="container-fluid">
@@ -9,8 +9,5 @@ const AppWrapper = React.createClass({
       </div>
     )
   }
-});
-
-export default AppWrapper;
-
-        
+}
+     

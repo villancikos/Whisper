@@ -2,7 +2,7 @@ import React from 'react';
 import ConversationsSidebar from './ConversationsSidebar';
 import ConversationPanel from './ConversationPanel';
 
-const Main = React.createClass({
+export default class Main extends React.Component {
   render() {
     return (
       <div className="row">
@@ -11,6 +11,4 @@ const Main = React.createClass({
       </div>
     )
   }
-});
-
-export default Main;
+}
