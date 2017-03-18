@@ -3,6 +3,8 @@ import C from '../actions/actionConstants';
 
 function messages(state = {}, action) {
     switch (action.type) {
+        case C.FETCH_MESSAGES:
+            return action.messages
         case C.ADD_MESSAGE:
             // return the new state with the new comment
             return Object.assign({}, state, {

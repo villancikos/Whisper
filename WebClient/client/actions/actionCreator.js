@@ -6,11 +6,12 @@ import { fAuth, ref } from '../components/helpers/firebase';
 export function watchFirebase(dispatch) {
   ref.on('value', (snap) => {
     dispatch(fetchConversationsFromFirebase());
+    dispatch(fetchMessagesFromFirebase());
   });
 }
 
-
-export function fetchConversationsFromFirebase() {
+// FIREBASE conversations
+function fetchConversationsFromFirebase() {
   return function (dispatch) {
     var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
     var conversations = {}
@@ -30,6 +31,30 @@ export function fetchConversationsFromFirebase() {
     dispatch({
       type: C.FETCH_CONVERSATIONS,
       conversations
+    })
+  }
+}
+
+// FIREBASE Messages
+function fetchMessagesFromFirebase() {
+  return function (dispatch) {
+    var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
+    var messages = {}
+    if (loggedUser !== null) {
+      var userConversations = ref.child("users/" + loggedUser);
+      userConversations.on('value', (userSnapshot) => {
+        userSnapshot.child('conversations').forEach((conversationKey) => {
+          var messageRef = ref.child('messages').child(conversationKey.key);
+          messageRef.on('value', (messagesSnapshot) => {
+            var message = messagesSnapshot.val();
+            messages[conversationKey.key] = message;
+          });
+        });
+      });
+    }
+    dispatch({
+      type: C.FETCH_MESSAGES,
+      messages
     })
   }
 }
