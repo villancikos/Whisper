@@ -13,17 +13,29 @@ export default class Message extends React.Component {
         return (
                 <div className="speech-whispper">
 
-                <div className="bubble-sender">
-                    <div className="bubble-sender-txt">
-                    <p className="bubble-sender-name">{message_data.sender}</p>
-                    <p className="bubble-sender-message">{message_data.content}</p>
-                    <span className="bubble-sender-timestamp">
+                <div className="bubble">
+                    <div className="bubble-txt">
+                    <p className="bubble-name">{message_data.sender}</p>
+                    <p className="bubble-message">{message_data.content}</p>
+                    <span className="bubble-timestamp">
                                     <i className="fa fa-clock-o mr-1"></i>
-                                    {message_data.timestamp}</span>
+                                    {message_data.timestamp}
+                    </span>
                     </div>
-                    <div className="bubble-sender-arrow"></div>
+                    <div className="bubble-arrow"></div>
                 </div>
 
+                    <div className="bubble sender">
+                        <div className="bubble-txt">
+                        <p className="bubble-name sender">{message_data.sender}</p>
+                        <p className="bubble-message">{message_data.content}</p>
+                        <span className="bubble-timestamp">
+                            <i className="fa fa-clock-o mr-1"></i>
+                            {message_data.timestamp}
+                        </span>
+                        </div>
+                        <div className="bubble-arrow sender"></div>
+                    </div>
 
 
                 </div>

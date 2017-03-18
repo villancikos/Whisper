@@ -13,7 +13,7 @@
 .add-message-form input[type=text]
     width: 100%
     display: block
-    background-color: red
+    background-color: #5bc0de
     height: 3em 
     font-size: 1em
 
@@ -26,21 +26,21 @@
 
 .speech-whispper{
   padding: 30px 40px;
-  .bubble-sender{
-    width: 240px;
+  .bubble{
+    width: 500px;
     height: auto;
     display: block;
     background: #f5f5f5;
-    border-radius: 4px;
-    box-shadow: 2px 8px 5px #000;
+    border-radius: 17px;
+    box-shadow: 1px 3px 2px #5bc0de;
     position: relative;
     margin: 0 0 25px;
-    &.alt{
+    &.sender{
       margin: 0 0 0 60px;
     }
-    .bubble-sender-txt{
+    .bubble-txt{
       padding: 8px 55px 8px 14px;
-      .bubble-sender-name{
+      .bubble-name{
         font-weight: 600;
         font-size: 12px;
         margin: 0 0 4px;
@@ -49,16 +49,16 @@
           font-weight: normal;
           color: #b3b3b3;
         }
-        &.alt{
+        &.sender{
           color: #2ecc71;
         }
       }
-      .bubble-sender-message{
+      .bubble-message{
         font-size: 12px;
         margin: 0;
         color: #2b2b2b;
       }
-      .bubble-sender-timestamp{
+      .bubble-timestamp{
         font-size: 11px;
         position: absolute;
         bottom: 8px;
@@ -66,12 +66,17 @@
         text-transform: uppercase; color: #999
       }
     }
-    .bubble-sender-arrow {
+    .bubble-arrow {
       position: absolute;
       width: 0;
       bottom:42px;
       left: -16px;
       height: 0;
+      &.sender{
+        right: -2px;      
+        bottom: 40px;
+        left: auto;
+      }
     }
     .bubble-arrow:after {
       content: "";
@@ -83,7 +88,7 @@
       height: 30px;
       transform: rotate(145deg);
     }
-    .bubble-arrow.alt:after {
+    .bubble-arrow.sender:after {
       transform: rotate(45deg) scaleY(-1);
     }
   }
