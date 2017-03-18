@@ -12,6 +12,7 @@ import rootReducer from './reducers/index';
 
 const defaultState = {
     users,
+    participants: '',
     conversations,
     messages,
     currentConversation: '',

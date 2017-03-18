@@ -1,7 +1,9 @@
 import h from '../components/helpers/h';
 import C from './actionConstants';
-// Runs whenever a new conversation is created in the 
-// user database
+import { fAuth, ref } from '../components/helpers/firebase';
+
+// Runs whenever a new conversation 
+// is created in the user database
 export function addConversation(index) {
   return {
     type: C.ADD_CONVERSATION,
@@ -48,6 +50,36 @@ export function showContactsSidebar() {
   }
 }
 
+export function readParticipant() {
+  return {
+    type: C.READ_PARTICIPANT,
+  }
+}
+
+export function startListeningToAuth(){
+  return function (dispatch) {
+    fAuth.auth().onAuthStateChanged((authData)=>{
+      if (authData){
+        dispatch({
+          type: C.LOGIN_USER,
+          uid: authData.uid
+        });
+      }
+    });
+  }
+}
+
+export function attemptLogin(){
+  return function (dispatch) {
+    dispatch({type:C.ATTEMPTING_LOGIN});
+    fAuth.signInWithCrdential((error, password)=>{
+      if (error){
+        dispatch({type:C.LOGIN_ERROR,error:"Login failed! "+error});
+      }
+    })
+    }
+}
+
 // because we are starting a new conversation first we need TODO: evaluate if there 
 // is no current conversation between sender (loggedUser) and receiver. If not...
 // then we can start a new one. Else, we need to fetch the conversation id.
@@ -63,3 +95,4 @@ export function startNewConversation(receiver) {
     typeOfContent: 'text',
   }
 }
+

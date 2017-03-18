@@ -1,6 +1,10 @@
 import React from 'react';
 import Conversation from './Conversation';
 import UserDrawer from './UserDrawer';
+// import firebase from 'firebase';
+// import firebaseui from 'firebaseui';
+// import { ref, fAuth } from './helpers/firebase';
+// const firebaseUI = new firebaseui.auth.AuthUI(fAuth);
 /* 
   ConversationsSidebar
 */
