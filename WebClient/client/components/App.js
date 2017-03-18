@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreator from '../actions/actionCreator';
 import AppWrapper from './AppWrapper';
+import { watchFirebase } from '../actions/actionCreator';
 
 function mapStateToProps(state) {
     return {
@@ -20,6 +21,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     // pass actionCreators via props...
+    watchFirebase(dispatch);
     return bindActionCreators(actionCreator, dispatch);
 }
 

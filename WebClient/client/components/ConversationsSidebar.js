@@ -21,7 +21,7 @@ export default class ConversationsSidebar extends React.Component {
                     </div>
                 </div>
                 {this.props.ui.leftDrawer ?
-                    <UserDrawer {...this.props}/>
+                    <UserDrawer {...this.props} />
                     :
                     Object.keys(this.props.conversations).map((i) => <Conversation {...this.props} key={i} i={i} />)
                 }
