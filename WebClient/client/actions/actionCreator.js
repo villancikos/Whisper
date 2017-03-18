@@ -43,6 +43,23 @@ export function updateConversationHeader(conversationId, lastMessage, timestamp)
 
   }
 }
+// Async action 
+export function pushConversation(conversationId, lastMessage, timestamp){
+    return function (dispatch) {
+      // Sending Firebase Data.
+      var update_conversation = {
+            last_message: lastMessage,
+            timestamp,
+            sender: 'default'
+      }
+      var updates = {};
+      updates['/conversations/' + conversationId] = update_conversation;
+      ref.update(updates);
+      dispatch(updateConversationHeader(conversationId, lastMessage, timestamp));
+      
+  }
+}
+
 
 export function showContactsSidebar() {
   return {
