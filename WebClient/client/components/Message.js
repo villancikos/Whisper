@@ -12,12 +12,13 @@ export default class Message extends React.Component {
         var message_data = this.props.message_data;
         return (
             <div className="p-0" style={{ border: "solid 0.1px gray" }}>
-                <small>{message_data.sender}</small>
+                <div className="message-sender">
+                    {message_data.sender}</div>
                 <p>{message_data.content}</p>
-                <small>
+                <div className="message-timestamp">
                     <i className="fa fa-clock-o mr-1"></i>
                     {message_data.timestamp}
-                </small>
+                </div>
             </div>
         )
     }
