@@ -44,7 +44,7 @@ const defaultState = {
     },
     auth: {
         currently: null,
-        uid: null,
+        uid: 'aZs5rISKcqWbed5rEyagbsIx5Ij2',
     },
 
 }
