@@ -16,9 +16,9 @@ export default class Message extends React.Component {
                     <small> r: {message_data.receiver}</small>
                         <small> s: {message_data.sender}</small>
                     {this.props.loggedUser===message_data.sender ?
-                    <p>From Logged User this then needs the correct class: {message_data.content}</p>
+                    <p className="bubble">{message_data.content}</p>
                     :
-                    <p>Not logged user: {message_data.content}</p>
+                    <p className="bubble alt">{message_data.content}</p>
                     }
                     <small>
                     {message_data.timestamp !== '' ? <i className="fa fa-clock-o mr-1"></i> : ''}

@@ -7,14 +7,15 @@ import h from './helpers/h';
 export default class AddMessage extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.refs.content.value);
-        const conversationId = this.props.i||h.createRandomId();
+        const conversationId = this.props.i || h.createRandomId();
         const sender = this.refs.sender.value;
+        const participants = this.props.participants[conversationId]
+        const receiver = h.getReceiver(conversationId, sender, this.props.participants);
         const content = this.refs.content.value;
         const typeOfContent = 'text';
-        const timestamp = Date.now();
-        this.props.pushMessages(conversationId, sender, content, typeOfContent, timestamp);
-        this.props.pushConversation(conversationId, content, timestamp)
+        console.log(receiver);
+        this.props.pushMessages(conversationId, sender, receiver, content, typeOfContent);
+        this.props.pushConversation(conversationId, content, sender)
         this.refs.messageForm.reset();
     }
     render() {
@@ -22,7 +23,7 @@ export default class AddMessage extends React.Component {
             <div className="mt-auto">
                 <form onSubmit={(e) => { this.handleSubmit(e) }} ref="messageForm" className="add-message-form" >
                     <input type="text" ref="content" required noValidate />
-                    <input type="hidden" ref="sender" value='pepe' />
+                    <input type="hidden" ref="sender" value={this.props.auth.uid} />
                     <input type="submit" hidden />
                 </form>
             </div>

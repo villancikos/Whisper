@@ -31,6 +31,7 @@ function addMessage(state = {}, action) {
                 ...state,
                 [action.messageId]: {
                     sender: action.sender,
+                    receiver: action.receiver,
                     content: action.content || action.lastMessage,
                     typeOfContent: action.typeOfContent,
                     timestamp: action.timestamp

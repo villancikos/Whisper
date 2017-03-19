@@ -10,7 +10,8 @@ function conversations(state = {}, action) {
                 ...state,
                 [action.conversationId]: {
                     last_message: action.lastMessage,
-                    timestamp: action.timestamp
+                    timestamp: action.timestamp,
+                    sender: action.sender
                 }
             }
         case C.START_NEW_CONVERSATION:
@@ -21,6 +22,7 @@ function conversations(state = {}, action) {
                 [action.conversationId]: {
                     last_message: action.lastMessage,
                     timestamp: action.timestamp,
+                    sender: action.sender
                 }
             }
         default:

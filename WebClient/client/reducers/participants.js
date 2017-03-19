@@ -2,8 +2,8 @@ import C from '../actions/actionConstants';
 
 function participants(state = {}, action) {
     switch (action.type){
-        case C.READ_PARTICIPANT:
-            return state;
+        case C.FETCH_PARTICIPANTS:
+            return action.participants;
     }
     return state;
 }
