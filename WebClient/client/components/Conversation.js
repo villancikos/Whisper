@@ -9,7 +9,11 @@ export default class Conversation extends React.Component {
         const { conversations, i } = this.props  || {};
         if (conversations !== {} && i!=={}) {
             return (
-                <div className="list-group-item" onClick={() => { this.props.toggleConversation(i) }}>
+                <div className=
+                    {`list-group-item${Object.keys(this.props.currentConversation)[0]===i
+                    ?' active':''}`}
+                    onClick={() => { this.props.toggleConversation(i) }}
+                >
                     <div>{conversations[i].last_message}</div>
                     <small>
                         <i className="fa fa-clock-o mr-1"></i>{conversations[i].timestamp}
