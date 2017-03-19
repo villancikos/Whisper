@@ -1,7 +1,7 @@
 import h from '../components/helpers/h';
 import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
-
+const loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
 
 export function watchFirebase(dispatch) {
   ref.on('value', (snap) => {
@@ -14,17 +14,15 @@ export function watchFirebase(dispatch) {
 // FIREBASE conversations
 function fetchConversationsFromFirebase() {
   return function (dispatch) {
-    var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
     var conversations = {}
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
       userConversations.on('value', (userSnapshot) => {
         userSnapshot.child('conversations').forEach((conversationKey) => {
           var conversationRef = ref.child('conversations').child(conversationKey.key);
-          conversationRef.on('value', (conversationsSnapshot) => {
+          conversationRef.orderByChild('timestamp').on('value', (conversationsSnapshot) => {
             var conversation = conversationsSnapshot.val();
             conversations[conversationKey.key] = conversation;
-            console.log("DISPATCH!!!!");
           });
         });
       });
@@ -39,14 +37,13 @@ function fetchConversationsFromFirebase() {
 // FIREBASE Messages
 function fetchMessagesFromFirebase() {
   return function (dispatch) {
-    var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
     var messages = {}
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
       userConversations.on('value', (userSnapshot) => {
         userSnapshot.child('conversations').forEach((conversationKey) => {
           var messageRef = ref.child('messages').child(conversationKey.key);
-          messageRef.on('value', (messagesSnapshot) => {
+          messageRef.orderByChild("timestamp").on('value', (messagesSnapshot) => {
             var message = messagesSnapshot.val();
             messages[conversationKey.key] = message;
           });
@@ -63,7 +60,6 @@ function fetchMessagesFromFirebase() {
 
 function fetchParticipants() {
   return function (dispatch) {
-    var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
     var participants = {}
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
@@ -165,10 +161,12 @@ export function pushConversation(conversationId, lastMessage, sender) {
 
 
 export function showContactsSidebar() {
-  return {
-    type: C.SHOW_CONTACTS_SIDEBAR,
+  return function (dispatch) {
+    dispatch(fetchFirebaseUsers());
   }
 }
+
+
 
 
 export function startListeningToAuth() {
@@ -198,10 +196,10 @@ export function attemptLogin() {
 // because we are starting a new conversation first we need TODO: evaluate if there 
 // is no current conversation between sender (loggedUser) and receiver. If not...
 // then we can start a new one. Else, we need to fetch the conversation id.
-export function startNewConversation(receiver) {
+export function startNewConversation(sender, receiver) {
   return {
     type: C.START_NEW_CONVERSATION,
-    sender: 'currentLoggedUser',
+    sender,
     receiver,
     conversationId: h.createRandomId(),
     messageId: h.createRandomId(),
@@ -211,3 +209,17 @@ export function startNewConversation(receiver) {
   }
 }
 
+function fetchFirebaseUsers(sender, receiver) {
+  return function (dispatch) {
+    var users = {}
+    ref.child("users").once('value', (userSnapshot) => {
+      var userDetails = userSnapshot.val();
+      users = userDetails;
+    });
+    dispatch({
+      type: C.SHOW_CONTACTS_SIDEBAR,
+      users
+    })
+  }
+  
+}

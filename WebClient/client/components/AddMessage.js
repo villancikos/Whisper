@@ -13,7 +13,6 @@ export default class AddMessage extends React.Component {
         const receiver = h.getReceiver(conversationId, sender, this.props.participants);
         const content = this.refs.content.value;
         const typeOfContent = 'text';
-        console.log(receiver);
         this.props.pushMessages(conversationId, sender, receiver, content, typeOfContent);
         this.props.pushConversation(conversationId, content, sender)
         this.refs.messageForm.reset();

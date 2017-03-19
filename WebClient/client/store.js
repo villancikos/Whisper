@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import { fAuth, ref } from './components/helpers/firebase';
 
 // Sample Data
-import users from './sample-data/sample-users';
+// import users from './sample-data/sample-users';
 // import conversations from './sample-data/sample-conversations';
 let defaultDrawerState = { leftDrawer: false };
 // import the root reducer
@@ -32,11 +32,11 @@ import rootReducer from './reducers/index';
 
 
 const defaultState = {
-    users,
-    participants: '',
-    conversations: '',
-    messages: '',
-    currentConversation: '',
+    users: {},
+    participants: {},
+    conversations: {},
+    messages: {},
+    currentConversation: {},
     ui: {
         leftDrawer: false,
         currentReceiver: '',

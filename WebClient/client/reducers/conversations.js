@@ -15,8 +15,6 @@ function conversations(state = {}, action) {
                 }
             }
         case C.START_NEW_CONVERSATION:
-            console.log('STARTING A NEW CONVERSATION ON Conversations REDUCER');
-            console.log(action.receiver);
             return {
                 ...state,
                 [action.conversationId]: {
