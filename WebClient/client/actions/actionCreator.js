@@ -197,6 +197,10 @@ export function attemptLogin() {
 // is no current conversation between sender (loggedUser) and receiver. If not...
 // then we can start a new one. Else, we need to fetch the conversation id.
 export function startNewConversation(sender, receiver) {
+  console.log("Sender");
+  console.log(sender);
+  console.log("Receiver");
+  console.log(receiver);
   return {
     type: C.START_NEW_CONVERSATION,
     sender,
@@ -214,7 +218,11 @@ function fetchFirebaseUsers(sender, receiver) {
     var users = {}
     ref.child("users").once('value', (userSnapshot) => {
       var userDetails = userSnapshot.val();
-      users = userDetails;
+      for (var user in userDetails){
+        if (user !== loggedUser){
+          users[user] = userDetails[user]
+        }
+      }
     });
     dispatch({
       type: C.SHOW_CONTACTS_SIDEBAR,
