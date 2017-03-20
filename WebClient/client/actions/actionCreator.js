@@ -197,10 +197,6 @@ export function attemptLogin() {
 // is no current conversation between sender (loggedUser) and receiver. If not...
 // then we can start a new one. Else, we need to fetch the conversation id.
 export function startNewConversation(sender, receiver) {
-  console.log("Sender");
-  console.log(sender);
-  console.log("Receiver");
-  console.log(receiver);
   return {
     type: C.START_NEW_CONVERSATION,
     sender,

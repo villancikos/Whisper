@@ -8,7 +8,7 @@ export default class UserDrawer extends React.Component {
     filterUsers(term){
         console.log(term);
         filteredUsers = {};
-        Object.assign(filteredUsers,this.props.users);
+        // Object.assign(filteredUsers,this.props.users);
 
     }
     render() {

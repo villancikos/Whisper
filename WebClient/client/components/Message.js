@@ -18,7 +18,7 @@ export default class Message extends React.Component {
                     {this.props.loggedUser===message_data.sender ?
                     <p className="bubble">{message_data.content}</p>
                     :
-                    <p className="bubble alt">{message_data.content}</p>
+                    <p className="bubble sender">{message_data.content}</p>
                     }
                     <small>
                     {message_data.timestamp !== '' ? <i className="fa fa-clock-o mr-1"></i> : ''}
