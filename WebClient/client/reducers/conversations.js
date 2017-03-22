@@ -10,17 +10,17 @@ function conversations(state = {}, action) {
                 ...state,
                 [action.conversationId]: {
                     last_message: action.lastMessage,
-                    timestamp: action.timestamp
+                    timestamp: action.timestamp,
+                    sender: action.sender
                 }
             }
         case C.START_NEW_CONVERSATION:
-            console.log('STARTING A NEW CONVERSATION ON Conversations REDUCER');
-            console.log(action.receiver);
             return {
                 ...state,
                 [action.conversationId]: {
                     last_message: action.lastMessage,
                     timestamp: action.timestamp,
+                    sender: action.sender
                 }
             }
         default:

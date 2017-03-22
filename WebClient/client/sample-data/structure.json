@@ -1,6 +1,6 @@
 {
     "conversations": {
-        "conversation0012012012012":{
+        "conversation0012012012012": {
             "last_message": "Totally mate! Where to?",
             "timestamp": 1488648607
         },
@@ -31,24 +31,38 @@
     },
     "participants": {
         "conversation0001": {
-            "ramiri01": true,
+            "aZs5rISKcqWbed5rEyagbsIx5Ij2": true,
             "jurdin01": true
         },
         "conversation0002": {
             "lucas02": true,
             "jurdini01": true
+        },
+        "conversation0012012012012": {
+            "aZs5rISKcqWbed5rEyagbsIx5Ij2": true,
+            "ramiri01": true
+        },
+        "conversation0003": {
+            "emptyness": true,
+            "aZs5rISKcqWbed5rEyagbsIx5Ij2": true
+        },
+        "conversation0004":{
+            "fullness":true,
+            "aZs5rISKcqWbed5rEyagbsIx5Ij2":true
         }
     },
     "messages": {
-        "conversation0012012012012":{
-            "message1212012012":{
+        "conversation0012012012012": {
+            "message1212012012": {
                 "sender": "ramiri01",
+                "receiver": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
                 "content": "Hey amigo. Want to study?",
                 "typeOfContent": "text",
                 "timestamp": 1488648607
             },
-            "message3123121212":{
+            "message3123121212": {
                 "sender": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
+                "receiver": "ramiri01",
                 "content": "Totally mate! Where to?",
                 "typeOfContent": "text",
                 "timestamp": 1488648510
@@ -56,13 +70,15 @@
         },
         "conversation0001": {
             "message000001": {
-                "sender": "ramiri01",
+                "sender": "jurdin01",
+                "receiver": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
                 "content": "Hey pal, hope you are doing great!",
                 "typeOfContent": "text",
                 "timestamp": 1487855066
             },
             "message000002": {
                 "sender": "jurdini01",
+                "receiver": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
                 "content": "Hey Ramiri, long time no see. I'm great!",
                 "typeOfContent": "text",
                 "timestamp": 1487855080
@@ -71,12 +87,14 @@
         "conversation0002": {
             "message000001": {
                 "sender": "lucas02",
+                "receiver": "jurdini01",
                 "content": "Hey Jurdini. I'm Lucas, do you remember me?",
                 "typeOfContent": "text",
                 "timestamp": 1487855001
             },
             "message000002": {
                 "sender": "jurdini01",
+                "receiver": "lucas02",
                 "content": "Lucas! Of course, how you've been mate?",
                 "typeOfContent": "text",
                 "timestamp": 1487855120
@@ -85,6 +103,7 @@
         "conversation0003": {
             "message000001": {
                 "sender": "emptyness",
+                "receiver": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
                 "content": "I'm so alone!",
                 "typeOfContent": "text",
                 "timestamp": 1487855066
@@ -92,13 +111,15 @@
         },
         "conversation0004": {
             "message000001": {
-                "sender": "emptyness",
+                "sender": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
+                "receiver": "fullness",
                 "content": "I'm so alone!",
                 "typeOfContent": "text",
                 "timestamp": 1487855066
             },
             "message000002": {
                 "sender": "fullness",
+                "receiver": "aZs5rISKcqWbed5rEyagbsIx5Ij2",
                 "content": "Not in this universe!",
                 "typeOfContent": "text",
                 "timestamp": 1487855999
@@ -106,19 +127,19 @@
         }
     },
     "users": {
-        "aZs5rISKcqWbed5rEyagbsIx5Ij2":{
+        "aZs5rISKcqWbed5rEyagbsIx5Ij2": {
             "name": "Fernando Villa",
             "email": "villancikos@gmail.com",
             "profile_pic": "https://lh3.googleusercontent.com/-5c7FDMIZKao/AAAAAAAAAAI/AAAAAAABkLg/dCXG3_ATNNk/photo.jpg",
-            "conversations":{
-                "conversation0012012012012": true
+            "conversations": {
+                "conversation0012012012012": true,
+                "conversation0001": true
             }
-
         },
         "ramiri01": {
             "name": "Ramiri Wohasah",
             "email": "ramiri@gmail.com",
-            "profile_pic": "ramiri_img.jpg",
+            "profile_pic": "https://cdn3.iconfinder.com/data/icons/movies-3/32/r2-d2-robot-starwars-movie-r2d2-science-space-128.png",
             "conversations": {
                 "conversation0001": true
             }
@@ -126,7 +147,7 @@
         "jurdini01": {
             "name": "Jurdi Nisa",
             "email": "jurdini@gmail.com",
-            "profile_pic": "jurdini_pics.jpg",
+            "profile_pic": "https://cdn3.iconfinder.com/data/icons/movies-3/32/r2-d2-robot-starwars-movie-r2d2-science-space-128.png",
             "conversations": {
                 "conversation0001": true,
                 "conversation0002": true
@@ -135,7 +156,17 @@
         "lucas02": {
             "name": "Lucas Goodwill",
             "email": "lucasg@gmail.com",
-            "profile_pic": "lucas-mugshot.jpg"
+            "profile_pic": "https://cdn3.iconfinder.com/data/icons/movies-3/32/r2-d2-robot-starwars-movie-r2d2-science-space-128.png"
+        },
+        "emptyness": {
+            "name": "So Empty",
+            "email": "imsoalone@empty.com",
+            "profile_pic": "https://cdn3.iconfinder.com/data/icons/movies-3/32/r2-d2-robot-starwars-movie-r2d2-science-space-128.png"
+        },
+        "fullness":{
+            "name": "Full Guy",
+            "email": "iam@full.com",
+            "profile_pic":"https://cdn3.iconfinder.com/data/icons/movies-3/32/r2-d2-robot-starwars-movie-r2d2-science-space-128.png"
         }
     }
 }

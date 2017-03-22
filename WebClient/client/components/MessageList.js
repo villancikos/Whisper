@@ -19,16 +19,11 @@ export default class MessageList extends React.Component {
                 // </div>
                 <div className="d-flex flex-column">
                     {Object.keys(currentMessageList).map((messageId) =>
-                        <Message key={messageId} i={messageId} message_data={currentMessageList[messageId]} />)
+                        <Message key={messageId} i={messageId} message_data={currentMessageList[messageId]} loggedUser={this.props.auth.uid} />)
                     }
                     <AddMessage i={currentConversation} {...this.props} />
                 </div>
             )
         }
-        return (
-            <div>
-                I cannot has that conversation
-            </div>
-        )
     }
 }

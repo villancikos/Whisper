@@ -6,6 +6,7 @@ import { watchFirebase } from '../actions/actionCreator';
 
 function mapStateToProps(state) {
     return {
+        participants: state.participants,
         conversations: state.conversations,
         users: state.users,
         messages: state.messages,
@@ -20,8 +21,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    // pass actionCreators via props...
+    console.log("...")
+    // Global Dispatcher for Firebase async actions
     watchFirebase(dispatch);
+    // main binder
     return bindActionCreators(actionCreator, dispatch);
 }
 

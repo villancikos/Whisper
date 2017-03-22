@@ -11,35 +11,30 @@ export default class Message extends React.Component {
     render() {
         var message_data = this.props.message_data || {};
         if (message_data !== {}) {
-
         return (
                 <div className="speech-whispper">
-
-                <div className="bubble">
-                    <div className="bubble-txt">
-                    <p className="bubble-name">{message_data.sender}</p>
-                    <p className="bubble-message">{message_data.content}</p>
-                    <span className="bubble-timestamp">
-                                    <i className="fa fa-clock-o mr-1"></i>
-                                    {message_data.timestamp}
-                    </span>
-                    </div>
-                    <div className="bubble-arrow"></div>
-                </div>
-
-                    <div className="bubble sender">
+                    <div className="bubble">
                         <div className="bubble-txt">
-                        <p className="bubble-name sender">{message_data.sender}</p>
-                        <p className="bubble-message">{message_data.content}</p>
-                        <span className="bubble-timestamp">
+                            {this.props.loggedUser === message_data.sender ?
+                            <p className="bubble-name sender">{message_data.sender}</p>
+                            :
+                            <p className="bubble-name">{message_data.sender}</p>
+                            }
+                            <p className="bubble-message">{message_data.content}</p>
+                            <span className="bubble-timestamp">
+                            {message_data.timestamp !== '' 
+                            ?
                             <i className="fa fa-clock-o mr-1"></i>
+                            :'' }
                             {message_data.timestamp}
-                        </span>
+                            </span>
                         </div>
-                        <div className="bubble-arrow sender"></div>
                     </div>
-
-
+                    {this.props.loggedUser === message_data.sender
+                    ?
+                        <div className="bubble-arrow sender"></div>
+                    :
+                        <div className="bubble-arrow"></div>}
                 </div>
         )
     }

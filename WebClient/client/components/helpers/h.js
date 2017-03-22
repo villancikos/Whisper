@@ -5,6 +5,13 @@ let h = {
         for (var i = 0; i < 22; i++)
             messageId += possible.charAt(Math.floor(Math.random() * possible.length));
         return messageId;
+    },
+    getReceiver: (conversationId, sender, participants) => {
+        var receiver = '';
+        for (var x in participants[conversationId]) 
+            if (x !== sender)
+                receiver = x;
+        return receiver;
     }
 }
 

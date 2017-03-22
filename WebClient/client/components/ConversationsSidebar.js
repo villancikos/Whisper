@@ -16,7 +16,7 @@ export default class ConversationsSidebar extends React.Component {
                 <div className="nav justify-content-end">
                     <div className="nav-item">
                         <button onClick={this.props.showContactsSidebar} className="btn btn-primary">
-                            {this.props.ui.leftDrawer ? "Back to Conversations" : "Search Contacts"}
+                            {this.props.ui.leftDrawer ? 'Back to Conversations' : 'Search Contacts'}
                         </button>
                     </div>
                 </div>
