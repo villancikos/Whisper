@@ -1,0 +1,149 @@
+\documentclass[10.9pt]{article}
+
+\usepackage[paper=letterpaper,centering,margin=1.0in]{geometry}
+\usepackage{setspace}
+
+\usepackage[american]{babel}
+\usepackage{epsfig,subfigure}
+\usepackage{color,cite}
+\usepackage{amsthm,amsfonts,amsmath,amssymb,amstext,latexsym}
+\usepackage{multirow}
+\usepackage{soul}
+%\usepackage{xxcolor}
+\usepackage{xcolor}
+%\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{graphicx}
+\usepackage{amstext}
+
+%\usepackage[utf8]{inputenc}
+%\usepackage{enumitem}
+
+%\algnewcommand{\IIf}[1]{\State\algorithmicif\ #1\ \algorithmicthen}
+%\algnewcommand{\EndIIf}{\unskip\ \algorithmicend\ \algorithmicif}
+\newcommand{\algorithmicbreak}{\textbf{break}}
+
+\newcommand*{\Cdot}[1][1.25]{%
+  \mathpalette{\CdotAux{#1}}\cdot%
+}
+\newdimen\CdotAxis
+\newcommand*{\CdotAux}[3]{%
+  {%
+    \settoheight\CdotAxis{$#2\vcenter{}$}%
+    \sbox0{%
+      \raisebox\CdotAxis{%
+        \scalebox{#1}{%
+          \raisebox{-\CdotAxis}{%
+            $\mathsurround=0pt #2#3$%
+          }%
+        }%
+      }%
+    }%
+    % Remove depth that arises from scaling.
+    \dp0=0pt %
+    % Decrease scaled height.
+    \sbox2{$#2\bullet$}%
+    \ifdim\ht2<\ht0 %
+      \ht0=\ht2 %
+    \fi
+    % Use the same width as the original \cdot.
+    \sbox2{$\mathsurround=0pt #2#3$}%
+    \hbox to \wd2{\hss\usebox{0}\hss}%
+  }%
+}
+
+
+%\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+%\algtext*{Indent}
+%\algtext*{EndIndent}
+
+
+
+\newcommand{\squishlist}{
+ \begin{list}{$\bullet$}
+  { \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{3pt}
+     \setlength{\topsep}{3pt}
+     \setlength{\partopsep}{0pt}
+     \setlength{\leftmargin}{1.5em}
+     \setlength{\labelwidth}{1em}
+     \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishend}{
+  \end{list}  }
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{remark}{Remark}
+% \newtheorem{proof}{Proof}
+\newtheorem{proposition}{Proposition}
+\newtheorem{observation}{Observation}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+
+\newcommand{\bydef}{\stackrel{\rm{def}}{=}}
+%\newcommand{\textul}[1]{\underline{#1}}
+
+\newcommand{\cP}{{\cal P}}
+\newcommand{\cR}{{\cal R}}
+\newcommand{\cK}{{\cal K}}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\Lrz}{\mbox{${\mathbb L}$}}
+\newcommand{\DMU}{\text{DMU}}
+
+
+% Comments colors conventions
+\newcommand{\J}[1]{{\textcolor{cyan}{#1}}}
+\newcommand{\JC}[1]{\textbf{{\textcolor{red}{Juan: #1}}}} 
+\newcommand{\SAB}[1]{\textbf{{\textcolor{orange}{Sab: #1}}}} 
+
+\newcommand{\preg}[1]{\textbf{{\textcolor{blue}{Sab: #1}}}} 
+
+
+\def\R{\mbox{${\mathbb R}$}}           % Real numbers
+\def\N{\mbox{${\mathbb N}$}}           % Natural numbers
+\def\Z{\mbox{${\mathbb Z}$}}           % Integer numbers
+
+\def\E{\mbox{${\mathbb E}$}}           % Expected value
+
+
+\title{ Whisper Project \\ 
+\begin{large} - Initial Report - }
+
+\author{
+\begin{center}
+    \begin{tabular}[c]{  p{3.3cm}  p{3.3cm}  p{3.3cm} }
+		Fernando Villa & Khalid Alobaid & Mariya Abdiyeva \\
+		Nicolas Cabuli & Oluremi Obolo & Santiago Arrubla
+    \end{tabular}
+\end{center}
+}
+
+
+
+%\author{Fernando Villa \and Khalid Alobaid \and Mariya Abdiyeva \and Nicolas Cabuli \and Oluremi Obolo \and Santiago Arrubla}
+
+\begin{document}
+\date{7 Febraury 2017}
+\maketitle
+
+
+\section{Project Description}
+\label{sec:part 1}
+\input{part1}
+
+\section{Project Organization}
+\label{sec:part 2}
+\input{part2}
+
+
+
+
+\bibliography{references}
+\bibliographystyle{plain}
+\end{document}

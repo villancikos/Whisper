@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo",
+    authDomain: "pythonwithfirebase-6b00a.firebaseapp.com",
+    databaseURL: "https://pythonwithfirebase-6b00a.firebaseio.com",
+    storageBucket: "pythonwithfirebase-6b00a.appspot.com",
+    messagingSenderId: "740790435984"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  var GoogleProvider = new firebase.auth.GoogleAuthProvider();
+  function googleSignin() {
+    console.log("Click");
+    console.log(GoogleProvider);
+  firebase.auth().signInWithPopup(GoogleProvider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log("Token");
+    console.log(token);
+    console.log("User");
+    console.log(user);
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log("ErrorCode");
+    console.log(error.code);
+    console.log("ErrorMessage");
+    console.log(error.message);
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+
+  }
+
+  function googleSignout() {
+   firebase.auth().signOut()
+	
+   .then(function() {
+      console.log('Signout Succesfull')
+   }, function(error) {
+      console.log('Signout Failed')  
+   });
+}
+
+</script>
+<script>
+   window.fbAsyncInit = function() {
+      FB.init({
+         appId      : '1860552097561990',
+         xfbml      : true,
+         version    : 'v2.6'
+      });
+   };
+
+   (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+	
+</script>
+</head>
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <h3>Google Login</h3>
+<button onclick = "googleSignin()">Google Signin</button>
+<button onclick = "googleSignout()">Google Signout</button>
+  </div>
+
+<div class="section no-pad-bot" id="index-banner">
+    <h3>Facebook Login</h3>
+<button onclick = "facebookSignin()">Facebook Signin</button>
+<button onclick = "facebookSignout()">Facebook Signout</button>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support
+            and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+<script>
+var FacebookProvider = new firebase.auth.FacebookAuthProvider();
+
+function facebookSignin() {
+   firebase.auth().signInWithPopup(FacebookProvider)
+   
+   .then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+		
+      console.log(token)
+      console.log(user)
+   }).catch(function(error) {
+      console.log(error.code);
+      console.log(error.message);
+   });
+}
+
+function facebookSignout() {
+   firebase.auth().signOut()
+   
+   .then(function() {
+      console.log('Signout successful!')
+   }, function(error) {
+      console.log('Signout failed')
+   });
+}
+
+var connectedRef = firebase.database().ref(".info/connected");
+
+connectedRef.on("value", function(snap) {
+   if (snap.val() === true) {
+      alert("connected");
+   } else {
+      alert("not connected");
+   }
+});
+
+</script>
+</body>
+</body>
+
+</html>
