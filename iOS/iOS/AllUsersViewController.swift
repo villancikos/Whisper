@@ -13,6 +13,7 @@ import Firebase
 class AllUsersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var userList = [users]()
+    var receiver = ""
     
     
     
@@ -63,5 +64,16 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        receiver = userList[indexPath.row].userId
+        performSegue(withIdentifier: "chat", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "chat") {
+            let dest = segue.destination as? ChatViewController
+            dest?.receiver = self.receiver
+        }
+    }
     
 }
