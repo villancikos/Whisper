@@ -17,12 +17,11 @@ class ResetPasswordViewController: UIViewController {
         
     }
     @IBAction func didClickReset(_ sender: Any) {
-        
-        restPassword()
-        print("reset email sent!")
-        
+        resetPassword()
     }
     @IBOutlet weak var emailTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,18 +29,13 @@ class ResetPasswordViewController: UIViewController {
     }
 
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    func restPassword() {
-        
-        let userInput = emailTextField.text
-        
-        FIRAuth.auth()?.sendPasswordReset(withEmail: userInput!) { (error) in
+    func resetPassword() {
+        // handule reset function
+        let userEmail = emailTextField.text
+        // pop up meaasge and dismiss
+        popUpMsgAndDismiss(title : "Reset password", message : "reset email will be sent only if this email exist in our database", buttonTitle : "Sounds good!")
+        // database reset side
+        FIRAuth.auth()?.sendPasswordReset(withEmail: userEmail!) { (error) in
             // ...
         }
         

@@ -151,8 +151,8 @@
                                 <rect key="frame" x="88" y="145" width="207" height="152"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Reset()
-Password;</string>
+                                <string key="text">Reset
+Password</string>
                                 <color key="textColor" red="0.4749510884" green="0.20113927130000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -297,8 +297,8 @@ Password;</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="signUp()" translatesAutoresizingMaskIntoConstraints="NO" id="DWQ-Kp-lgE">
-                                <rect key="frame" x="74" y="172" width="207" height="108"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Sign up" translatesAutoresizingMaskIntoConstraints="NO" id="DWQ-Kp-lgE">
+                                <rect key="frame" x="74" y="172" width="195" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.4749510884" green="0.20113927130000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -340,6 +340,6 @@ Password;</string>
         <image name="whisperLogo" width="358" height="356"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k2P-XN-VCd"/>
+        <segue reference="GXQ-7a-GXq"/>
     </inferredMetricsTieBreakers>
 </document>
