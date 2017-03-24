@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,10 +29,12 @@ public class Chat_room  extends AppCompatActivity{
     private Button btn_send_msg;
     private EditText input_msg;
     private TextView chat_conversation;
+    private TextView timeStamp;
 
     private String user_name,room_name;
     private DatabaseReference root ;
     private String temp_key;
+    private Object timeMes = ServerValue.TIMESTAMP;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class Chat_room  extends AppCompatActivity{
 
         user_name = getIntent().getExtras().get("user_name").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
-        setTitle(" Room - "+room_name);
+        setTitle(room_name);
 
         root = FirebaseDatabase.getInstance().getReference().child(room_name);
 
@@ -58,8 +61,9 @@ public class Chat_room  extends AppCompatActivity{
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String,Object> map2 = new HashMap<String, Object>();
-                map2.put("name",user_name);
-                map2.put("msg",input_msg.getText().toString());
+                map2.put("sender",user_name);
+                map2.put("content",input_msg.getText().toString());
+                map2.put("timestamp",timeMes);
 
                 message_root.updateChildren(map2);
             }
@@ -97,7 +101,9 @@ public class Chat_room  extends AppCompatActivity{
 
     }
 
+
     private String chat_msg,chat_user_name;
+    private Object chat_message_time;
 
     private void append_chat_conversation(DataSnapshot dataSnapshot) {
 
@@ -107,10 +113,14 @@ public class Chat_room  extends AppCompatActivity{
 
             chat_msg = (String) ((DataSnapshot)i.next()).getValue();
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
+            chat_message_time =  ((DataSnapshot)i.next()).getValue();
 
-            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n");
+            chat_conversation.append(chat_user_name +" : "+ chat_msg + "\n"+ chat_message_time + "\n");
         }
 
 
     }
 }
+
+
+

@@ -44,19 +44,19 @@ public class LoginActivity extends AppCompatActivity{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d("AAAAAAAAAAAAAAAAAA", "onAuthStateChanged:signed_in:" + user.getUid());
+                    Log.d("Hello", "onAuthStateChanged:signed_in:" + user.getUid());
                     i.putExtra("username", user.getEmail());
                     startActivity(i);
                 } else {
                     // User is signed out
-                    Log.d("AAAAAAAAAAAAAAAAAA", "onAuthStateChanged:signed_out");
+                    Log.d("You are signed out", "onAuthStateChanged:signed_out");
                 }
             }
         };
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) {
-            Toast.makeText(LoginActivity.this, "cheers Found an user", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "You are already signed in", Toast.LENGTH_LONG).show();
             i.putExtra("username", auth.getCurrentUser().getEmail());
             startActivity(i);
         }
@@ -68,10 +68,10 @@ public class LoginActivity extends AppCompatActivity{
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Log.d("AAAAAAAAAAAAAAAAAA", "signInWithEmail:onComplete:" + task.isSuccessful());
+                                    Log.d("Hello", "signInWithEmail:onComplete:" + task.isSuccessful());
                                     if (!task.isSuccessful()) {
-                                        Log.w("AAAAAAAAAAAAAAAAAA", "signInWithEmail:failed", task.getException());
-                                        Toast.makeText(LoginActivity.this, "EROROOROOROROROROROR",
+                                        Log.w("you are signed out", "signInWithEmail:failed", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Please try again",
                                                 Toast.LENGTH_SHORT).show();
                                     }
 

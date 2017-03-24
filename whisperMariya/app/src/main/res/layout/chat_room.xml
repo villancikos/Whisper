@@ -8,7 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="message"
         android:ems="10"
         android:layout_alignBottom="@+id/button"
         android:layout_alignParentLeft="true"

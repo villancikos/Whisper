@@ -55,17 +55,6 @@ public class MainActivity extends AppCompatActivity{
 
         name = getIntent().getStringExtra("username");
 
-        add_room.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText input = (EditText) findViewById(R.id.tvChatName);
-                FirebaseDatabase.getInstance().getReference().push().setValue(new Message(input.getText().toString(), name));
-                input.setText("");
-            }
-        });
-
-        displayChats();
-
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms);
         listView.setAdapter(arrayAdapter);
 
@@ -114,39 +103,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    private void displayChats() {
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms){
 
-            protected void mainView(View v, MainActivity model, int position) {
-
-                TextView room_name;
-
-                room_name = (TextView) v.findViewById(R.id.tvChatName);
-
-
-            }
-        };
-
-        listView.setAdapter(arrayAdapter);
-
-        /*ListView listMessages = (ListView)findViewById(R.id.lvMessagesList);
-        messageAdapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.item, FirebaseDatabase.getInstance().getReference()) {
-            @Override
-            protected void populateView(View v, Message model, int position) {
-
-                TextView textMessage, autor, timeMessage;
-                textMessage = (TextView)v.findViewById(R.id.tvMessage);
-                autor = (TextView)v.findViewById(R.id.tvUser);
-                timeMessage = (TextView)v.findViewById(R.id.tvTimestamp);
-
-                textMessage.setText(model.getTMessage());
-                autor.setText(model.getUser());
-                timeMessage.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)", model.getTimeStamp()));
-            }
-        };
-        listMessages.setAdapter(messageAdapter);
-        */
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

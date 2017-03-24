@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
+        android:text="user name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
@@ -13,12 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
         android:ems="10"
         android:id="@+id/txt_username" />
 
     <TextView
-        android:text="TextView"
+        android:text="password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2" />
@@ -31,7 +30,7 @@
         android:id="@+id/txt_password" />
 
     <Button
-        android:text="Button"
+        android:text="Log in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignIn" />
