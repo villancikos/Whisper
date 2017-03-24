@@ -26,9 +26,11 @@ struct conversation {
 
 // a structure to make array of messages in less code anywhere in any class
 struct messageStruct {
-    let fromID : String!
-    let toID : String!
-    let text : String!
+    let sender : String!
+    let receiver : String!
+    let content : String!
+    let typeOfContent : String!
+    let timestamp : String!
 }
 
 
