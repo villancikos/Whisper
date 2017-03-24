@@ -19,7 +19,15 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var userListTable: UITableView!
     @IBAction func didClickBack(_ sender: Any) {
-        dismiss(animated: true)
+        // sign out code from Firebase doc
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        // return to sign in UI
+        self.performSegue(withIdentifier: "signIn", sender: self)
     }
 
     
@@ -40,7 +48,6 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
             let snapshotValue = snapshot.value as? NSDictionary
             let userID = snapshot.key as? String
             let uName = snapshotValue?["name"] as? String
-            print(uName)
             let UImageUrl = snapshotValue?["image"] as? String
             let UEmail = snapshotValue?["email"] as? String
             let lastSeen = self.currentTimeStamp()

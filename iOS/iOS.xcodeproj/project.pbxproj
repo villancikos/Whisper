@@ -149,6 +149,7 @@
 				TargetAttributes = {
 					6BBC76D91E3F7FC1007FE8CA = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7HAT68KBG6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -366,6 +367,7 @@
 			baseConfigurationReference = 442F19B4CB0E90308537965F /* Pods-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7HAT68KBG6;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TripleATeam.Whisper;
@@ -379,6 +381,7 @@
 			baseConfigurationReference = 33726D7AA9619C8E5ECB78BC /* Pods-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7HAT68KBG6;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TripleATeam.Whisper;

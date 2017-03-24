@@ -24,6 +24,14 @@ struct conversation {
 }
 
 
+// a structure to make array of messages in less code anywhere in any class
+struct messageStruct {
+    let fromID : String!
+    let toID : String!
+    let text : String!
+}
+
+
 
 extension UIViewController {
 

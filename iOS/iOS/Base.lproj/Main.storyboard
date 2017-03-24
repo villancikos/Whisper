@@ -243,6 +243,7 @@ Password</string>
                     <connections>
                         <outlet property="userListTable" destination="uTW-6I-JOj" id="5j3-Pg-y9h"/>
                         <segue destination="R1K-xI-A8Z" kind="show" identifier="chat" id="unX-r7-adL"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="signIn" id="GKj-fW-tme"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBK-hX-20h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,7 +289,7 @@ Password</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="send"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwM-Fp-0Zy">
                                 <rect key="frame" x="301" y="71" width="63" height="29"/>
