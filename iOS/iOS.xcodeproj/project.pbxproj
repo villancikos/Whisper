@@ -16,6 +16,7 @@
 		6BE0C3751E83340B0010FCDF /* AllUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE0C3741E83340B0010FCDF /* AllUsersViewController.swift */; };
 		6BE0C3771E833A870010FCDF /* SharedFucn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE0C3761E833A870010FCDF /* SharedFucn.swift */; };
 		6BE0C3791E8350D80010FCDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BE0C3781E8350D80010FCDF /* GoogleService-Info.plist */; };
+		6BE0C37B1E8367040010FCDF /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE0C37A1E8367040010FCDF /* ChatViewController.swift */; };
 		A86FA7701E6732CF00F666A8 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */; };
 		A86FA7721E67386300F666A8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86FA7711E67386300F666A8 /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		6BE0C3741E83340B0010FCDF /* AllUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllUsersViewController.swift; sourceTree = "<group>"; };
 		6BE0C3761E833A870010FCDF /* SharedFucn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFucn.swift; sourceTree = "<group>"; };
 		6BE0C3781E8350D80010FCDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6BE0C37A1E8367040010FCDF /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		84E87A8E63F88D53C8363065 /* Pods_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A86FA7711E67386300F666A8 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				A86FA76F1E6732CF00F666A8 /* ResetPasswordViewController.swift */,
 				A86FA7711E67386300F666A8 /* SignUpViewController.swift */,
 				6BE0C3741E83340B0010FCDF /* AllUsersViewController.swift */,
+				6BE0C37A1E8367040010FCDF /* ChatViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				TargetAttributes = {
 					6BBC76D91E3F7FC1007FE8CA = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7HAT68KBG6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -238,6 +242,7 @@
 				6BE0C3751E83340B0010FCDF /* AllUsersViewController.swift in Sources */,
 				A86FA7721E67386300F666A8 /* SignUpViewController.swift in Sources */,
 				6BBC76DE1E3F7FC1007FE8CA /* AppDelegate.swift in Sources */,
+				6BE0C37B1E8367040010FCDF /* ChatViewController.swift in Sources */,
 				A86FA7701E6732CF00F666A8 /* ResetPasswordViewController.swift in Sources */,
 				6BE0C3771E833A870010FCDF /* SharedFucn.swift in Sources */,
 				6B3254201E3FEF34006E0E38 /* SignInViewController.swift in Sources */,
@@ -362,6 +367,7 @@
 			baseConfigurationReference = 442F19B4CB0E90308537965F /* Pods-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7HAT68KBG6;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TripleATeam.Whisper;
@@ -375,6 +381,7 @@
 			baseConfigurationReference = 33726D7AA9619C8E5ECB78BC /* Pods-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7HAT68KBG6;
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.TripleATeam.Whisper;

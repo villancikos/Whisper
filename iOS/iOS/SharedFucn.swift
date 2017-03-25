@@ -24,6 +24,14 @@ struct conversation {
 }
 
 
+// a structure to make array of messages in less code anywhere in any class
+struct messageStruct {
+    let fromID : String!
+    let toID : String!
+    let text : String!
+}
+
+
 
 extension UIViewController {
 
@@ -51,6 +59,20 @@ extension UIViewController {
         view.endEditing(true)
     }
 
+    
+    // popup messsage and dismiss
+    
+    func popUpMsgAndDismiss(title : String, message : String, buttonTitle : String){
+        
+        let title = title
+        let message = message
+        let buttonTitle = buttonTitle
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: buttonTitle, style: .default, handler: { ACTION in self.dismiss(animated: true, completion: nil)})
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 
 
 
