@@ -90,7 +90,7 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = userListTable.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
         cell.textLabel?.text = userList[indexPath.row].name
-        cell.detailTextLabel?.text = "last seen " + userList[indexPath.row].timeStamp
+        cell.detailTextLabel?.text = userList[indexPath.row].email
         return cell
     }
     
