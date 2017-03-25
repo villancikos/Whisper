@@ -30,7 +30,7 @@
         android:id="@+id/txt_password" />
 
     <Button
-        android:text="Log in"
+        android:text="/Hey Nico, Go to sleep :D"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignIn" />
