@@ -15,15 +15,17 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var toID = ""
     var receiver = ""
     var messagesList = [messageStruct] ()
-    var conversationIdToSendAndFetch = ""
+    var conversationIdToSendAndFetch = UUID().uuidString
     var conversationList = [String]()
     var receiverConversationList = [String]()
-
+    
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var messageTable: UITableView!
 
     @IBAction func didClickBack(_ sender: Any) {
+//        conversationList.removeAll()
+//        receiverConversationList.removeAll()
         dismiss(animated: false)
     }
     
@@ -36,33 +38,186 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 //        retrieveConversationId()
-        
-// code below is for testing only, will be remove when retrieveConversationId fixed
-        conversationList = ["13D0D35A-48A9-4204-899D-2AC2FE78C0B1", "4EDE8E2C-9BF8-48DB-83FC-88E033E6460B", "6373B67D-F3A6-4438-9844-B04198110612", "CC17F938-238E-4D38-9DE3-88E2F2693400"]
-        receiverConversationList = ["13D0D35A-48A9-4204-899D-2AC2FE78C0B1"]
-// end of  testing
-        
-        checkIfTheyChatBefore()
-        print(conversationIdToSendAndFetch)
-        fetchMessages()
+//        retrieveReceiverConversationList()
+//        checkIfTheyChatBefore()
+//        print(conversationIdToSendAndFetch)
+//        fetchMessages()
+        rId()
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
     
     
-    func retrieveConversationId(){
-        // fetch conversations ID from Whisper Database
-        FIRDatabase.database().reference().child("users").child(userID!).child("conversations").observeSingleEvent(of:.value, with: { (snapshot) in
-            let snapshotValue = snapshot.value as? NSDictionary
-            print(snapshotValue?.allKeys as! String)
-            // snapshotValue?.allKeys return list of ids
+    
+    func rId(){
+        // fetch conversations ID for sender
+        let ref =  FIRDatabase.database().reference().child("users").child(userID!)
+        ref.observeSingleEvent(of:.value, with: { (snapshot) in
+            if snapshot.hasChild("conversations"){
+                
+                ref.child("conversations").observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get sender conversations IDs
+                    let snapshotValue = snapshot.value as? NSDictionary
+                    self.conversationList = snapshotValue?.allKeys as! [String]
+                    var i = 0
+                    let numberOfConversations = self.conversationList.count
+                    for i in 0..<numberOfConversations {
+
+                        // fetch conversations ID for reciver
+                        let reff =  FIRDatabase.database().reference().child("users").child(self.receiver)
+                        reff.observeSingleEvent(of:.value, with: { (snapshot) in
+                            if snapshot.hasChild("conversations"){
+                                
+                                reff.child("conversations").observeSingleEvent(of: .value, with: { (snapshot) in
+                                    // Get retrieve conversations IDs
+                                    let snapshotValue = snapshot.value as? NSDictionary
+                                    self.receiverConversationList = snapshotValue?.allKeys as! [String]
+                                    let numberOfReceiverConversations = self.receiverConversationList.count
+                                    for j in 0..<numberOfReceiverConversations{
+                                        if (self.receiverConversationList[j]==self.conversationList[i]){
+                                            self.fM(id : self.receiverConversationList[j])
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
         })
-        
-        dump(conversationList)
     }
     
     
-    func fetchMessages(){
+    
+    func fM(id : String){
+        conversationIdToSendAndFetch = id
+        // fetch chat log from Whisper Database
+        FIRDatabase.database().reference().child("messages").child(conversationIdToSendAndFetch).queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+            let snapshotValue = snapshot.value as? NSDictionary
+            let sender = snapshotValue?["sender"] as? String
+            let receiver = snapshotValue?["receiver"] as? String
+            let content = snapshotValue?["content"] as? String
+            let timestamp = snapshotValue?["timestamp"] as? String
+            self.messagesList.insert(messageStruct(sender: sender, receiver: receiver, content: content, typeOfContent : "text", timestamp : timestamp), at: 0)
+            self.messageTable.reloadData()
+        })
         
+        
+    }
+    
+    
+    
+    func retrieveConversationId(){
+        // fetch conversations ID for sender
+        let ref =  FIRDatabase.database().reference().child("users").child(userID!)
+        ref.observeSingleEvent(of:.value, with: { (snapshot) in
+            if snapshot.hasChild("conversations"){
+                
+                ref.child("conversations").observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get sender conversations IDs
+                    let snapshotValue = snapshot.value as? NSDictionary
+                    self.conversationList = snapshotValue?.allKeys as! [String]
+//                    self.saveList(sList: self.conversationList)
+                })
+            }
+        })
+    }
+    
+    
+    func retrieveReceiverConversationList(){
+        // fetch conversations ID for reciver
+        let ref =  FIRDatabase.database().reference().child("users").child(receiver)
+        ref.observeSingleEvent(of:.value, with: { (snapshot) in
+            if snapshot.hasChild("conversations"){
+                
+                ref.child("conversations").observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get retrieve conversations IDs
+                    let snapshotValue = snapshot.value as? NSDictionary
+                    self.receiverConversationList = snapshotValue?.allKeys as! [String]
+                })
+            }
+        })
+    }
+    
+    
+    func saveList(sList : [String]){
+        self.conversationList = sList
+    }
+    
+    
+    func checkIfTheyChatBefore(){
+        // We assume that the "default" is they didn't chat before, so assign new id to start new chat
+        
+        print("111111")
+        conversationIdToSendAndFetch = UUID().uuidString
+        
+        let numberOfConversations = self.conversationList.count
+        print("22222")
+        print(numberOfConversations)
+        for i in 0..<numberOfConversations {
+            print(i)
+            print("33333")
+            if((checkIfConversationIdIsExistInReciverConversationList(conversationIdToCompare: conversationList[i]))==true){
+                // if they chat before, update conversationIdToSendAndFetch
+                self.conversationIdToSendAndFetch = conversationList[i]
+            }
+            
+        }
+        
+        print("44444")
+
+        
+//        var i = 0
+//        while i < numberOfConversations {
+//            print("I'm here, 111",conversationIdToSendAndFetch,receiverConversationList[i])
+//
+//            if((checkIfConversationIdIsExistInReciverConversationList(conversationIdToCompare: conversationList[i]))==true){
+//                // if they chat before, update conversationIdToSendAndFetch
+//                self.conversationIdToSendAndFetch = conversationList[i]
+//                i = numberOfConversations
+//                print("I'm here, 222",conversationIdToSendAndFetch,conversationList[i])
+//            }
+//            i = i + 1
+//        }
+    }
+
+    
+    func checkIfConversationIdIsExistInReciverConversationList(conversationIdToCompare : String) -> Bool{
+        print("555555")
+
+        var conversationIdExisted = false
+        let numberOfReceiverConversations = receiverConversationList.count
+
+        
+        for i in 0..<numberOfReceiverConversations{
+            print(i)
+            if (receiverConversationList[i]==conversationIdToCompare){
+            conversationIdExisted = true
+                print("666666")
+
+            }
+        }
+        
+//        
+//        var i = 0
+//        while i < numberOfReceiverConversations {
+//            
+//            if (receiverConversationList[i]==conversationIdToCompare){
+//                conversationIdExisted = true
+//                i = numberOfReceiverConversations
+//            }
+//            i = i + 1
+//        }
+        
+        print("77777")
+
+        return conversationIdExisted
+    }
+
+    
+    
+    func fetchMessages(){
+        print(conversationIdToSendAndFetch)
         // fetch chat log from Whisper Database
         FIRDatabase.database().reference().child("messages").child(conversationIdToSendAndFetch).queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
             let snapshotValue = snapshot.value as? NSDictionary
@@ -77,55 +232,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     }
     
-    
-    func checkIfTheyChatBefore(){
-        
-        
-        // "default" is that they didn't chat before, assign new id to start new chat
-        conversationIdToSendAndFetch = UUID().uuidString
-    
-        let numberOfConversations = conversationList.count
-        var i = 0
-        while i < numberOfConversations {
-            
-            if(checkIfConversationIdIsExistInReciverConversationList(conversationId: conversationList[i])){
-            // they chat before, update conversationIdToSendAndFetch
-                conversationIdToSendAndFetch = conversationList[i]
-                i = numberOfConversations
-                print("I'm here")
-            }
-            i = i + 1
-            
-        }
 
-    
-    }
-        // this func should be updated to chech reciver->conversation list and return true if he/she already chat with sender
-    func checkIfConversationIdIsExistInReciverConversationList(conversationId : String) -> Bool{
-    
-        var conversationIdExisted = false
-        
-        /*
-        FIRDatabase.database().reference().child("participants").child("\(conversationId)").observe(.value, with: { (snapshot) in
-            
-            // I have the same issue here. I need to get a list of id in string without NSDictionry structrue
-            
-        })
-        */
-        
-        let numberOfReceiverConversations = receiverConversationList.count
-        var i = 0
-        while i < numberOfReceiverConversations {
-            
-            if (receiverConversationList[i]==conversationId){
-                conversationIdExisted = true
-                i = numberOfReceiverConversations
-            }
-            i = i + 1
-        }
-        
-        return conversationIdExisted
-    }
     
     func sendMessage(){
         if (textField.text!.isEmpty){
