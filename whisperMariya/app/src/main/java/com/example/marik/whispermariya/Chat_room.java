@@ -35,6 +35,8 @@ public class Chat_room  extends AppCompatActivity{
     private DatabaseReference root ;
     private String temp_key;
     private Object timeMes = ServerValue.TIMESTAMP;
+    private String sender;
+    private  String receiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
