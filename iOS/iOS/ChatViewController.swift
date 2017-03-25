@@ -20,6 +20,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var receiverConversationList = [String]()
     
     
+    @IBOutlet weak var navBarTitle: UINavigationItem!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var messageTable: UITableView!
 
@@ -42,12 +43,22 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        checkIfTheyChatBefore()
 //        print(conversationIdToSendAndFetch)
 //        fetchMessages()
+        fetchReceiverName()
         rId()
         self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
     
+    func fetchReceiverName(){
     
+        FIRDatabase.database().reference().child("users").child(receiver).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let snapshotValue = snapshot.value as? NSDictionary
+            let receiverName =  snapshotValue?["name"] as? String
+            self.navBarTitle.title = receiverName
+            })
+    
+    }
     
     func rId(){
         // fetch conversations ID for sender

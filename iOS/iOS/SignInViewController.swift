@@ -24,14 +24,14 @@ class SignInViewController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: email!, password: password!) { (user, error) in
             if let error = error
             {
-                // create the alert
-                let alert = UIAlertController(title: "Wrong email or password", message: "sign up to Whisper or reset you password", preferredStyle: UIAlertControllerStyle.alert)
-                // add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                // show the alert
-                self.present(alert, animated: true, completion: nil)
-                
-            print("wrong user or password")
+            // if one field is empty, show message
+                if (self.emailTextField.text==""){
+                    self.alertMessage.text = "Email is required"
+                }else if (self.passwordTextField.text==""){
+                    self.alertMessage.text = "Password is required"
+                }else{
+                    self.alertMessage.text = "Email or password is incorrect"
+                }
             }else {
                 self.performSegue(withIdentifier: "allUsers", sender: self)
             }
