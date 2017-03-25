@@ -1,70 +1,66 @@
 //
-//  SignUpViewController.swift
+//  signUpViewController.swift
 //  iOS
 //
-//  Created by Khaled AlObaid on 1/30/17.
+//  Created by Obolo Oluremi on 01/03/2017.
 //  Copyright © 2017 TripleAteam. All rights reserved.
 //
 
 import UIKit
 import Firebase
-import FirebaseAuth
 
 class SignUpViewController: UIViewController {
+    @IBAction func didClickCancel(_ sender: Any) {
+        dismiss(animated: true)
+    }
     
-    var ref : FIRDatabaseReference!
-    
-    
-
-
-    @IBOutlet weak var nickNameText: UITextField!
-    @IBOutlet weak var passswordTextField: UITextField!
+    @IBOutlet weak var alertMessage: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+
+    @IBAction func didClickSignUp(_ sender: Any) {
+        handleSignUp()
+    }
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    
+    func handleSignUp(){
+        //this func handles sign up to Whisper
+        
+        if ((nameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!){
+            // one field or more is empty
+            self.alertMessage.text = "Please enter all fields"
+        }else {
+            
+            let email = self.emailTextField.text
+            let password = self.passwordTextField.text
+            let name = self.nameTextField.text
+            
+            FIRAuth.auth()?.createUser(withEmail: email!, password: password!) { (user, error) in
+                if error != nil {
+                    // show message "dose not meet constrans"
+                    self.alertMessage.text = "enter correct email and =>6 digits pass"
+                }else{
+                    // will come here only if user and pass are in correct format (email style + 6 digit password)
+                    // save user email and name into DB
+                    let ref = FIRDatabase.database().reference()
+                    let imageURL = "http://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
+                    let userId = user?.uid
+                    let info = ["name" : name, "email" : email, "profile_pic" : imageURL, "lastSeen" : self.currentTimeStamp()]
+                    ref.child("users").child(userId!).setValue(info)
+                    // go to users list UI
+                    self.performSegue(withIdentifier: "allUsers", sender: self)
+                }
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = FIRDatabase.database().reference()
-
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func didClickSignUp(_ sender: Any) {
-        let nickName = self.nickNameText.text
-        let email = self.emailTextField.text
-        let password = self.passswordTextField.text
-        
-        FIRAuth.auth()?.createUser(withEmail: email!, password: password!, completion: { (user, error) in
-            if let error = error {
-                // handul error
-            }else {
-                // sign in
-                self.singIn(user: user!)
-                
-                    
-                    
-                    
-                
-                }
-            
-        })
-        
-    }
-    
-    func singIn(user : FIRUser){
-    
-    }
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }
