@@ -81,8 +81,6 @@ public class Chat_room  extends AppCompatActivity{
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                append_chat_conversation(dataSnapshot);
-
             }
 
             @Override
@@ -102,7 +100,7 @@ public class Chat_room  extends AppCompatActivity{
         });
 
     }
-
+    /**/
 
     private String chat_msg,chat_user_name;
     private Object chat_message_time;
@@ -122,6 +120,8 @@ public class Chat_room  extends AppCompatActivity{
 
 
     }
+
+
 }
 
 

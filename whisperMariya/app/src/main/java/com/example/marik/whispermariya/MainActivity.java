@@ -1,5 +1,6 @@
 package com.example.marik.whispermariya;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity{
 
     private ArrayList<String> list_of_rooms = new ArrayList<>();
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
+    private final int USER_CHAT_CREATION = 9;
 
 
     @Override
@@ -61,9 +63,9 @@ public class MainActivity extends AppCompatActivity{
         add_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put(room_name.getText().toString(),"");
-                root.updateChildren(map);
+                //// TODO: 26/03/2017 Call UserListActivity and bring back the name of the selected user
+                 Intent intent = new Intent(getApplicationContext(),UserListActivity.class);
+                startActivityForResult(intent, USER_CHAT_CREATION);
             }
         });
 
@@ -102,8 +104,19 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK) {
+            if(requestCode == USER_CHAT_CREATION) {
+                Map<String, Object> map = new HashMap<String, Object>();
 
-
+                map.put(data.getStringExtra("name"), "");
+                //Cause this place says so.
+                root.updateChildren(map);
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -121,5 +134,7 @@ public class MainActivity extends AppCompatActivity{
         }
         return true;
     }
+
+
 
 }

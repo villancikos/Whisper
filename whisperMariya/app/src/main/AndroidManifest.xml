@@ -20,6 +20,7 @@
 
         <activity android:name=".Chat_room"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".UserListActivity"/>
 
     </application>
 
