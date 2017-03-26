@@ -7,7 +7,8 @@ import { fAuth, ref } from './components/helpers/firebase';
 // Sample Data
 // import users from './sample-data/sample-users';
 // import conversations from './sample-data/sample-conversations';
-let defaultDrawerState = { leftDrawer: false };
+const loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
+const defaultDrawerState = { leftDrawer: false };
 // import the root reducer
 import rootReducer from './reducers/index';
 
@@ -43,7 +44,7 @@ const defaultState = {
     },
     auth: {
         currently: null,
-        uid: 'aZs5rISKcqWbed5rEyagbsIx5Ij2',
+        uid: loggedUser,
     },
 
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import h from './helpers/h';
 import Message from './Message';
 import AddMessage from './AddMessage';
 /*
@@ -8,8 +9,10 @@ import AddMessage from './AddMessage';
 
 export default class MessageList extends React.Component {
     render() {
-        var currentConversation = this.props.i || {}
-        var currentMessageList = this.props.messages[currentConversation] || {}
+        var uid = this.props.auth.uid;
+        var currentConversation = this.props.i || {};
+        var currentMessageList = this.props.messages[currentConversation] || {};
+        var receiver = h.getReceiver(currentConversation, uid, this.props.participants);
         // if (currentConversation !== {}) {
         if (currentConversation !== {}) {
             return (
@@ -17,11 +20,17 @@ export default class MessageList extends React.Component {
                 //     {Object.keys(this.props.messages[this.props.i]).map((i) =>
                 //         <Message key={i} i={i}/>)}
                 // </div>
-                <div className="d-flex flex-column">
-                    {Object.keys(currentMessageList).map((messageId) =>
-                        <Message key={messageId} i={messageId} message_data={currentMessageList[messageId]} loggedUser={this.props.auth.uid} />)
-                    }
-                    <AddMessage i={currentConversation} {...this.props} />
+                // {this.props.users[uid].profile_pic}
+                <div>
+                    <div className="conversation-receiver">
+                        
+                    </div>
+                    <div className="d-flex flex-column conversation-container">
+                        {Object.keys(currentMessageList).map((messageId) =>
+                            <Message key={messageId} i={messageId} message_data={currentMessageList[messageId]} loggedUser={uid} />)
+                        }
+                        <AddMessage i={currentConversation} {...this.props} />
+                    </div>
                 </div>
             )
         }

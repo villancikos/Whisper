@@ -1,5 +1,6 @@
 import React from 'react';
 import h from './helpers/h';
+import { ref } from './helpers/firebase';
 /*
     Add Message Component
     Will take care of adding new messages to a conversation.
@@ -7,10 +8,17 @@ import h from './helpers/h';
 export default class AddMessage extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
-        const conversationId = this.props.i || h.createRandomId();
+        // debugger;
+        // TODO: get ConversationId or get it from Firebase before anything...
+        const conversationId = this.props.i;
         const sender = this.refs.sender.value;
         const participants = this.props.participants[conversationId]
-        const receiver = h.getReceiver(conversationId, sender, this.props.participants);
+        const receiver = h.getReceiver(conversationId, sender, this.props.participants) || null;
+        if (receiver !== null){
+            //TODO push to participants object this conversationId.
+            this.props.pushParticipants(conversationId, sender, receiver);
+
+        }
         const content = this.refs.content.value;
         const typeOfContent = 'text';
         this.props.pushMessages(conversationId, sender, receiver, content, typeOfContent);

@@ -12,13 +12,17 @@ export default class UserDrawer extends React.Component {
 
     }
     render() {
+        // we don't need the sender
+        let users = this.props.users;
+        // so we get rid of it
+        delete users[this.props.auth.uid];
         return (
             <div>
                 <h4 className="pl-3">Select User From The List</h4>
                 <input placeholder="Or search ..." className="search-bar" type="text" onChange={(event) => this.filterUsers(event.target.value)}/>
-                {Object.keys(this.props.users).map((receiver) =>
-                    <div className="list-group-item" key={receiver}
-                    onClick={this.props.startNewConversation.bind(null,this.props.auth.uid,receiver)}
+                {Object.keys(users).map((receiver) =>
+                    <div className= "list-group-item" key={receiver}
+                    onClick={this.props.startNewConversation.bind(null,this.props.auth.uid,receiver, this.props.participants)}
                     >
                         <img style={{height: "45px"}} src="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-128.png" alt={`${this.props.users[receiver].name} profile pic`} className="rounded-circle mr-2" />
                         <h5>{this.props.users[receiver].name}</h5>

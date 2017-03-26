@@ -11,7 +11,6 @@ function messages(state = {}, action) {
                 [action.conversationId]: addMessage(state[action.conversationId], action)
             })
         case C.START_NEW_CONVERSATION:
-            console.log('STARTING A NEW CONVERSATION ON MESSAGES REDUCER');
             return Object.assign({}, state, {
                 [action.conversationId]: addMessage(state[action.conversationId], action)
             })

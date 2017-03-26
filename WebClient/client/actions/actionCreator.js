@@ -58,7 +58,7 @@ function fetchMessagesFromFirebase() {
 }
 
 
-function fetchParticipants() {
+export function fetchParticipants() {
   return function (dispatch) {
     var participants = {}
     if (loggedUser !== null) {
@@ -131,6 +131,7 @@ export function pushMessages(conversationId, sender, receiver, content, typeOfCo
   }
 }
 
+
 // Updates the conversation header of the sidebar.
 export function updateConversationHeader(conversationId, lastMessage, timestamp, sender) {
   return {
@@ -196,28 +197,64 @@ export function attemptLogin() {
 // because we are starting a new conversation first we need TODO: evaluate if there 
 // is no current conversation between sender (loggedUser) and receiver. If not...
 // then we can start a new one. Else, we need to fetch the conversation id.
-export function startNewConversation(sender, receiver) {
+function updateNewConversationState(sender, receiver, conversationId, messageId) {
   return {
     type: C.START_NEW_CONVERSATION,
     sender,
     receiver,
-    conversationId: h.createRandomId(),
-    messageId: h.createRandomId(),
+    conversationId,
+    messageId,
     lastMessage: '',
     timestamp: '',
     typeOfContent: 'text',
   }
 }
 
-function fetchFirebaseUsers(sender, receiver) {
+export function startNewConversation(sender, receiver, participants) {
+  return function (dispatch) {
+    // check out if already conv. exists between users
+    let conversationId = participantsChecker(sender,receiver,participants);
+    if (conversationId === undefined){
+      conversationId = ref.child('conversations').push().key;
+    }
+    let messageId = ref.child('messages').push().key;
+    dispatch(updateNewConversationState(sender, receiver, conversationId, messageId));
+
+  }
+}
+
+export function pushParticipants(conversationId, sender, receiver){
+  return function(dispatch){
+    let participants = {
+      [conversationId]:{
+        [sender]: true,
+        [receiver]: true
+      }
+    }
+    var updates = {}; // hold the updates 
+    updates['/participants/' + conversationId] = participants[conversationId];
+    updates['/users/' + sender + '/conversations/' + conversationId] =  true;
+    updates['/users/' + receiver + '/conversations/' + conversationId] =  true;
+    ref.update(updates);
+  }
+}
+
+function participantsChecker(sender, receiver, participants){
+  for (var convo in participants){
+    let involved = Object.keys(participants[convo]);
+    if (involved.includes(sender) && involved.includes(receiver)){
+      return convo;
+    }
+  }
+}
+
+export function fetchFirebaseUsers(sender, receiver) {
   return function (dispatch) {
     var users = {}
     ref.child("users").once('value', (userSnapshot) => {
       var userDetails = userSnapshot.val();
-      for (var user in userDetails){
-        if (user !== loggedUser){
-          users[user] = userDetails[user]
-        }
+      for (var user in userDetails) {
+        users[user] = userDetails[user]
       }
     });
     dispatch({
@@ -225,5 +262,5 @@ function fetchFirebaseUsers(sender, receiver) {
       users
     })
   }
-  
+
 }
