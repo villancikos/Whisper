@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity{
 
         activity_main = (RelativeLayout) findViewById(R.id.activity_main);
         add_room = (Button) findViewById(R.id.addButton);
-        room_name = (EditText) findViewById(R.id.tvChatName);
         listView = (ListView) findViewById(R.id.lvChatList);
 
         name = getIntent().getStringExtra("username");
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
                 Map<String, Object> mapParticipants = new HashMap<String, Object>();
                 mapParticipants.put(name, true);
                 mapParticipants.put(data.getStringExtra("name"), true);
-                map.put(""+id, mapParticipants); //Change name
+                map.put(""+id, mapParticipants); //Change to name
                 id ++;
                 //Cause this place says so.
                 participantsDatabaseReference.updateChildren(map);
