@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity{
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
     private DatabaseReference participantsDatabaseReference;
     private final int USER_CHAT_CREATION = 9;
+    private int id = 0;
 
 
     @Override
@@ -119,7 +120,8 @@ public class MainActivity extends AppCompatActivity{
                 Map<String, Object> mapParticipants = new HashMap<String, Object>();
                 mapParticipants.put(name, true);
                 mapParticipants.put(data.getStringExtra("name"), true);
-                map.put("Test99999", mapParticipants);
+                map.put(""+id, mapParticipants); //Change name
+                id ++;
                 //Cause this place says so.
                 participantsDatabaseReference.updateChildren(map);
             }
