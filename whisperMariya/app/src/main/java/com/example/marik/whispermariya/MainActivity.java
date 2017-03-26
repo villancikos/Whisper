@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity{
 
     private ArrayList<String> list_of_rooms = new ArrayList<>();
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
+    private DatabaseReference participantsDatabaseReference;
     private final int USER_CHAT_CREATION = 9;
 
 
@@ -68,15 +69,19 @@ public class MainActivity extends AppCompatActivity{
                 startActivityForResult(intent, USER_CHAT_CREATION);
             }
         });
+        participantsDatabaseReference = root.child("participants");
 
-        root.addValueEventListener(new ValueEventListener() {
+        participantsDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Set<String> set = new HashSet<String>();
                 Iterator i = dataSnapshot.getChildren().iterator();
 
                 while(i.hasNext()){
-                    set.add(((DataSnapshot)i.next()).getKey());
+                    DataSnapshot actualData = (DataSnapshot)i.next();
+                    if(actualData.child(name).exists()) {
+                        set.add(actualData.getKey());
+                    }
                 }
 
                 list_of_rooms.clear();
@@ -111,9 +116,12 @@ public class MainActivity extends AppCompatActivity{
             if(requestCode == USER_CHAT_CREATION) {
                 Map<String, Object> map = new HashMap<String, Object>();
 
-                map.put(data.getStringExtra("name"), "");
+                Map<String, Object> mapParticipants = new HashMap<String, Object>();
+                mapParticipants.put(name, true);
+                mapParticipants.put(data.getStringExtra("name"), true);
+                map.put("Test99999", mapParticipants);
                 //Cause this place says so.
-                root.updateChildren(map);
+                participantsDatabaseReference.updateChildren(map);
             }
         }
     }

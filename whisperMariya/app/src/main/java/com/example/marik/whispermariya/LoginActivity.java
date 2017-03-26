@@ -35,6 +35,12 @@ public class LoginActivity extends AppCompatActivity{
         username = (EditText) findViewById(R.id.txt_username);
         password = (EditText) findViewById(R.id.txt_password);
 
+        //TODO Create a Registration activity, when you get the creation done dont forget to set the username to the displayname
+        //TODO change the hardcoded room name to a uniqueID
+        //TODO create a toast or something when the user tries to create a new conversation with a user in an existing conversation
+        //TODO Update the last message of a conversation on the conversations part of the database structure.
+        //TODO change on the list the last message of the conversation.
+        //TODO Convert timestamp to a human readable date.
         final Intent i = new Intent(LoginActivity.this, MainActivity.class);
 
         mAuth = FirebaseAuth.getInstance();
@@ -45,7 +51,7 @@ public class LoginActivity extends AppCompatActivity{
                 if (user != null) {
                     // User is signed in
                     Log.d("Hello", "onAuthStateChanged:signed_in:" + user.getUid());
-                    i.putExtra("username", user.getEmail());
+                    i.putExtra("username", user.getUid());
                     startActivity(i);
                 } else {
                     // User is signed out
@@ -57,7 +63,7 @@ public class LoginActivity extends AppCompatActivity{
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) {
             Toast.makeText(LoginActivity.this, "You are already signed in", Toast.LENGTH_LONG).show();
-            i.putExtra("username", auth.getCurrentUser().getEmail());
+            i.putExtra("username", auth.getCurrentUser().getUid());
             startActivity(i);
         }
 

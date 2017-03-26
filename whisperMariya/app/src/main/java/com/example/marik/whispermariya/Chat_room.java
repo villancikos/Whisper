@@ -32,7 +32,7 @@ public class Chat_room  extends AppCompatActivity{
     private TextView timeStamp;
 
     private String user_name,room_name;
-    private DatabaseReference root ;
+    private DatabaseReference chatReference;
     private String temp_key;
     private Object timeMes = ServerValue.TIMESTAMP;
     private String sender;
@@ -51,17 +51,17 @@ public class Chat_room  extends AppCompatActivity{
         room_name = getIntent().getExtras().get("room_name").toString();
         setTitle(room_name);
 
-        root = FirebaseDatabase.getInstance().getReference().child(room_name);
+        chatReference = FirebaseDatabase.getInstance().getReference().child("messages").child(room_name);
 
         btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Map<String,Object> map = new HashMap<String, Object>();
-                temp_key = root.push().getKey();
-                root.updateChildren(map);
+                temp_key = chatReference.push().getKey();
+                chatReference.updateChildren(map);
 
-                DatabaseReference message_root = root.child(temp_key);
+                DatabaseReference message_root = chatReference.child(temp_key);
                 Map<String,Object> map2 = new HashMap<String, Object>();
                 map2.put("sender",user_name);
                 map2.put("content",input_msg.getText().toString());
@@ -71,7 +71,7 @@ public class Chat_room  extends AppCompatActivity{
             }
         });
 
-        root.addChildEventListener(new ChildEventListener() {
+        chatReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
