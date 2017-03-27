@@ -5,17 +5,14 @@ import { ref, fAuth } from './helpers/firebase'
 const firebaseUI = new firebaseui.auth.AuthUI(fAuth);
 
 export default class FirebaseUi extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     componentDidMount() {
         var uiConfig = {
             'tosUrl':
-                'https://www.google.com'
+            ''
             ,
             'callbacks': {
                 'signInSuccess': function (user) {
-                    console.log(user);
+                    this.props.auth.uid = user.uid;
                 }
             },
             'signInOptions': [
@@ -31,8 +28,13 @@ export default class FirebaseUi extends React.Component {
     }
 
     render() {
+        if (this.props.auth.uid === undefined) {
+            return (
+                <div id="firebaseui-auth">...</div>
+            )
+        }
         return (
-            <div id="firebaseui-auth">...</div>
+            <h1>test</h1>
         );
     }
 };

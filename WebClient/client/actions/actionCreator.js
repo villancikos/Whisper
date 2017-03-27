@@ -5,6 +5,7 @@ const loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
 
 export function watchFirebase(dispatch) {
   ref.on('value', (snap) => {
+    // dispatch(startListeningToAuth());
     dispatch(fetchConversationsFromFirebase());
     dispatch(fetchMessagesFromFirebase());
     dispatch(fetchParticipants());
@@ -174,6 +175,7 @@ export function startListeningToAuth() {
   return function (dispatch) {
     fAuth.auth().onAuthStateChanged((authData) => {
       if (authData) {
+        console.log("WHATTT????????");
         dispatch({
           type: C.LOGIN_USER,
           uid: authData.uid

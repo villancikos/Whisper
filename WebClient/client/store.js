@@ -12,26 +12,6 @@ const defaultDrawerState = { leftDrawer: false };
 // import the root reducer
 import rootReducer from './reducers/index';
 
-// var loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
-// var conversations = {}
-// if (loggedUser !== null) {
-//     var userConversations = ref.child("users/" + loggedUser);
-//     userConversations.on('value', (userSnapshot) => {
-//         userSnapshot.child('conversations').forEach((conversationKey) => {
-//             var conversationRef = ref.child('conversations').child(conversationKey.key);
-//             conversationRef.on('value', (conversationsSnapshot) => {
-//                 var conversation = conversationsSnapshot.val();
-//                 conversations[conversationKey.key] = conversation;
-//                 console.log(conversation);
-//                 // this.state.conversations[conversationKey.key] = conversation;
-//                 // this.setState({ conversations: this.state.conversations });
-//             });
-//         });
-//     });
-// }
-// console.log(conversations);
-
-
 const defaultState = {
     users: {},
     participants: {},

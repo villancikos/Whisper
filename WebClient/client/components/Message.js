@@ -1,4 +1,5 @@
 import React from 'react';
+import h from '../components/helpers/h';
 /*
     Message Component
     Renders all the messages from a conversation into the DOM
@@ -22,7 +23,7 @@ export default class Message extends React.Component {
                     }
                     <small>
                     {message_data.timestamp !== '' ? <i className="fa fa-clock-o mr-1"></i> : ''}
-                    {message_data.timestamp}
+                    {h.formatTime(message_data.timestamp)}
                     </small>
                 </div>
             )

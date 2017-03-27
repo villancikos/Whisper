@@ -11,6 +11,8 @@ import Main from './components/Main';
 import App from './components/App';
 import About from './components/About';
 import Login from './components/Login';
+import NotFound from './components/NotFound';
+import AuthB from './components/AuthB';
 
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -21,8 +23,10 @@ const router = (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Main}></IndexRoute>
+        <IndexRoute component={AuthB}></IndexRoute>
+        <Route path="/web" component={Main}></Route>
         <Route path="/about" component={About}></Route>
+        <Route path="*" component={NotFound}/>
       </Route>
     </Router>
   </Provider>
