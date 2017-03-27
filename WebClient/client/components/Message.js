@@ -1,5 +1,5 @@
 import React from 'react';
-import h from '../components/helpers/h';
+import h from './helpers/h';
 /*
     Message Component
     Renders all the messages from a conversation into the DOM

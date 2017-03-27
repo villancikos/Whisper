@@ -1,7 +1,7 @@
 import h from '../components/helpers/h';
 import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
-const loggedUser = 'aZs5rISKcqWbed5rEyagbsIx5Ij2';
+const loggedUser = '3phGyXkuBkgVTVH4Zzyk49kEj7y1';
 
 export function watchFirebase(dispatch) {
   ref.on('value', (snap) => {
