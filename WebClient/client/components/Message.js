@@ -13,28 +13,29 @@ export default class Message extends React.Component {
         var message_data = this.props.message_data || {};
         if (message_data !== {}) {
             return (
-                <div className="p-0" style={{ border: 'solid 0.1px gray' }}>
-                    <small> r: {message_data.receiver}</small>
-                        <small> s: {message_data.sender}</small>
-                    {this.props.loggedUser===message_data.sender ?
-                    <p className="bubble">{message_data.content}</p>
-                    :
-                    <p className="bubble sender">{message_data.content}</p>
-                    }
-                    <small>
-                    {message_data.timestamp !== '' ? <i className="fa fa-clock-o mr-1"></i> : ''}
-                    {h.formatTime(message_data.timestamp)}
-                    </small>
+                <div className="speech-whispper">
+                    <div className="bubble">
+                        <div className="bubble-txt">
+
+                            <p className="bubble-message">{message_data.content}</p>
+                            <span className="bubble-timestamp">
+                                {message_data.timestamp !== ''
+                                    ?
+                                    <i className="fa fa-clock-o mr-1"></i>
+                                    : ''}
+                                {h.formatTime(message_data.timestamp)}
+                            </span>
+                        </div>
+                        {this.props.loggedUser === message_data.sender
+                            ?
+                            <div className="bubble-arrow sender"></div>
+                            :
+                            <div className="bubble-arrow"></div>
+                        }
+                    </div>
                 </div>
             )
-
         }
-        return (
-            <div className="p-0">
-                Empty Message Data
-        </div>
-        )
-
     }
 
 }
