@@ -119,9 +119,11 @@ public class MainActivity extends AppCompatActivity{
                 Map<String, Object> mapParticipants = new HashMap<String, Object>();
                 mapParticipants.put(name, true);
                 mapParticipants.put(data.getStringExtra("name"), true);
-                map.put(""+id, mapParticipants); //Change to name
-                id ++;
-                //Cause this place says so.
+
+                //map.put(""+id, mapParticipants); //Change to name
+                //id ++;
+                map.put(data.getStringExtra("name"), mapParticipants); //Change to name
+
                 participantsDatabaseReference.updateChildren(map);
             }
         }
