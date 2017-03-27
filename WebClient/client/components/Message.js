@@ -28,9 +28,9 @@ export default class Message extends React.Component {
                         </div>
                         {this.props.loggedUser === message_data.sender
                             ?
-                            <div className="bubble-arrow sender"></div>
-                            :
                             <div className="bubble-arrow"></div>
+                            :
+                            <div className="bubble-arrow sender"></div>
                         }
                     </div>
                 </div>

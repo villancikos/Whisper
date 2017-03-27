@@ -27,7 +27,7 @@ export default class AddMessage extends React.Component {
     }
     render() {
         return (
-            <div className="mt-auto">
+            <div className="mt-auto" style={{paddingTop:"3em"}}>
                 <form onSubmit={(e) => { this.handleSubmit(e) }} ref="messageForm" className="add-message-form" >
                     <input type="text" ref="content" required noValidate />
                     <input type="hidden" ref="sender" value={this.props.auth.uid} />

@@ -3,10 +3,11 @@
 @import '_normalize.styl'
 @import '_typography.styl'
 @import '_animations.styl'
+@import 'firebaseui.css'
 
 #conversationPanel
     background-color: #e5e5e5
-    background-image: url(https://wallpaperbrowse.com/media/images/White-Background-9B1.jpg);
+    background-image: url("/whiteBg.jpg");
     background-size: 800px 600px;
     width: 100%
     height: 100vh
@@ -14,13 +15,12 @@
         
 
 .add-message-form input[type=text]
-    position absolute 
-    right: 0
+    position: fixed
     bottom: 0
     width: 100%
-    display: block
+    clear: both
     background-color: white
-    height: 4em 
+    height: 3em 
     font-size: 1em
 
 .search-bar
@@ -128,6 +128,8 @@
     position: fixed
     width: 100%   
     height: 50px
+    z-index: 9999
 
 .conversation-container
     margin-top: 50px
+

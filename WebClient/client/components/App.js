@@ -21,7 +21,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    console.log("...")
     // Global Dispatcher for Firebase async actions
     watchFirebase(dispatch);
     // main binder
