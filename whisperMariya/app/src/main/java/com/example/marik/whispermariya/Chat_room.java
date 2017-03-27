@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
+import java.security.Timestamp;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class Chat_room  extends AppCompatActivity{
     private String temp_key;
     private Object timeMes = ServerValue.TIMESTAMP;
     private String sender;
-    private  String receiver;
+    private String receiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class Chat_room  extends AppCompatActivity{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 append_chat_conversation(dataSnapshot);
+
             }
 
             @Override
@@ -115,7 +117,17 @@ public class Chat_room  extends AppCompatActivity{
             chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
             chat_message_time =  ((DataSnapshot)i.next()).getValue();
 
-            chat_conversation.append(chat_user_name +" : "+ chat_msg + "\n"+ chat_message_time + "\n");
+            String senderMessage = input_msg.getText().toString().trim();
+
+
+            //Time time = new Timestamp();
+            //time.getTimestamp(Long.valueOf(chat_message_time));
+
+            if(!senderMessage.isEmpty()){
+
+                chat_conversation.append(chat_user_name +" : "+ chat_msg + "\n"+ chat_message_time + "\n");
+                input_msg.setText("");
+            }
         }
 
 

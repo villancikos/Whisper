@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity{
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() != null) {
-            Toast.makeText(LoginActivity.this, "You are already signed in", Toast.LENGTH_LONG).show();
+            //Toast.makeText(LoginActivity.this, "You are already signed in", Toast.LENGTH_LONG).show();
             i.putExtra("username", auth.getCurrentUser().getUid());
             startActivity(i);
         }
