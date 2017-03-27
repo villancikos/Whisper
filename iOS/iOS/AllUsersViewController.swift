@@ -13,10 +13,12 @@ import Firebase
 class AllUsersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var userList = [users]()
+    var conversationList = [conversation]()
     var receiver = ""
     
     
     
+    @IBOutlet weak var navBarTitle: UINavigationItem!
     @IBOutlet weak var userListTable: UITableView!
     @IBAction func didClickBack(_ sender: Any) {
         // sign out code from Firebase doc
@@ -34,11 +36,21 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateNavTitle()
         fetchAllUsers()
         // Do any additional setup after loading the view.
     }
     
+    func updateNavTitle(){
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        FIRDatabase.database().reference().child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let snapshotValue = snapshot.value as? NSDictionary
+            let uName = snapshotValue?["name"] as? String
+            self.navBarTitle.title = "Welcome " + uName!
+        })
     
+    
+    }
     
     func fetchAllUsers(){
         // fetch all users from Whisper Database
@@ -52,9 +64,20 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
             let UEmail = snapshotValue?["email"] as? String
             let lastSeen = self.currentTimeStamp()
             self.userList.insert(users(userId: userID, name: uName, imageUrl: UImageUrl, email: UEmail,  timeStamp: lastSeen), at: 0)
+            
+            self.fetchLastMessageAndTimeStamp(userIdToFetchLastMessage : userID!)
             self.userListTable.reloadData()
         })
     }
+    
+    
+    // this function should return data from child "conversation" in database as a string
+    func fetchLastMessageAndTimeStamp(userIdToFetchLastMessage : String) -> String{
+        
+        return "test"
+    
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -67,7 +90,7 @@ class AllUsersViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = userListTable.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
         cell.textLabel?.text = userList[indexPath.row].name
-        cell.detailTextLabel?.text = "last seen " + userList[indexPath.row].timeStamp
+        cell.detailTextLabel?.text = userList[indexPath.row].email
         return cell
     }
     
