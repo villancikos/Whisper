@@ -22,7 +22,7 @@ let h = {
             return dateObj.getDate() + "/" + dateObj.getMonth() + "/" + dateObj.getFullYear();
         }
         return dateObj.getHours() + ":" + dateObj.getMinutes();
-    }
+    },
 }
 
 export default h;

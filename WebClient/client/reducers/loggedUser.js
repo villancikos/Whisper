@@ -1,7 +1,10 @@
 import C from '../actions/actionConstants';
 
 function loggedUser(state = {}, action) {
-    return state;
+    switch (action.type) {
+        case C.LOGGED_IN:
+            return state;
+    }
 }
 
 

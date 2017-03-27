@@ -1,8 +1,18 @@
 import h from '../components/helpers/h';
 import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
+import store from '../store'
 
-const loggedUser = '4iEoYIjG40YiLnkeqkCsLmrhBEh2';
+
+export function fillLoggedUser(dispatch) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: C.LOGGED_IN,
+    })
+    
+  }
+}
+
 
 export function watchFirebase(dispatch) {
   ref.on('value', (snap) => {
@@ -189,7 +199,6 @@ export function startListeningToAuth() {
   return (dispatch) => {
     fAuth.onAuthStateChanged((authData) => {
       if (authData) {
-        console.log("WHATTT????????");
         dispatch({
           type: C.LOGIN_USER,
           uid: authData.uid
@@ -199,20 +208,7 @@ export function startListeningToAuth() {
   }
 }
 
-export function attemptLogin() {
-  return (dispatch) => {
-    dispatch({ type: C.ATTEMPTING_LOGIN });
-    fAuth.signInWithCrdential((error, password) => {
-      if (error) {
-        dispatch({ type: C.LOGIN_ERROR, error: "Login failed! " + error });
-      }
-    })
-  }
-}
 
-// because we are starting a new conversation first we need TODO: evaluate if there 
-// is no current conversation between sender (loggedUser) and receiver. If not...
-// then we can start a new one. Else, we need to fetch the conversation id.
 function updateNewConversationState(sender, receiver, conversationId, messageId) {
   return {
     type: C.START_NEW_CONVERSATION,
