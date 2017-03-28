@@ -3,12 +3,6 @@ import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
 import store from '../store'
 
-let loggedUser = "YtFkSWnSguZCoQ4Xl3mTV9miAUo2";
-
-const logState = () => (dispatch, getState) => {
-  console.log(getState());
-};
-
 export function fillLoggedUser() {
   return (dispatch, getState) => {
     dispatch({
@@ -18,37 +12,46 @@ export function fillLoggedUser() {
 }
 
 
+
 export function watchFirebase(dispatch) {
   console.log("Is this working outside?");
-  ref.on('value', (snap) => {
-    dispatch(fetchConversationsFromFirebase());
-    dispatch(fetchMessagesFromFirebase());
-    dispatch(fetchParticipants());
-  });
+  // dispatch(initialFetch());
+  dispatch(fetchParticipants());
   dispatch(startListeningToAuth());
-  dispatch(initialFetch());
+  ref.on('value', (snap) => {
+    dispatch(initialFetch());    
+    dispatch(fetchParticipants());
+    dispatch(fetchMessagesFromFirebase());
+    dispatch(fetchConversationsFromFirebase());
+  });
 }
 
 
 export function registerUser(email, uid, profile_pic, name) {
   return (dispatch) => {
     let pp = profile_pic;
-    if (pp === null){
+    if (pp === null) {
       pp = h.getRandomProfilePic();
     }
     let updates = {}
-    updates['/users/' + uid] = {
-      email,
-      lastSeen: Date.now(),
-      name,
-      profile_pic: pp,
-    }
+    let userpath = '/users/'+uid;
+    // updates['/users/' + uid] = {
+    //   email,
+    //   lastSeen: Date.now(),
+    //   name,
+    //   profile_pic: pp,
+    // }
+    updates[userpath+'/email/'] = email;
+    updates[userpath+'/lastSeen/'] = Date.now();
+    updates[userpath+'/name/'] = name;
+    updates[userpath+'/profile_pic/'] = pp;
     ref.update(updates);
   }
 }
 // FIREBASE conversations
 function fetchConversationsFromFirebase() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    let loggedUser = getState().auth.uid;
     var conversations = {}
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
@@ -71,14 +74,15 @@ function fetchConversationsFromFirebase() {
 
 // FIREBASE Messages
 function fetchMessagesFromFirebase() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    let loggedUser = getState().auth.uid;
     var messages = {}
     if (loggedUser !== null) {
-      var userConversations = ref.child("users/" + loggedUser);
+      var userConversations = ref.child('users/' + loggedUser);
       userConversations.on('value', (userSnapshot) => {
         userSnapshot.child('conversations').forEach((conversationKey) => {
           var messageRef = ref.child('messages').child(conversationKey.key);
-          messageRef.orderByChild("timestamp").on('value', (messagesSnapshot) => {
+          messageRef.orderByChild('timestamp').on('value', (messagesSnapshot) => {
             var message = messagesSnapshot.val();
             messages[conversationKey.key] = message;
           });
@@ -94,8 +98,9 @@ function fetchMessagesFromFirebase() {
 
 
 export function fetchParticipants() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     var participants = {}
+    let loggedUser = getState().auth.uid;
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
       userConversations.on('value', (userSnapshot) => {
@@ -213,7 +218,6 @@ export function startListeningToAuth() {
           type: C.LOGIN_USER,
           uid: authData.uid
         });
-        loggedUser = authData.uid;
       }
       else {
         dispatch({
@@ -277,8 +281,10 @@ function participantsChecker(sender, receiver, participants) {
 }
 
 export function fetchFirebaseUsers(sender, receiver) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    let loggedUser = getState().auth.uid;
     if (loggedUser !== null) {
+      
       var users = {}
       ref.child("users").once('value', (userSnapshot) => {
         var userDetails = userSnapshot.val();
@@ -295,9 +301,9 @@ export function fetchFirebaseUsers(sender, receiver) {
 }
 
 export function initialFetch(dispatch) {
-  return (dispatch) => {
+  return (dispatch,getState) => {
+    let loggedUser = getState().auth.uid;
     if (loggedUser !== null) {
-      console.log("ENTRO")
       var users = {}
       ref.child("users").once('value', (userSnapshot) => {
         var userDetails = userSnapshot.val();
