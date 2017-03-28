@@ -1,0 +1,29 @@
+messages:
+    timestamp:
+    messageid:
+        senderid: XXXYYY123
+        receiverid: 123456
+        contents: "hello!"
+        type:
+            text
+            img
+            location
+            video
+            gif
+            audio
+        timestamp:
+
+
+users:
+    uid: XXXYYY123
+        email: peter@gmail.com
+        username: peter
+        picture: peter.img
+        phonenumber: 
+        timezone: ???
+    uid: 123456
+        email: juan@gmail.com
+        username: juanito
+        picture: juanito.img
+        phonenumber: 
+        timezone: CST timestamp+1800
