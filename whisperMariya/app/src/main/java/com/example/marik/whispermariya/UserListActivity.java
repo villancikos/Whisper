@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,11 +45,12 @@ public class UserListActivity extends Activity {
                 //// TODO: 26/03/2017 whenever an item is selected you wil have to retrieve the name of such item and return it
                 // to the main activity as it called us on a activityForResult we should add it as a Extra called in this case
                 // "name" but you can change it later on.
-                String user = parent.getAdapter().getItem(position).toString();
+                User user = ((User)parent.getAdapter().getItem(position));
                 // Launching new Activity on selecting single List Item
                 Intent i = new Intent();
                 // sending data to new activity
-                i.putExtra("name", user);
+                i.putExtra("key", user.getUserId());
+                i.putExtra("name", user.getName());
                 setResult(Activity.RESULT_OK,i);
                 finish();
 
@@ -56,8 +59,8 @@ public class UserListActivity extends Activity {
     }
 
     public void getAllUsersFromFirebase() {
-        final List<String> users = new ArrayList<>();
-        final ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(UserListActivity.this, android.R.layout.simple_list_item_1, users);
+        final List<User> users = new ArrayList<>();
+        final UsersArrayAdapter usersAdapter = new UsersArrayAdapter(users, this);
         userList.setAdapter(usersAdapter);
         FirebaseDatabase.getInstance()
                 .getReference()
@@ -72,7 +75,8 @@ public class UserListActivity extends Activity {
                             User user = dataSnapshotChild.getValue(User.class);
                             if (!TextUtils.equals(user.name,
                                     FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                                users.add(user.getName());
+                                user.setUserId(dataSnapshotChild.getKey());
+                                users.add(user);
                             }
                         }
                         usersAdapter.notifyDataSetChanged();

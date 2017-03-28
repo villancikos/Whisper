@@ -8,6 +8,7 @@ package com.example.marik.whispermariya;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.google.firebase.database.ServerValue;
 
 import java.security.Timestamp;
@@ -52,7 +54,19 @@ public class Chat_room  extends AppCompatActivity{
         room_name = getIntent().getExtras().get("room_name").toString();
         setTitle(room_name);
 
-        chatReference = FirebaseDatabase.getInstance().getReference().child("messages").child(room_name);
+
+
+        //if(uniqueID no existe)
+
+            //chatReference = FirebaseDatabase.getInstance().getReference().child("messages").push();
+        //else
+             //   cambiar el push por un child con la referencia.
+            //    Change the push for a child with the reference.
+
+        //sender = user_name;
+        //receiver = room_name;
+
+        chatReference = FirebaseDatabase.getInstance().getReference().child("messages").push();
 
         btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +81,9 @@ public class Chat_room  extends AppCompatActivity{
                 map2.put("sender",user_name);
                 map2.put("content",input_msg.getText().toString());
                 map2.put("timestamp",timeMes);
+
+                //map2.put("receiver",room_name.toString());
+
 
                 message_root.updateChildren(map2);
             }
@@ -113,21 +130,28 @@ public class Chat_room  extends AppCompatActivity{
 
         while (i.hasNext()){
 
-            chat_msg = (String) ((DataSnapshot)i.next()).getValue();
-            chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
-            chat_message_time =  ((DataSnapshot)i.next()).getValue();
+                chat_msg = (String) ((DataSnapshot) i.next()).getValue();
+                chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
+                chat_message_time = ((DataSnapshot) i.next()).getValue();
 
-            String senderMessage = input_msg.getText().toString().trim();
+                String senderMessage = input_msg.getText().toString().trim();
 
 
-            //Time time = new Timestamp();
-            //time.getTimestamp(Long.valueOf(chat_message_time));
+                //Time time = new Timestamp();
+                //time.getTimestamp(Long.valueOf(chat_message_time));
 
-            if(!senderMessage.isEmpty()){
+                //if(!senderMessage.isEmpty()){
+                //  btn_send_msg.setEnabled(true);
+                //} else {
+                //  btn_send_msg.setEnabled(false);
+                //}
 
-                chat_conversation.append(chat_user_name +" : "+ chat_msg + "\n"+ chat_message_time + "\n");
+                user_name = getIntent().getExtras().get("user_name").toString();
+
+                chat_conversation.append(user_name + " : " + chat_msg + "\n" + chat_message_time + "\n");
                 input_msg.setText("");
-            }
+
+
         }
 
 

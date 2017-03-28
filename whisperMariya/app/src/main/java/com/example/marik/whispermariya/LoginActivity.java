@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity{
                 } else {
                     // User is signed out
                     Log.d("You are signed out", "onAuthStateChanged:signed_out");
+
                 }
             }
         };

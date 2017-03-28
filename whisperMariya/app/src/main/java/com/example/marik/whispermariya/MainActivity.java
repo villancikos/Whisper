@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,6 +31,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import static android.R.attr.key;
+import static android.R.attr.tag;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -45,6 +51,7 @@ public class MainActivity extends AppCompatActivity{
     private DatabaseReference participantsDatabaseReference;
     private final int USER_CHAT_CREATION = 9;
     private int id = 0;
+    private Set<String> set = new HashSet<String>();
 
 
     @Override
@@ -64,7 +71,6 @@ public class MainActivity extends AppCompatActivity{
         add_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 26/03/2017 Call UserListActivity and bring back the name of the selected user
                  Intent intent = new Intent(getApplicationContext(),UserListActivity.class);
                 startActivityForResult(intent, USER_CHAT_CREATION);
             }
@@ -74,13 +80,19 @@ public class MainActivity extends AppCompatActivity{
         participantsDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<String>();
                 Iterator i = dataSnapshot.getChildren().iterator();
 
                 while(i.hasNext()){
                     DataSnapshot actualData = (DataSnapshot)i.next();
-                    if(actualData.child(name).exists()) {
-                        set.add(actualData.getKey());
+                    String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    if(actualData.child(currentUserID).exists()) {
+                        Iterator<DataSnapshot> participants = actualData.getChildren().iterator();
+                        while(participants.hasNext()){
+                            String participantKey = participants.next().getKey();
+                            if(!participantKey.equalsIgnoreCase(currentUserID)){
+                                convertReceiverUIDToName(participantKey);
+                            }
+                        }
                     }
                 }
 
@@ -108,23 +120,42 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    private void convertReceiverUIDToName(String receiverID){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(receiverID).child("name");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null) {
+                    set.add((String) snapshot.getValue());
+                    list_of_rooms.clear();
+                    list_of_rooms.addAll(set);
+                    arrayAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
             if(requestCode == USER_CHAT_CREATION) {
-                Map<String, Object> map = new HashMap<String, Object>();
 
                 Map<String, Object> mapParticipants = new HashMap<String, Object>();
                 mapParticipants.put(name, true);
-                mapParticipants.put(data.getStringExtra("name"), true);
+                mapParticipants.put(data.getStringExtra("key"), true);
 
                 //map.put(""+id, mapParticipants); //Change to name
                 //id ++;
-                map.put(data.getStringExtra("name"), mapParticipants); //Change to name
-
-                participantsDatabaseReference.updateChildren(map);
+                DatabaseReference ref = participantsDatabaseReference.push();
+                ref.updateChildren(mapParticipants);
             }
         }
     }
