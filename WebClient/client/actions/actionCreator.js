@@ -3,24 +3,31 @@ import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
 import store from '../store'
 
+let loggedUser = "4iEoYIjG40YiLnkeqkCsLmrhBEh2";
 
-export function fillLoggedUser(dispatch) {
+const logState = () => (dispatch, getState) => {
+  console.log(getState());
+};
+
+export function fillLoggedUser() {
   return (dispatch, getState) => {
     dispatch({
       type: C.LOGGED_IN,
-    })
-    
+    });
   }
 }
 
 
 export function watchFirebase(dispatch) {
+  console.log("Is this working outside?");
   ref.on('value', (snap) => {
     dispatch(startListeningToAuth());
     dispatch(fetchConversationsFromFirebase());
     dispatch(fetchMessagesFromFirebase());
     dispatch(fetchParticipants());
+    // dispatch(fetchFirebaseUsers());
   });
+  dispatch(initialFetch());
 }
 
 export function registerUser(email, uid, profile_pic, name) {
@@ -203,6 +210,12 @@ export function startListeningToAuth() {
           type: C.LOGIN_USER,
           uid: authData.uid
         });
+        loggedUser = authData.uid;
+      }
+      else {
+        dispatch({
+          type: C.LOGGED_OUT,
+        })
       }
     });
   }
@@ -276,5 +289,23 @@ export function fetchFirebaseUsers(sender, receiver) {
       })
     }
   }
+}
 
+export function initialFetch(dispatch) {
+  return (dispatch) => {
+    if (loggedUser !== null) {
+      console.log("ENTRO")
+      var users = {}
+      ref.child("users").once('value', (userSnapshot) => {
+        var userDetails = userSnapshot.val();
+        for (var user in userDetails) {
+          users[user] = userDetails[user]
+        }
+      });
+      dispatch({
+        type: C.FILL_USERS,
+        users
+      })
+    }
+  }
 }

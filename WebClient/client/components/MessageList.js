@@ -23,7 +23,7 @@ export default class MessageList extends React.Component {
                 // {this.props.users[uid].profile_pic}
                 <div>
                     <div className="conversation-receiver">
-                        
+                        Conversation with: {this.props.users[receiver].name}
                     </div>
                     <div className="d-flex flex-column conversation-container">
                         {Object.keys(currentMessageList).map((messageId) =>

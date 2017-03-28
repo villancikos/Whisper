@@ -8,6 +8,11 @@ function auth(state = {}, action) {
                 ...state,
                 uid: action.uid
             }
+        case C.LOGGED_OUT:
+            return {
+                ...state,
+                uid: null
+            }
     }
     return state;
 }
