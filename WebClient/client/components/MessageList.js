@@ -26,7 +26,7 @@ export default class MessageList extends React.Component {
                 <div>
                 
                     <div className="conversation-receiver">
-                    <img className="conversation-profile-pic" src={profile_pic}/>
+                    <img className="conversation-profile-pic rounded-circle" src={profile_pic}/>
                     {receiver_name}
                     </div>
                     <div className="d-flex flex-column conversation-container">

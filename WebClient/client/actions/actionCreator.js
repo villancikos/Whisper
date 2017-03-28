@@ -3,7 +3,7 @@ import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
 import store from '../store'
 
-let loggedUser = "";
+let loggedUser = "YtFkSWnSguZCoQ4Xl3mTV9miAUo2";
 
 const logState = () => (dispatch, getState) => {
   console.log(getState());

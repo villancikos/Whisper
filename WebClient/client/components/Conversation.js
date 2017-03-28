@@ -9,11 +9,10 @@ export default class Conversation extends React.Component {
     render() {
         const { conversations, i } = this.props || {};
         if (conversations !== {} && i !== {}) {
-            let sender = conversations[i].sender;
-            let sender_name = this.props.users[sender].name;
             let timestamp = conversations[i].timestamp;
             let last_message = conversations[i].last_message;
-            let receiver = h.getReceiver(i,sender,this.props.participants);
+            let receiver = h.getReceiver(i,this.props.auth.uid,this.props.participants)|| '';
+            let receiver_name = this.props.users[receiver].name||'';
             let profile_pic = this.props.users[receiver].profile_pic;
             return (
                 <div className=
@@ -22,17 +21,10 @@ export default class Conversation extends React.Component {
                     onClick={() => { this.props.toggleConversation(i) }}
                 >
                 <img className="rounded-circle mr-2 conversation-profile-pic" src={profile_pic}/>
-                {this.props.auth.uid === sender
-                ?
                 <div className="conversation-sender">
-                you:
+                    {receiver_name}
                 </div>
-                :
-                <div className="conversation-sender">
-                    {sender_name} said 
-                </div>
-                }
-                    <div className="conversation-last-message">{last_message}</div>
+                    <div className="conversation-last-message">{h.trunctateText(last_message)}</div>
                     <div className="conversation-timestamp">
                         <i className="fa fa-clock-o mr-1"></i>{h.formatTime(timestamp)}
                     </div>
