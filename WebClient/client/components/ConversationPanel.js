@@ -11,7 +11,7 @@ export default class ConversationPanel extends React.Component {
         var currentConversation = this.props.currentConversation
         if (currentConversation !== '') {
             return (
-                <div id="conversationPanel" className="d-flex flex-column col-md-7 p-0">
+                <div id="conversationPanel" className="d-flex flex-column col-lg-8  p-0">
                 <div>
                     
                 </div>

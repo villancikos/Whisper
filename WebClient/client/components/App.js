@@ -22,9 +22,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     // Global Dispatcher for Firebase async actions
-    // fillLoggedUser(dispatch);
     watchFirebase(dispatch);
-    // initialFetch(dispatch);
     // main binder
     return bindActionCreators(actionCreator, dispatch);
 }

@@ -9,10 +9,12 @@ import AddMessage from './AddMessage';
 
 export default class MessageList extends React.Component {
     render() {
-        var uid = this.props.auth.uid;
-        var currentConversation = this.props.i || {};
-        var currentMessageList = this.props.messages[currentConversation] || {};
-        var receiver = h.getReceiver(currentConversation, uid, this.props.participants);
+        let uid = this.props.auth.uid;
+        let currentConversation = this.props.i || {};
+        let currentMessageList = this.props.messages[currentConversation] || {};
+        let receiver = h.getReceiver(currentConversation, uid, this.props.participants);
+        let receiver_name = this.props.users[receiver].name;
+        let profile_pic = this.props.users[receiver].profile_pic;
         // if (currentConversation !== {}) {
         if (currentConversation !== {}) {
             return (
@@ -22,8 +24,10 @@ export default class MessageList extends React.Component {
                 // </div>
                 // {this.props.users[uid].profile_pic}
                 <div>
+                
                     <div className="conversation-receiver">
-                        Conversation with: {this.props.users[receiver].name}
+                    <img className="conversation-profile-pic" src={profile_pic}/>
+                    {receiver_name}
                     </div>
                     <div className="d-flex flex-column conversation-container">
                         {Object.keys(currentMessageList).map((messageId) =>

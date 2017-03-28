@@ -25,7 +25,6 @@ export function watchFirebase(dispatch) {
     dispatch(fetchConversationsFromFirebase());
     dispatch(fetchMessagesFromFirebase());
     dispatch(fetchParticipants());
-    // dispatch(fetchFirebaseUsers());
   });
   dispatch(initialFetch());
 }
