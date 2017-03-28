@@ -23,6 +23,24 @@ let h = {
         }
         return dateObj.getHours() + ":" + dateObj.getMinutes();
     },
+    trunctateText: (text) =>{
+        if (text.length > 30)
+            return text.substring(0, 30)+"...";
+        else
+            return text;
+    },
+    getRandomProfilePic: () =>{
+        let profile_pics = [
+            'http://i.imgur.com/KH5Q9wG.png',
+            'http://i.imgur.com/OqU1H7U.png',
+            'http://i.imgur.com/s6z9dJq.png',
+            'http://i.imgur.com/qBnSKMz.png',
+            'http://i.imgur.com/Ydb83IP.png',
+            'http://i.imgur.com/fUqFxe7.png',
+            'http://i.imgur.com/8N4iQ85.png',
+        ]
+        return profile_pics[Math.floor((Math.random() * 7))];
+    },
 }
 
 export default h;
