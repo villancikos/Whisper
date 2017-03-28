@@ -4,6 +4,7 @@ import firebaseui from 'firebaseui'
 import { ref, fAuth } from './helpers/firebase'
 const firebaseUI = new firebaseui.auth.AuthUI(fAuth);
 
+
 export default class FirebaseUi extends React.Component {
     signOut() {
         fAuth.signOut();
@@ -11,7 +12,7 @@ export default class FirebaseUi extends React.Component {
     }
     componentDidMount() {
         let uiConfig = {
-            signInSuccessUrl: window.location.href + 'web',
+            signInSuccessUrl: document.location.origin+"/web",
             tosUrl: 'www.whisper.com',
             signInOptions: [
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -21,7 +22,6 @@ export default class FirebaseUi extends React.Component {
             callbacks: {
                 signInSuccess: (currentUser) => {
                     if (currentUser) {
-                        console.log("success");
                         let email = currentUser.email;
                         let uid = currentUser.uid;
                         let profile_pic = currentUser.photoURL;

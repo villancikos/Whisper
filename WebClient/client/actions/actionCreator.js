@@ -3,7 +3,7 @@ import C from './actionConstants';
 import { fAuth, ref } from '../components/helpers/firebase';
 import store from '../store'
 
-let loggedUser = "4iEoYIjG40YiLnkeqkCsLmrhBEh2";
+let loggedUser = "";
 
 const logState = () => (dispatch, getState) => {
   console.log(getState());
@@ -21,30 +21,34 @@ export function fillLoggedUser() {
 export function watchFirebase(dispatch) {
   console.log("Is this working outside?");
   ref.on('value', (snap) => {
-    dispatch(startListeningToAuth());
     dispatch(fetchConversationsFromFirebase());
     dispatch(fetchMessagesFromFirebase());
     dispatch(fetchParticipants());
   });
+  dispatch(startListeningToAuth());
   dispatch(initialFetch());
 }
 
+
 export function registerUser(email, uid, profile_pic, name) {
   return (dispatch) => {
-    var updates = {};
+    let pp = profile_pic;
+    if (pp === null){
+      pp = h.getRandomProfilePic();
+    }
+    let updates = {}
     updates['/users/' + uid] = {
-      conversations: {},
       email,
       lastSeen: Date.now(),
       name,
-      profile_pic
+      profile_pic: pp,
     }
     ref.update(updates);
   }
 }
 // FIREBASE conversations
 function fetchConversationsFromFirebase() {
-  return function (dispatch) {
+  return (dispatch) => {
     var conversations = {}
     if (loggedUser !== null) {
       var userConversations = ref.child("users/" + loggedUser);
