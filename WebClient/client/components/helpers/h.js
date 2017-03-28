@@ -6,12 +6,13 @@ let h = {
             messageId += possible.charAt(Math.floor(Math.random() * possible.length));
         return messageId;
     },
-    getReceiver: (conversationId, sender, participants) => {
-        var receiver = '';
-        for (var x in participants[conversationId])
-            if (x !== sender)
-                receiver = x;
-        return receiver;
+    getParticipant: (conversationId, loggedUser, participants) => {
+        for (var x in participants[conversationId]) {
+            if (x !== loggedUser) {
+                return x;
+            }
+        }
+        return loggedUser;
     },
     formatTime: (time) => {
         var dateObj = new Date(time);
@@ -23,13 +24,13 @@ let h = {
         }
         return dateObj.getHours() + ":" + dateObj.getMinutes();
     },
-    trunctateText: (text) =>{
+    trunctateText: (text) => {
         if (text.length > 30)
-            return text.substring(0, 30)+"...";
+            return text.substring(0, 30) + "...";
         else
             return text;
     },
-    getRandomProfilePic: () =>{
+    getRandomProfilePic: () => {
         let profile_pics = [
             'http://i.imgur.com/KH5Q9wG.png',
             'http://i.imgur.com/OqU1H7U.png',

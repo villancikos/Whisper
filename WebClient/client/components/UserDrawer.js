@@ -22,7 +22,7 @@ export default class UserDrawer extends React.Component {
                 
                 {Object.keys(users).map((receiver) =>
                     <div className= "list-group-item" key={receiver}
-                    onClick={this.props.startNewConversation.bind(null,this.props.auth.uid,receiver, this.props.participants)}
+                    onClick={this.props.startNewConversation.bind(null,this.props.auth.uid,receiver,this.props.participants)}
                     >
                         <img style={{height: "45px"}} src={this.props.users[receiver].profile_pic} alt={`${this.props.users[receiver].name} profile pic`} className="rounded-circle mr-2" />
                         <h5>{this.props.users[receiver].name}</h5>

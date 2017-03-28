@@ -12,7 +12,7 @@ export default class MessageList extends React.Component {
         let uid = this.props.auth.uid;
         let currentConversation = this.props.i || {};
         let currentMessageList = this.props.messages[currentConversation] || {};
-        let receiver = h.getReceiver(currentConversation, uid, this.props.participants);
+        let receiver = h.getParticipant(currentConversation, uid, this.props.participants);
         let receiver_name = this.props.users[receiver].name;
         let profile_pic = this.props.users[receiver].profile_pic;
         // if (currentConversation !== {}) {

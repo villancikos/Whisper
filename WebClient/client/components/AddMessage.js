@@ -11,9 +11,9 @@ export default class AddMessage extends React.Component {
         // debugger;
         // TODO: get ConversationId or get it from Firebase before anything...
         const conversationId = this.props.i;
-        const sender = this.refs.sender.value;
+        const sender = this.props.auth.uid;
         const participants = this.props.participants[conversationId]
-        const receiver = h.getReceiver(conversationId, sender, this.props.participants) || null;
+        const receiver = h.getParticipant(conversationId, sender, this.props.participants) || null;
         if (receiver !== null){
             //TODO push to participants object this conversationId.
             this.props.pushParticipants(conversationId, sender, receiver);
@@ -30,7 +30,6 @@ export default class AddMessage extends React.Component {
             <div className="mt-auto" style={{paddingTop:"3em"}}>
                 <form onSubmit={(e) => { this.handleSubmit(e) }} ref="messageForm" className="add-message-form" >
                     <input type="text" ref="content" required noValidate />
-                    <input type="hidden" ref="sender" value={this.props.auth.uid} />
                     <input type="submit" hidden />
                 </form>
             </div>

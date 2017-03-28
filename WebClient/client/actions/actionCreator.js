@@ -14,8 +14,6 @@ export function fillLoggedUser() {
 
 
 export function watchFirebase(dispatch) {
-  console.log("Is this working outside?");
-  // dispatch(initialFetch());
   dispatch(fetchParticipants());
   dispatch(startListeningToAuth());
   ref.on('value', (snap) => {
@@ -35,12 +33,6 @@ export function registerUser(email, uid, profile_pic, name) {
     }
     let updates = {}
     let userpath = '/users/'+uid;
-    // updates['/users/' + uid] = {
-    //   email,
-    //   lastSeen: Date.now(),
-    //   name,
-    //   profile_pic: pp,
-    // }
     updates[userpath+'/email/'] = email;
     updates[userpath+'/lastSeen/'] = Date.now();
     updates[userpath+'/name/'] = name;
@@ -54,7 +46,7 @@ function fetchConversationsFromFirebase() {
     let loggedUser = getState().auth.uid;
     var conversations = {}
     if (loggedUser !== null) {
-      var userConversations = ref.child("users/" + loggedUser);
+      var userConversations = ref.child('users/' + loggedUser);
       userConversations.on('value', (userSnapshot) => {
         userSnapshot.child('conversations').forEach((conversationKey) => {
           var conversationRef = ref.child('conversations').child(conversationKey.key);
@@ -102,7 +94,7 @@ export function fetchParticipants() {
     var participants = {}
     let loggedUser = getState().auth.uid;
     if (loggedUser !== null) {
-      var userConversations = ref.child("users/" + loggedUser);
+      var userConversations = ref.child('users/' + loggedUser);
       userConversations.on('value', (userSnapshot) => {
         userSnapshot.child('conversations').forEach((conversationKey) => {
           var participantRef = ref.child('participants').child(conversationKey.key);
@@ -164,7 +156,7 @@ export function pushMessages(conversationId, sender, receiver, content, typeOfCo
       typeOfContent,
       timestamp,
     }
-    updates['/messages/' + conversationId + "/" + messageId.key] = message_data;
+    updates['/messages/' + conversationId + '/' + messageId.key] = message_data;
     ref.update(updates);
     // Now dispatching the pure function so we can modify render of components
     dispatch(addMessage(conversationId, messageId.key, sender, receiver, content, typeOfContent, timestamp));
@@ -286,7 +278,7 @@ export function fetchFirebaseUsers(sender, receiver) {
     if (loggedUser !== null) {
       
       var users = {}
-      ref.child("users").once('value', (userSnapshot) => {
+      ref.child('users').once('value', (userSnapshot) => {
         var userDetails = userSnapshot.val();
         for (var user in userDetails) {
           users[user] = userDetails[user]
@@ -305,7 +297,7 @@ export function initialFetch(dispatch) {
     let loggedUser = getState().auth.uid;
     if (loggedUser !== null) {
       var users = {}
-      ref.child("users").once('value', (userSnapshot) => {
+      ref.child('users').once('value', (userSnapshot) => {
         var userDetails = userSnapshot.val();
         for (var user in userDetails) {
           users[user] = userDetails[user]
