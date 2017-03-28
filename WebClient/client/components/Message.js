@@ -12,11 +12,12 @@ export default class Message extends React.Component {
     render() {
         var message_data = this.props.message_data || {};
         if (message_data !== {}) {
+            let isSenderLogged = this.props.loggedUser === message_data.sender;
+
             return (
                 <div className="speech-whispper">
-                    <div className="bubble">
+                    <div className={`bubble ${isSenderLogged?'':'float-right'}`}>
                         <div className="bubble-txt">
-
                             <p className="bubble-message">{message_data.content}</p>
                             <span className="bubble-timestamp">
                                 {message_data.timestamp !== ''
@@ -26,7 +27,7 @@ export default class Message extends React.Component {
                                 {h.formatTime(message_data.timestamp)}
                             </span>
                         </div>
-                        {this.props.loggedUser === message_data.sender
+                        {isSenderLogged
                             ?
                             <div className="bubble-arrow"></div>
                             :
