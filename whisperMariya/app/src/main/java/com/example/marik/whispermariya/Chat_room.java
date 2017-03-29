@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import static android.R.attr.name;
+
 public class Chat_room  extends AppCompatActivity{
 
     private Button btn_send_msg;
@@ -63,7 +65,8 @@ public class Chat_room  extends AppCompatActivity{
              //   cambiar el push por un child con la referencia.
             //    Change the push for a child with the reference.
 
-        //sender = user_name;
+        //DatabaseReference senderReference = FirebaseDatabase.getInstance().getReference().child("users").child(user_name);
+        //String senderSnapshot = dataSnapshot.;
         //Chat imthesender = new Chat();
         //receiver = ;
 
@@ -135,6 +138,8 @@ public class Chat_room  extends AppCompatActivity{
                 chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
                 chat_message_time = ((DataSnapshot) i.next()).getValue();
 
+
+
                 String senderMessage = input_msg.getText().toString().trim();
 
 
@@ -149,7 +154,7 @@ public class Chat_room  extends AppCompatActivity{
 
                 user_name = getIntent().getExtras().get("user_name").toString();
 
-                chat_conversation.append(user_name + " : " + chat_msg + "\n" + chat_message_time + "\n");
+                chat_conversation.append(chat_user_name + " : " + chat_msg + "\n" + chat_message_time + "\n");
                 input_msg.setText("");
 
 
