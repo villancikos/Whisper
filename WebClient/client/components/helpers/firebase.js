@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-const config = {
+const config_dev = {
   apiKey: 'AIzaSyBghW4rGKXMhzjJXPBZIhWmHaYRqpz7AZo',
   authDomain: 'pythonwithfirebase-6b00a.firebaseapp.com',
   databaseURL: 'https://pythonwithfirebase-6b00a.firebaseio.com',
@@ -8,7 +8,7 @@ const config = {
   messagingSenderId: '740790435984'
 };
 
-const config_prod = {
+const config = {
   apiKey: "AIzaSyAFKtYVz2RxyeZsPKSfF1uA1DVBYt-aG5U",
   authDomain: "whisper-f225b.firebaseapp.com",
   databaseURL: "https://whisper-f225b.firebaseio.com",
