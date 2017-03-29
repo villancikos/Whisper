@@ -64,7 +64,8 @@ public class Chat_room  extends AppCompatActivity{
             //    Change the push for a child with the reference.
 
         //sender = user_name;
-        //receiver = room_name;
+        //Chat imthesender = new Chat();
+        //receiver = ;
 
         chatReference = FirebaseDatabase.getInstance().getReference().child("messages").push();
 
