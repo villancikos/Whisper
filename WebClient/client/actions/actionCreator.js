@@ -35,7 +35,9 @@ export function registerUser(email, uid, profile_pic, name) {
     let userpath = '/users/'+uid;
     updates[userpath+'/email/'] = email;
     updates[userpath+'/lastSeen/'] = Date.now();
-    updates[userpath+'/name/'] = name;
+    if (name !== null){
+      updates[userpath+'/name/'] = name;
+    }
     updates[userpath+'/profile_pic/'] = pp;
     ref.update(updates);
   }

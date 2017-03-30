@@ -12,7 +12,7 @@ export default class FirebaseUi extends React.Component {
     }
     componentDidMount() {
         let uiConfig = {
-            signInSuccessUrl: document.location.origin+"/web",
+            signInSuccessUrl: document.location.origin + "/web",
             tosUrl: 'www.whisper.com',
             signInOptions: [
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -46,12 +46,17 @@ export default class FirebaseUi extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.props.auth.uid !== null?
-                <button onClick={this.signOut}>Sign Out</button>
-                :
-                <div id="firebaseui-auth"></div>
-                }
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        {this.props.auth.uid !== null ? <p>If you were not redirected, <a href="http://localhost:7770/web">click here</a></p> : ""}
+                        {this.props.auth.uid !== null ?
+                            <button onClick={this.signOut}>Sign Out</button>
+                            :
+                            <div id="firebaseui-auth"></div>
+                        }
+                    </div>
+                </div>
             </div>
         )
     }
