@@ -113,26 +113,34 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if (textField.text!.isEmpty){
             // text field is empty, do nothing
         }else{
-            // send message to database child "messages"
-            let message = self.textField.text
-            let timeStamp = self.timeStamp()
-            let newMessage = ["sender" : userID,  "receiver" : receiver, "content" : message, "typeOfContent" : "text", "timestamp" : timeStamp] as [String : Any]
-            FIRDatabase.database().reference().child("messages").child(conversationIdToSendAndFetch).childByAutoId().setValue(newMessage)
-            // send conversation info to database child "conversations"
-            let conversationInfo = ["last_message" : message, "sender" : userID, "timestamp" : timeStamp] as [String : Any]
-            FIRDatabase.database().reference().child("conversations").child(conversationIdToSendAndFetch).setValue(conversationInfo)
-            // send conversation info to database child "participants"
-            let participantsInfo = [userID! : true, receiver : true] as [String : Any]
-            FIRDatabase.database().reference().child("participants").child(conversationIdToSendAndFetch).setValue(participantsInfo)
-            // send conversation info to database child "users"
-            let userConversations = [conversationIdToSendAndFetch : true]
-            FIRDatabase.database().reference().child("users").child(userID!).child("conversations").updateChildValues(userConversations)
-            FIRDatabase.database().reference().child("users").child(receiver).child("conversations").updateChildValues(userConversations)
-            // update last seen into DB
-            let ref = FIRDatabase.database().reference()
-            let currentUserId = FIRAuth.auth()?.currentUser?.uid
-            let info = ["lastSeen" : self.timeStamp()]
-            ref.child("users").child(currentUserId!).updateChildValues(info)
+            
+            // display a message if user try to chat himself
+            if (userID==receiver){
+            self.popUpMsgAndDismiss(title: "Why?", message: "you already know what you are going to recevie. Please select another user to chat. In this chat we show you all chat histories that you have access to.",buttonTitle: "Ok")
+            }else{
+                // send message to database child "messages"
+                let message = self.textField.text
+                let timeStamp = self.timeStamp()
+                let newMessage = ["sender" : userID,  "receiver" : receiver, "content" : message, "typeOfContent" : "text", "timestamp" : timeStamp] as [String : Any]
+                FIRDatabase.database().reference().child("messages").child(conversationIdToSendAndFetch).childByAutoId().setValue(newMessage)
+                // send conversation info to database child "conversations"
+                let conversationInfo = ["last_message" : message, "sender" : userID, "timestamp" : timeStamp] as [String : Any]
+                FIRDatabase.database().reference().child("conversations").child(conversationIdToSendAndFetch).setValue(conversationInfo)
+                // send conversation info to database child "participants"
+                let participantsInfo = [userID! : true, receiver : true] as [String : Any]
+                FIRDatabase.database().reference().child("participants").child(conversationIdToSendAndFetch).setValue(participantsInfo)
+                // send conversation info to database child "users"
+                let userConversations = [conversationIdToSendAndFetch : true]
+                FIRDatabase.database().reference().child("users").child(userID!).child("conversations").updateChildValues(userConversations)
+                FIRDatabase.database().reference().child("users").child(receiver).child("conversations").updateChildValues(userConversations)
+                // update last seen into DB
+                let ref = FIRDatabase.database().reference()
+                let currentUserId = FIRAuth.auth()?.currentUser?.uid
+                let info = ["lastSeen" : self.timeStamp()]
+                ref.child("users").child(currentUserId!).updateChildValues(info)
+                
+            }
+
         }
         textField.text = ""
     }
@@ -146,6 +154,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messagesList.count
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageTable.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
@@ -157,6 +170,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
         cell.detailTextLabel?.text = messagesList[indexPath.row].content
         cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         return cell
     }
 
