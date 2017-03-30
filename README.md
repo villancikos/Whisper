@@ -23,7 +23,8 @@ The iOS client is created using macOS and Xcode.
 CocoaPods and UI KIT. In order to start the project you need to have latest Xcode installed and run it.
 
 ## Android
-The Android Client is created using Android Studio with Java as the main programming Language
+The Android Client is created using Android Studio with Java as the main programming Language.
+In order to run the program, is needed to have Android Studio and open the main project with it.
 
 ## Web Client
 
