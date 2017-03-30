@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController {
                     let ref = FIRDatabase.database().reference()
                     let imageURL = "http://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
                     let userId = user?.uid
-                    let info = ["name" : name, "email" : email, "profile_pic" : imageURL, "lastSeen" : self.currentTimeStamp()]
+                    let info = ["name" : name, "email" : email, "profile_pic" : imageURL, "lastSeen" : self.timeStamp()] as [String : Any]
                     ref.child("users").child(userId!).setValue(info)
                     // go to users list UI
                     self.performSegue(withIdentifier: "allUsers", sender: self)

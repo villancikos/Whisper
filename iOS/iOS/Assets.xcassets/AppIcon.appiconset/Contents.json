@@ -11,9 +11,8 @@
       "scale" : "3x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "appIcon.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -32,8 +31,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "whisperIcon-1.png",
       "scale" : "2x"
     },
     {

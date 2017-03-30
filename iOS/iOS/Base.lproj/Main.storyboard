@@ -64,10 +64,6 @@
                                     <action selector="didClickSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rNb-3d-Ugq"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whisperLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Af3-ST-2XI">
-                                <rect key="frame" x="123" y="152" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i2P-AR-jo7">
                                 <rect key="frame" x="65" y="403" width="118" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,6 +82,10 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whisperLogo" translatesAutoresizingMaskIntoConstraints="NO" id="PE8-cd-mga">
+                                <rect key="frame" x="119" y="152" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -441,7 +441,7 @@ Password</string>
     </scenes>
     <resources>
         <image name="whisperBackground" width="600" height="399"/>
-        <image name="whisperLogo" width="358" height="356"/>
+        <image name="whisperLogo" width="206" height="207"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="k2P-XN-VCd"/>
