@@ -15,11 +15,12 @@ struct users {
     let name : String!
     let imageUrl : String!
     let email : String!
-    let timeStamp : String!
+    let timeStamp : Int!
 }
 // a structure to make array of conversation in less code anywhere in any class
 struct conversation {
     let lastMessage : String!
+    let sender : String!
     let timeStamp : String!
 }
 
