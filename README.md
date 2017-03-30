@@ -1,5 +1,7 @@
 # Whisper 
 
+![Whisper App Logo](http://i.imgur.com/Z9ifBdN.jpg)
+
 This is a King's College of London project for the Group Project Class.
 Our team is conformed of people of three continents with different native languages.
 
@@ -18,7 +20,7 @@ We did three clients for our chat application. iOS, Android and Web.
 
 ## iOS
 The iOS client is created using macOS and Xcode. 
-CocoaPods and UI KIT.
+CocoaPods and UI KIT. In order to start the project you need to have latest Xcode installed and run it.
 
 ## Android
 The Android Client is created using Android Studio with Java as the main programming Language
@@ -71,4 +73,4 @@ Thanks for reading.
 [React-Router]: <https://reacttraining.com/react-router/>
 [React Native]: <https://facebook.github.io/react-native/>
 [React VR]: <https://developer.oculus.com/blog/introducing-the-react-vr-pre-release/>
-[Redux] : <https://github.com/reactjs/react-redux>
+[Redux]: <https://github.com/reactjs/react-redux>
