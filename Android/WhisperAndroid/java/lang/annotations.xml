@@ -1,0 +1,5 @@
+<root>
+  <item name='java.lang.Override'>
+    <annotation name='android.support.annotation.Nullable' />
+  </item>
+</root>
