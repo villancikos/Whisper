@@ -16,6 +16,14 @@ const config = {
   messagingSenderId: "241417745514"
 };
 
+ const confignico = {
+    apiKey: "AIzaSyD0sTBQHOjF9qhb09i8bFNnVcyum_jJJ-Q",
+    authDomain: "whispermariya-48e27.firebaseapp.com",
+    databaseURL: "https://whispermariya-48e27.firebaseio.com",
+    storageBucket: "whispermariya-48e27.appspot.com",
+    messagingSenderId: "167687328797"
+  };
+
 firebase.initializeApp(config);
 export const fAuth = firebase.auth();
 export const ref = firebase.database().ref();

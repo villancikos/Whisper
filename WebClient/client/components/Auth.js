@@ -48,7 +48,13 @@ export default class FirebaseUi extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-12 text-center">
+                    <img src="http://i.imgur.com/Z9ifBdN.jpg"/>
+                    <h1>Welcome to Whisper</h1>
+                    <p>Whisper is a messaging app created by students from King's College of London.</p>
+                    <p>This is our first project using React, Android and iOS </p>
+                    </div>
+                    <div className="col-md-12 text-center">
                         {this.props.auth.uid !== null ? <p>If you were not redirected, <a href="http://localhost:7770/web">click here</a></p> : ""}
                         {this.props.auth.uid !== null ?
                             <button onClick={this.signOut}>Sign Out</button>

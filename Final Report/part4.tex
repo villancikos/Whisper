@@ -19,7 +19,7 @@ Figures 4 and 6 present the specific architecture and database interaction of th
 	\caption{iOS Database Interactions}
 	\label{fig:iOSarchitecture}
 \end{figure}
-\textbf{Achievements and Challenges}: The iOS client was able to carry out all the tasks listed under Priority 1 successfully. However, some of the most challenging aspects were how to fetch users and check if the users have chatted before.
+\textbf{Achievements and Challenges}: The iOS client was able to carry out all the tasks listed under Priority 1 successfully. We were able to achieve secure connection, messages, contact list, sign in by email, one to one conversation across the platforms. However, some of the most challenging aspects were how to fetch users and check if the users have chatted before. Some of the most relevant specific details across iOS development are also stated in the next subsections while some screen-shots of the GUI are in Figure 16. 
 
 \begin{figure}[ht]
 \centering
@@ -27,8 +27,7 @@ Figures 4 and 6 present the specific architecture and database interaction of th
 	\caption{Fetching Users in iOS}
 	\label{fig:iOS_fetch_users_ID_issue_and_solution}
 \end{figure}
-
-Some of the most relevant specific details across iOS development and stated in the next subsections.   
+  
 
 \textbf{Fetch users}: The sender must ensure that the sent message go only to the intended receiver using the first UI (left side in Figure 7). To resolve this, we fetch the data of users as an array of array (as shown in the UI on the right of Figure 7) from the back-end to have the ID of the selected user.
 
@@ -181,22 +180,23 @@ Our conclusions for the implementation of the Web client are that we are very ha
 
 \subsection{Android Implementation}
 
-As new programmers, we started by looking at existing Android messaging apps that use Firebase as a back-end so we could take ideas on how to start. There is a course in Udacity made by Google that makes a basic chat (all to all) that we used as reference for our app ~\cite{4664rtyrtr67}.
+As new programmers, we started by looking at existing Android messaging apps that use Firebase as a back-end so we could take ideas on how to start. There is a course in Udacity made by Google that makes a basic chat (all to all) that we used as reference for our app. ~\cite{4664rtyrtr67}.
 
 Later on, we found out that this app was very different to what we needed. We needed a different database structure to be able to map each message to the appropriate conversation. With this came many complications. We had to change the whole structure of our program! We tried changing our code, but we found out that it was a hard task so we decided to start a new project from zero because it would be easier.
-We had many problems during the way but only one that we were not able to fix. We didn't manage to append a new message to the previous list of messages of a specific conversation.
+We had many problems during the way. One of our biggest challenge was to append a new message to the previous list of messages of a specific conversation.
 
-We think that the steps to do it are as follow, but we don’t know how to implement them:
+The steps are:
 
 \begin{itemize}
-	\item Get the user id (the key) of the sender [Done].
+	\item Get the user id (the key) of the sender.
 	\item Get the user id of the receiver.
 	\item Search inside each “participants” children if the userid of the sender and receiver match the keys stored with a value of true.
 	\item Get the “participants” children key that found before. This is the key for the conversation for the 2 participants.
 	\item Go to ``messages" $\rightarrow$ ``key-found-in-previous-step" $\rightarrow$ append the message.
 \end{itemize}
 
-The android app doesn't have a register functionality because the priority was to solve the previous problem and then tackle the next one. We can not display the senders username in the chat room, so we display the userid instead.
+We focused on finishing the main activities of the chat and we were not able to implement a registration proccess.
+
 We have different classes in our app:
 
 \begin{itemize}
@@ -213,6 +213,11 @@ We have different classes in our app:
 	\item \textbf{UserListActivity}: Class containing a method to get all the users from Firebase.
 
 	\item \textbf{UsersArrayAdapter}: Special class made for android to be able to map a list of users to a list view. We display thanks to cellprototype.xm
+	
+	\item \textbf{Participant}: 
+	
+	\item \textbf{ParticipantArrayAdapter}: 
+	
 \end{itemize}
 
 
@@ -220,7 +225,7 @@ We have different classes in our app:
 
 \subsection{Testing}
 
-For the test, we were inspired by the verification and validation model (V- model), which is based on the relationship between each phase of a software development life cycle, were and associated testing phase is added.   The next figures summarise each phase of the methodology, which also is an integral part of our developed philosophy. 
+For the testing process we were inspired by the verification and validation model (V- model), which is based on the relationship between each phase of the software development life cycle. Therefore, each development step is associate with a test phase.   The next figures summarise each phase of the methodology, which also is an integral part of our developed philosophy. 
 
 \begin{figure}[ht]
 \centering
@@ -230,18 +235,62 @@ For the test, we were inspired by the verification and validation model (V- mode
 \end{figure}
 
 
-Despite we are aware of the agile test methodology model (where each little division or task of software is tested while developing ~\cite{rtyeteey}), in our case this was not at all useful, considering that we have a priority requirements list. This means that the divisions of our software, as well tour architecture, changes according with our learning curve across this project. Thus, our initial plan or division of the software were extremely dynamically to adequately divided since the beginning. In fact, we can say that this is the main challenge our group face.
+In spite of the fact that we were aware of the agile test methodology model (where each little division or task of software is tested while developing ~\cite{rtyeteey}), in our case we had to be flexible, considering our list of requirements by priorities. This means that the divisions of our software, as well as our architecture, change according to our learning curve across this project. Thus, our testing plan for each division of the software were extremely flexible from the beginning.
 
-The next table presents the results of the testing process. An iterative process was conducted to guarantee a proper integration of the different clients.  Also, this process is challenging, considering that while we are trying to develop each client, at the same time we must be aware the whole structure of the system.  
+The next table presents the results of the testing process. An iterative process was conducted to guarantee a proper integration of the different clients.  Also, this process was challenging, considering that while we were trying to develop each client, at the same time we had to bear in mind the structure of the whole system.
 
 
-In addition to the previous methodology, we can also have said that our testing process was iterative across the development in the following sense: 
+\begin{table}[ht]
+\caption{Requirements by priority level}
+\label{tab:requirements}
+    \begin{tabular}[c]{ | p{6cm} | p{3cm} | p{3cm} | p{3cm} |}
+		\hline
+		\centering\textbf{Feature} & \centering{\textbf{IOS}} & \centering\textbf{Web} & \centering\textbf{Android}  &
+    \hline
+    Log in & Ok & Ok & Ok \\
+    \hline
+    Log out & Ok & Ok & Ok \\
+    \hline
+    Registration & Ok & Ok &  No \\
+    \hline
+    Validate empty messages & Ok & Ok & Ok \\
+    \hline
+    Validate blank messages & Ok & Ok &  No \\
+    \hline
+    Render profile picture & Ok & Ok & No \\
+    \hline
+    Recover historical messages & Ok & Ok &  Ok \\
+    \hline
+    List of conversations & Ok & Ok &  Ok \\
+    \hline
+    Able to show long messages &  No & Ok & Ok \\
+    \hline
+    Conversation title & Ok & Ok & Ok \\
+    \hline
+    Contacts and message panel &  No & Ok &  No \\
+    \hline
+    Readable timestamp & Ok & Ok & Ok \\
+    \hline
+    HTTPS connections & Ok & Ok & Ok \\
+    \hline
+    Offline working & Ok & Ok & Ok \\
+    \hline
+    Get last message & No & Ok & No \\
+    \hline
+    Reset pasword & Ok & N.A. & No \\
+    \hline
+    \end{tabular}
+\end{table}
 
-Initial Testing.	Initial testing was the first test conducted on the application. The testing process began with the testing of the login unit/page that was demonstrated    during the initial presentation. At that point the testing was platform specific. There was no need for testing together across other platforms then. However, as the development progressed, our testing methodology was modified. 
 
-Development Phase Testing.	These are the testing conducted through the development phase of the project.  The testing done during the development phase was such that the codes were shared amongst the team as soon as they were observed to be working and deleted or overwritten once it was found not to be working or not to meet our desired end. The testing was done intermittently as the project was being developed. The result of each test determined progression to the next phase. No member of the group was dedicated as a test engineer neither was any sub-team assigned the responsibility of testing the software. However, as each sub-team was working on its project, the test was also going on. Whoever was writing the code was a test engineer in his own right. Then when the team meets, the codes were run across platforms to query its compatibility and flexibility across platforms. The team members from the different platforms then criticise the codes based on their observations (Red Teaming) and suggested necessary modifications.
 
-Final/Integration Testing. The final test is an integrated testing at the end of the project.  The final testing was done to ensure that all the users were able to carry out one to one conversation across the three clients’ platforms. At this stage, we encountered a challenge of the inability of the three clients’ bases to communicate directly with each other. However, the database structure was re-examined and the sub-teams developing the clients were made to restructure their back-end to follow the same format. Then, the inter-communications issue across the three platforms was resolved.   
+From the above, we could state that our testing process was iterative across the development process as follows: 
+
+\textbf{Initial Testing}.	Initial testing was the first test conducted on the application. The testing process began with the testing of the login unit/page that was demonstrated    during the initial presentation. At that point the testing was platform specific. There was no need for testing together across other platforms then. However, as the development progressed, our testing methodology was modified. 
+
+\textbf{Development Phase Testing}.	These are the testing conducted through the development phase of the project.  The testing done during the development phase was such that the codes were shared amongst the team as soon as they were observed to be working and deleted or overwritten once it was found not to be working or not to meet our desired end. The testing was done intermittently as the project was being developed. The result of each test determined progression to the next phase. No member of the group was dedicated as a test engineer neither was any sub-team assigned the responsibility of testing the software. However, as each sub-team was working on its project, the test was also going on. Whoever was writing the code was a test engineer in his own right. Then when the team meets, the codes were run across platforms to query its compatibility and flexibility across platforms. The team members from the different platforms then criticise the codes based on their observations (\textbf{Red Teaming}) and suggested necessary modifications.
+
+\textbf{Final/Integration Testing}. The final test was an integrated testing at the end of the project.  The final testing was done to ensure that all the users were able to carry out one to one conversation across the three clients’ platforms. At this stage, we encountered a challenge of the inability of the three clients’ bases to communicate directly with each other. However, the database structure was re-examined and the sub-teams developing the clients were made to restructure their back-end to follow the same format. Then, the inter-communications issue across the three platforms was resolved.   
 
 \begin{figure}[ht]
 \centering
