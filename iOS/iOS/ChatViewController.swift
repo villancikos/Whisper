@@ -110,7 +110,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func sendMessage(){
-        if (textField.text!.isEmpty){
+        
+        let text = textField.text
+        let textToSend = text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if (textToSend?.isEmpty)!{
             // text field is empty, do nothing
         }else{
             
